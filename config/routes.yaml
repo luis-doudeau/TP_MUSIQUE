@@ -1,0 +1,21 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+spotify:
+    path: /spotify
+    controller: App\Controller\SpotifyController::index
+
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+
+album_show:
+    path: '/album/{id}'
+    controller: App\Controller\AlbumController::show
+    requirements:
+        id: '\d+'
+
+
