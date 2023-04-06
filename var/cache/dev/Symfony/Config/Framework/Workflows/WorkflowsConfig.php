@@ -28,13 +28,10 @@ class WorkflowsConfig
     private $_usedProperties = [];
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @default {"enabled":false}
      * @return \Symfony\Config\Framework\Workflows\WorkflowsConfig\AuditTrailConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\Framework\Workflows\WorkflowsConfig\AuditTrailConfig : static)
      */
-    public function auditTrail(array $value = []): \Symfony\Config\Framework\Workflows\WorkflowsConfig\AuditTrailConfig|static
+    public function auditTrail(mixed $value = []): \Symfony\Config\Framework\Workflows\WorkflowsConfig\AuditTrailConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['auditTrail'] = true;
@@ -79,11 +76,11 @@ class WorkflowsConfig
     }
 
     /**
-     * @param ParamConfigurator|list<ParamConfigurator|mixed>|string $value
+     * @param mixed $value
      *
      * @return $this
      */
-    public function supports(ParamConfigurator|string|array $value): static
+    public function supports(mixed $value): static
     {
         $this->_usedProperties['supports'] = true;
         $this->supports = $value;
@@ -105,7 +102,7 @@ class WorkflowsConfig
     }
 
     /**
-     * @param ParamConfigurator|list<ParamConfigurator|mixed>|mixed $value
+     * @param mixed $value
      *
      * @return $this
      */
@@ -135,10 +132,7 @@ class WorkflowsConfig
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @return \Symfony\Config\Framework\Workflows\WorkflowsConfig\PlaceConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\Framework\Workflows\WorkflowsConfig\PlaceConfig : static)
      */
     public function place(mixed $value = []): \Symfony\Config\Framework\Workflows\WorkflowsConfig\PlaceConfig|static
     {
@@ -153,10 +147,7 @@ class WorkflowsConfig
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @return \Symfony\Config\Framework\Workflows\WorkflowsConfig\TransitionConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\Framework\Workflows\WorkflowsConfig\TransitionConfig : static)
      */
     public function transition(mixed $value = []): \Symfony\Config\Framework\Workflows\WorkflowsConfig\TransitionConfig|static
     {

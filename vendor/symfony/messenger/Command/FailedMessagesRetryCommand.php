@@ -23,12 +23,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent;
 use Symfony\Component\Messenger\EventListener\StopWorkerOnMessageLimitListener;
+use Symfony\Component\Messenger\Exception\LogicException;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\MessageDecodingFailedStamp;
 use Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface;
 use Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface;
 use Symfony\Component\Messenger\Transport\Receiver\SingleMessageReceiver;
-use Symfony\Component\Messenger\Transport\Serialization\PhpSerializer;
 use Symfony\Component\Messenger\Worker;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
@@ -42,15 +41,18 @@ class FailedMessagesRetryCommand extends AbstractFailedMessagesCommand
     private MessageBusInterface $messageBus;
     private ?LoggerInterface $logger;
 
-    public function __construct(?string $globalReceiverName, ServiceProviderInterface $failureTransports, MessageBusInterface $messageBus, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null, PhpSerializer $phpSerializer = null)
+    public function __construct(?string $globalReceiverName, ServiceProviderInterface $failureTransports, MessageBusInterface $messageBus, EventDispatcherInterface $eventDispatcher, LoggerInterface $logger = null)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->messageBus = $messageBus;
         $this->logger = $logger;
 
-        parent::__construct($globalReceiverName, $failureTransports, $phpSerializer);
+        parent::__construct($globalReceiverName, $failureTransports);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure(): void
     {
         $this
@@ -81,6 +83,9 @@ EOF
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->eventDispatcher->addSubscriber(new StopWorkerOnMessageLimitListener(1));
@@ -134,23 +139,23 @@ EOF
             // to be temporarily "acked", even if the user aborts
             // handling the message
             while (true) {
-                $envelopes = [];
-                $this->phpSerializer?->acceptPhpIncompleteClass();
-                try {
-                    foreach ($receiver->all(1) as $envelope) {
-                        ++$count;
-                        $envelopes[] = $envelope;
+                $ids = [];
+                foreach ($receiver->all(1) as $envelope) {
+                    ++$count;
+
+                    $id = $this->getMessageId($envelope);
+                    if (null === $id) {
+                        throw new LogicException(sprintf('The "%s" receiver is able to list messages by id but the envelope is missing the TransportMessageIdStamp stamp.', $failureTransportName));
                     }
-                } finally {
-                    $this->phpSerializer?->rejectPhpIncompleteClass();
+                    $ids[] = $id;
                 }
 
                 // break the loop if all messages are consumed
-                if (0 === \count($envelopes)) {
+                if (0 === \count($ids)) {
                     break;
                 }
 
-                $this->retrySpecificEnvelopes($envelopes, $failureTransportName, $io, $shouldForce);
+                $this->retrySpecificIds($failureTransportName, $ids, $io, $shouldForce);
             }
         } else {
             // get() and ask messages one-by-one
@@ -171,10 +176,6 @@ EOF
             $envelope = $messageReceivedEvent->getEnvelope();
 
             $this->displaySingleMessage($envelope, $io);
-
-            if ($envelope->last(MessageDecodingFailedStamp::class)) {
-                throw new \RuntimeException(sprintf('The message with id "%s" could not decoded, it can only be shown or removed.', $this->getMessageId($envelope) ?? '?'));
-            }
 
             $shouldHandle = $shouldForce || $io->confirm('Do you want to retry (yes) or delete this message (no)?');
 
@@ -212,26 +213,11 @@ EOF
         }
 
         foreach ($ids as $id) {
-            $this->phpSerializer?->acceptPhpIncompleteClass();
-            try {
-                $envelope = $receiver->find($id);
-            } finally {
-                $this->phpSerializer?->rejectPhpIncompleteClass();
-            }
+            $envelope = $receiver->find($id);
             if (null === $envelope) {
                 throw new RuntimeException(sprintf('The message "%s" was not found.', $id));
             }
 
-            $singleReceiver = new SingleMessageReceiver($receiver, $envelope);
-            $this->runWorker($failureTransportName, $singleReceiver, $io, $shouldForce);
-        }
-    }
-
-    private function retrySpecificEnvelopes(array $envelopes, string $failureTransportName, SymfonyStyle $io, bool $shouldForce)
-    {
-        $receiver = $this->getReceiver($failureTransportName);
-
-        foreach ($envelopes as $envelope) {
             $singleReceiver = new SingleMessageReceiver($receiver, $envelope);
             $this->runWorker($failureTransportName, $singleReceiver, $io, $shouldForce);
         }

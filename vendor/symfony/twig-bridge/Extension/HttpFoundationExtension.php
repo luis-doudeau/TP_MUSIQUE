@@ -30,6 +30,9 @@ final class HttpFoundationExtension extends AbstractExtension
         $this->urlHelper = $urlHelper;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFunctions(): array
     {
         return [

@@ -28,7 +28,9 @@ class ChatChannel extends AbstractChannel
             $message = $notification->asChatMessage($recipient, $transportName);
         }
 
-        $message ??= ChatMessage::fromNotification($notification);
+        if (null === $message) {
+            $message = ChatMessage::fromNotification($notification);
+        }
 
         if (null !== $transportName) {
             $message->transport($transportName);

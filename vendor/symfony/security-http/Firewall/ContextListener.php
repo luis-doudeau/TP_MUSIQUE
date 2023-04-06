@@ -71,6 +71,9 @@ class ContextListener extends AbstractListener
         $this->sessionTrackerEnabler = null === $sessionTrackerEnabler ? null : $sessionTrackerEnabler(...);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports(Request $request): ?bool
     {
         return null; // always run authenticate() lazily with lazy firewalls
@@ -87,7 +90,7 @@ class ContextListener extends AbstractListener
         }
 
         $request = $event->getRequest();
-        $session = $request->hasPreviousSession() ? $request->getSession() : null;
+        $session = $request->hasPreviousSession() && $request->hasSession() ? $request->getSession() : null;
 
         $request->attributes->set('_security_firewall_run', $this->sessionKey);
 
@@ -119,7 +122,7 @@ class ContextListener extends AbstractListener
 
         $this->logger?->debug('Read existing security token from the session.', [
             'key' => $this->sessionKey,
-            'token_class' => \is_object($token) ? $token::class : null,
+            'token_class' => \is_object($token) ? \get_class($token) : null,
         ]);
 
         if ($token instanceof TokenInterface) {
@@ -192,7 +195,7 @@ class ContextListener extends AbstractListener
 
         $userNotFoundByProvider = false;
         $userDeauthenticated = false;
-        $userClass = $user::class;
+        $userClass = \get_class($user);
 
         foreach ($this->userProviders as $provider) {
             if (!$provider instanceof UserProviderInterface) {
@@ -212,7 +215,7 @@ class ContextListener extends AbstractListener
                 if ($token instanceof AbstractToken && $this->hasUserChanged($user, $newToken)) {
                     $userDeauthenticated = true;
 
-                    $this->logger?->debug('Cannot refresh token because user has changed.', ['username' => $refreshedUser->getUserIdentifier(), 'provider' => $provider::class]);
+                    $this->logger?->debug('Cannot refresh token because user has changed.', ['username' => $refreshedUser->getUserIdentifier(), 'provider' => \get_class($provider)]);
 
                     continue;
                 }
@@ -220,7 +223,7 @@ class ContextListener extends AbstractListener
                 $token->setUser($refreshedUser);
 
                 if (null !== $this->logger) {
-                    $context = ['provider' => $provider::class, 'username' => $refreshedUser->getUserIdentifier()];
+                    $context = ['provider' => \get_class($provider), 'username' => $refreshedUser->getUserIdentifier()];
 
                     if ($token instanceof SwitchUserToken) {
                         $originalToken = $token->getOriginalToken();
@@ -234,7 +237,7 @@ class ContextListener extends AbstractListener
             } catch (UnsupportedUserException) {
                 // let's try the next user provider
             } catch (UserNotFoundException $e) {
-                $this->logger?->warning('Username could not be found in the selected user provider.', ['username' => $e->getUserIdentifier(), 'provider' => $provider::class]);
+                $this->logger?->warning('Username could not be found in the selected user provider.', ['username' => $e->getUserIdentifier(), 'provider' => \get_class($provider)]);
 
                 $userNotFoundByProvider = true;
             }

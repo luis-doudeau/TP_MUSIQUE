@@ -29,6 +29,9 @@ class CheckArgumentsValidityPass extends AbstractRecursivePass
         $this->throwExceptions = $throwExceptions;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function processValue(mixed $value, bool $isRoot = false): mixed
     {
         if (!$value instanceof Definition) {

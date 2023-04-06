@@ -73,6 +73,9 @@ class TranslationDebugCommand extends Command
         $this->enabledLocales = $enabledLocales;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -118,6 +121,9 @@ EOF
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -180,7 +186,7 @@ EOF
         }
 
         // No defined or extracted messages
-        if (!$allMessages || null !== $domain && empty($allMessages[$domain])) {
+        if (empty($allMessages) || null !== $domain && empty($allMessages[$domain])) {
             $outputMessage = sprintf('No defined or extracted messages for locale "%s"', $locale);
 
             if (null !== $domain) {

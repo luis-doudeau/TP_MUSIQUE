@@ -124,7 +124,9 @@ class RedirectController
             return new RedirectResponse($path, $statusCode);
         }
 
-        $scheme ??= $request->getScheme();
+        if (null === $scheme) {
+            $scheme = $request->getScheme();
+        }
 
         if ($qs = $request->server->get('QUERY_STRING') ?: $request->getQueryString()) {
             if (!str_contains($path, '?')) {

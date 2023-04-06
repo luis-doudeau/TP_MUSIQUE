@@ -101,11 +101,17 @@ class ViolationPath implements \IteratorAggregate, PropertyPathInterface
         return $this->pathAsString;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLength(): int
     {
         return $this->length;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent(): ?PropertyPathInterface
     {
         if ($this->length <= 1) {
@@ -124,11 +130,17 @@ class ViolationPath implements \IteratorAggregate, PropertyPathInterface
         return $parent;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getElements(): array
     {
         return $this->elements;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getElement(int $index): string
     {
         if (!isset($this->elements[$index])) {
@@ -138,6 +150,9 @@ class ViolationPath implements \IteratorAggregate, PropertyPathInterface
         return $this->elements[$index];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isProperty(int $index): bool
     {
         if (!isset($this->isIndex[$index])) {
@@ -147,6 +162,9 @@ class ViolationPath implements \IteratorAggregate, PropertyPathInterface
         return !$this->isIndex[$index];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isIndex(int $index): bool
     {
         if (!isset($this->isIndex[$index])) {
@@ -154,11 +172,6 @@ class ViolationPath implements \IteratorAggregate, PropertyPathInterface
         }
 
         return $this->isIndex[$index];
-    }
-
-    public function isNullSafe(int $index): bool
-    {
-        return false;
     }
 
     /**

@@ -88,6 +88,9 @@ final class NativeResponse implements ResponseInterface, StreamableInterface
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getInfo(string $type = null): mixed
     {
         if (!$info = $this->finalInfo) {
@@ -206,12 +209,18 @@ final class NativeResponse implements ResponseInterface, StreamableInterface
         $this->multi->hosts[$host] = 1 + ($this->multi->hosts[$host] ?? 0);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     private function close(): void
     {
         $this->canary->cancel();
         $this->handle = $this->buffer = $this->inflate = $this->onProgress = null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     private static function schedule(self $response, array &$runningResponses): void
     {
         if (!isset($runningResponses[$i = $response->multi->id])) {
@@ -228,6 +237,8 @@ final class NativeResponse implements ResponseInterface, StreamableInterface
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param NativeClientState $multi
      */
     private static function perform(ClientState $multi, array &$responses = null): void
@@ -337,6 +348,8 @@ final class NativeResponse implements ResponseInterface, StreamableInterface
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param NativeClientState $multi
      */
     private static function select(ClientState $multi, float $timeout): int

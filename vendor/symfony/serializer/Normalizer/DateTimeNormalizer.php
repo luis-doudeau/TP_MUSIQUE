@@ -48,6 +48,8 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws InvalidArgumentException
      */
     public function normalize(mixed $object, string $format = null, array $context = []): string
@@ -68,6 +70,8 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param array $context
      */
     public function supportsNormalization(mixed $data, string $format = null /* , array $context = [] */): bool
@@ -76,6 +80,8 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws NotNormalizableValueException
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): \DateTimeInterface
@@ -117,6 +123,8 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @param array $context
      */
     public function supportsDenormalization(mixed $data, string $type, string $format = null /* , array $context = [] */): bool
@@ -124,6 +132,9 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
         return isset(self::SUPPORTED_TYPES[$type]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasCacheableSupportsMethod(): bool
     {
         return __CLASS__ === static::class;

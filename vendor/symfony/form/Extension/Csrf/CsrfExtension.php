@@ -33,6 +33,9 @@ class CsrfExtension extends AbstractExtension
         $this->translationDomain = $translationDomain;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function loadTypeExtensions(): array
     {
         return [

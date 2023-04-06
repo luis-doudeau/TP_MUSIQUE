@@ -10,12 +10,11 @@
 
 {% block summary %}
     <div class="status">
-        <h2>Profile Search</h2>
+        <div class="container">
+            <h2>Profile Search</h2>
+        </div>
     </div>
 {% endblock %}
-
-{% block sidebar_search_css_class %}{% endblock %}
-{% block sidebar_shortcuts_links %}{% endblock %}
 
 {% block panel %}
     <h2>{{ tokens ? tokens|length : 'No' }} results found</h2>
@@ -60,7 +59,7 @@
             </tbody>
         </table>
     {% else %}
-        <div class="empty empty-panel">
+        <div class="empty">
             <p>The query returned no result.</p>
         </div>
     {% endif %}

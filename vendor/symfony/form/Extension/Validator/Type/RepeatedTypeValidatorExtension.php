@@ -21,6 +21,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RepeatedTypeValidatorExtension extends AbstractTypeExtension
 {
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         // Map errors to the first field
@@ -33,6 +36,9 @@ class RepeatedTypeValidatorExtension extends AbstractTypeExtension
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getExtendedTypes(): iterable
     {
         return [RepeatedType::class];

@@ -17,8 +17,6 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
  * @author Franz Wilding <franz.wilding@me.com>
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Fred Cox <mcfedr@gmail.com>
- *
- * @extends BaseDateTimeTransformer<string>
  */
 class DateTimeToHtml5LocalDateTimeTransformer extends BaseDateTimeTransformer
 {
@@ -31,7 +29,7 @@ class DateTimeToHtml5LocalDateTimeTransformer extends BaseDateTimeTransformer
      * input is an RFC3339 date followed by 'T', followed by an RFC3339 time.
      * https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-local-date-and-time-string
      *
-     * @param \DateTimeInterface $dateTime
+     * @param \DateTime|\DateTimeInterface $dateTime A DateTime object
      *
      * @throws TransformationFailedException If the given value is not an
      *                                       instance of \DateTime or \DateTimeInterface
@@ -42,8 +40,8 @@ class DateTimeToHtml5LocalDateTimeTransformer extends BaseDateTimeTransformer
             return '';
         }
 
-        if (!$dateTime instanceof \DateTimeInterface) {
-            throw new TransformationFailedException('Expected a \DateTimeInterface.');
+        if (!$dateTime instanceof \DateTime && !$dateTime instanceof \DateTimeInterface) {
+            throw new TransformationFailedException('Expected a \DateTime or \DateTimeInterface.');
         }
 
         if ($this->inputTimezone !== $this->outputTimezone) {

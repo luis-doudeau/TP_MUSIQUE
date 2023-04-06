@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -27,7 +28,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -124,8 +124,6 @@ abstract class AbstractController implements ServiceSubscriberInterface
 
     /**
      * Returns a RedirectResponse to the given URL.
-     *
-     * @param int $status The HTTP status code (302 "Found" by default)
      */
     protected function redirect(string $url, int $status = 302): RedirectResponse
     {
@@ -134,8 +132,6 @@ abstract class AbstractController implements ServiceSubscriberInterface
 
     /**
      * Returns a RedirectResponse to the given route with the given parameters.
-     *
-     * @param int $status The HTTP status code (302 "Found" by default)
      */
     protected function redirectToRoute(string $route, array $parameters = [], int $status = 302): RedirectResponse
     {
@@ -144,8 +140,6 @@ abstract class AbstractController implements ServiceSubscriberInterface
 
     /**
      * Returns a JsonResponse that uses the serializer component if enabled, or json_encode.
-     *
-     * @param int $status The HTTP status code (200 "OK" by default)
      */
     protected function json(mixed $data, int $status = 200, array $headers = [], array $context = []): JsonResponse
     {
@@ -179,16 +173,10 @@ abstract class AbstractController implements ServiceSubscriberInterface
     protected function addFlash(string $type, mixed $message): void
     {
         try {
-            $session = $this->container->get('request_stack')->getSession();
+            $this->container->get('request_stack')->getSession()->getFlashBag()->add($type, $message);
         } catch (SessionNotFoundException $e) {
             throw new \LogicException('You cannot use the addFlash method if sessions are disabled. Enable them in "config/packages/framework.yaml".', 0, $e);
         }
-
-        if (!$session instanceof FlashBagAwareSessionInterface) {
-            trigger_deprecation('symfony/framework-bundle', '6.2', 'Calling "addFlash()" method when the session does not implement %s is deprecated.', FlashBagAwareSessionInterface::class);
-        }
-
-        $session->getFlashBag()->add($type, $message);
     }
 
     /**
@@ -215,7 +203,7 @@ abstract class AbstractController implements ServiceSubscriberInterface
     {
         if (!$this->isGranted($attribute, $subject)) {
             $exception = $this->createAccessDeniedException($message);
-            $exception->setAttributes([$attribute]);
+            $exception->setAttributes($attribute);
             $exception->setSubject($subject);
 
             throw $exception;
@@ -224,8 +212,6 @@ abstract class AbstractController implements ServiceSubscriberInterface
 
     /**
      * Returns a rendered view.
-     *
-     * Forms found in parameters are auto-cast to form views.
      */
     protected function renderView(string $view, array $parameters = []): string
     {
@@ -233,33 +219,18 @@ abstract class AbstractController implements ServiceSubscriberInterface
             throw new \LogicException('You cannot use the "renderView" method if the Twig Bundle is not available. Try running "composer require symfony/twig-bundle".');
         }
 
-        foreach ($parameters as $k => $v) {
-            if ($v instanceof FormInterface) {
-                $parameters[$k] = $v->createView();
-            }
-        }
-
         return $this->container->get('twig')->render($view, $parameters);
     }
 
     /**
      * Renders a view.
-     *
-     * If an invalid form is found in the list of parameters, a 422 status code is returned.
-     * Forms found in parameters are auto-cast to form views.
      */
     protected function render(string $view, array $parameters = [], Response $response = null): Response
     {
         $content = $this->renderView($view, $parameters);
-        $response ??= new Response();
 
-        if (200 === $response->getStatusCode()) {
-            foreach ($parameters as $v) {
-                if ($v instanceof FormInterface && $v->isSubmitted() && !$v->isValid()) {
-                    $response->setStatusCode(422);
-                    break;
-                }
-            }
+        if (null === $response) {
+            $response = new Response();
         }
 
         $response->setContent($content);
@@ -271,12 +242,28 @@ abstract class AbstractController implements ServiceSubscriberInterface
      * Renders a view and sets the appropriate status code when a form is listed in parameters.
      *
      * If an invalid form is found in the list of parameters, a 422 status code is returned.
-     *
-     * @deprecated since Symfony 6.2, use render() instead
      */
     protected function renderForm(string $view, array $parameters = [], Response $response = null): Response
     {
-        trigger_deprecation('symfony/framework-bundle', '6.2', 'The "%s::renderForm()" method is deprecated, use "render()" instead.', get_debug_type($this));
+        if (null === $response) {
+            $response = new Response();
+        }
+
+        foreach ($parameters as $k => $v) {
+            if ($v instanceof FormView) {
+                throw new \LogicException(sprintf('Passing a FormView to "%s::renderForm()" is not supported, pass directly the form instead for parameter "%s".', get_debug_type($this), $k));
+            }
+
+            if (!$v instanceof FormInterface) {
+                continue;
+            }
+
+            $parameters[$k] = $v->createView();
+
+            if (200 === $response->getStatusCode() && $v->isSubmitted() && !$v->isValid()) {
+                $response->setStatusCode(422);
+            }
+        }
 
         return $this->render($view, $parameters, $response);
     }
@@ -377,7 +364,7 @@ abstract class AbstractController implements ServiceSubscriberInterface
      * @param string      $id    The id used when generating the token
      * @param string|null $token The actual token sent with the request that should be validated
      */
-    protected function isCsrfTokenValid(string $id, #[\SensitiveParameter] ?string $token): bool
+    protected function isCsrfTokenValid(string $id, ?string $token): bool
     {
         if (!$this->container->has('security.csrf.token_manager')) {
             throw new \LogicException('CSRF protection is not enabled in your application. Enable it with the "csrf_protection" key in "config/packages/framework.yaml".');

@@ -54,25 +54,24 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
         $this->displayBlock('title', $context, $blocks);
         // line 8
         echo "\t\t</title>
-
 \t\t<link
 \t\trel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>\">
 \t\t";
-        // line 13
+        // line 12
         echo "\t\t";
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 17
+        // line 16
         echo "
 \t\t";
-        // line 18
+        // line 17
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 21
+        // line 20
         echo "\t</head>
 \t<body>
 \t\t";
-        // line 23
+        // line 22
         $this->displayBlock('body', $context, $blocks);
-        // line 24
+        // line 23
         echo "\t</body>
 </html>
 ";
@@ -104,7 +103,7 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
 
     }
 
-    // line 13
+    // line 12
     public function block_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -114,7 +113,7 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 14
+        // line 13
         echo "\t\t\t";
         echo twig_escape_filter($this->env, $this->env->getFunction('encore_entry_link_tags')->getCallable()("app"), "html", null, true);
         echo "
@@ -128,7 +127,7 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
 
     }
 
-    // line 18
+    // line 17
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -138,7 +137,7 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 19
+        // line 18
         echo "\t\t\t";
         echo twig_escape_filter($this->env, $this->env->getFunction('encore_entry_script_tags')->getCallable()("app"), "html", null, true);
         echo "
@@ -151,7 +150,7 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
 
     }
 
-    // line 23
+    // line 22
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -176,7 +175,7 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
 
     public function getDebugInfo()
     {
-        return array (  155 => 23,  142 => 19,  132 => 18,  118 => 14,  108 => 13,  88 => 6,  76 => 24,  74 => 23,  70 => 21,  68 => 18,  65 => 17,  62 => 13,  56 => 8,  54 => 6,  47 => 1,);
+        return array (  154 => 22,  141 => 18,  131 => 17,  117 => 13,  107 => 12,  87 => 6,  75 => 23,  73 => 22,  69 => 20,  67 => 17,  64 => 16,  61 => 12,  56 => 8,  54 => 6,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -189,7 +188,6 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
 \t\t\t{% block title %}Welcome!
 \t\t\t{% endblock %}
 \t\t</title>
-
 \t\t<link
 \t\trel=\"icon\" href=\"data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>\">
 \t\t{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
@@ -206,6 +204,6 @@ class __TwigTemplate_e81cff2a485b4e67e119ce164375c31d extends Template
 \t\t{% block body %}{% endblock %}
 \t</body>
 </html>
-", "base.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/templates/base.html.twig");
+", "base.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/templates/base.html.twig");
     }
 }

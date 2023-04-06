@@ -43,11 +43,17 @@ class RingBuffer implements \ArrayAccess
         $this->size = $size;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function offsetExists(mixed $key): bool
     {
         return isset($this->indices[$key]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function offsetGet(mixed $key): mixed
     {
         if (!isset($this->indices[$key])) {
@@ -57,6 +63,9 @@ class RingBuffer implements \ArrayAccess
         return $this->values[$this->indices[$key]];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function offsetSet(mixed $key, mixed $value): void
     {
         if (false !== ($keyToRemove = array_search($this->cursor, $this->indices))) {
@@ -69,6 +78,9 @@ class RingBuffer implements \ArrayAccess
         $this->cursor = ($this->cursor + 1) % $this->size;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function offsetUnset(mixed $key): void
     {
         if (isset($this->indices[$key])) {

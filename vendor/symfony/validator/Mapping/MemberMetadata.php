@@ -67,6 +67,9 @@ abstract class MemberMetadata extends GenericMetadata implements PropertyMetadat
         $this->property = $property;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addConstraint(Constraint $constraint): static
     {
         $this->checkConstraint($constraint);
@@ -76,6 +79,9 @@ abstract class MemberMetadata extends GenericMetadata implements PropertyMetadat
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __sleep(): array
     {
         return array_merge(parent::__sleep(), [
@@ -93,11 +99,17 @@ abstract class MemberMetadata extends GenericMetadata implements PropertyMetadat
         return $this->name;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getClassName()
     {
         return $this->class;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getPropertyName(): string
     {
         return $this->property;
@@ -132,7 +144,7 @@ abstract class MemberMetadata extends GenericMetadata implements PropertyMetadat
      */
     public function getReflectionMember(object|string $objectOrClassName): \ReflectionMethod|\ReflectionProperty
     {
-        $className = \is_string($objectOrClassName) ? $objectOrClassName : $objectOrClassName::class;
+        $className = \is_string($objectOrClassName) ? $objectOrClassName : \get_class($objectOrClassName);
         if (!isset($this->reflMember[$className])) {
             $this->reflMember[$className] = $this->newReflectionMember($objectOrClassName);
         }

@@ -32,11 +32,17 @@ class MessengerDataCollector extends DataCollector implements LateDataCollectorI
         $this->traceableBuses[$name] = $bus;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         // Noop. Everything is collected live by the traceable buses & cloned as late as possible.
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function lateCollect()
     {
         $this->data = ['messages' => [], 'buses' => array_keys($this->traceableBuses)];
@@ -56,11 +62,17 @@ class MessengerDataCollector extends DataCollector implements LateDataCollectorI
         $this->data['messages'] = array_column($messages, 0);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'messenger';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function reset()
     {
         $this->data = [];
@@ -69,6 +81,9 @@ class MessengerDataCollector extends DataCollector implements LateDataCollectorI
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getCasters(): array
     {
         $casters = parent::getCasters();
@@ -88,7 +103,7 @@ class MessengerDataCollector extends DataCollector implements LateDataCollectorI
             'stamps' => $tracedMessage['stamps'] ?? null,
             'stamps_after_dispatch' => $tracedMessage['stamps_after_dispatch'] ?? null,
             'message' => [
-                'type' => new ClassStub($message::class),
+                'type' => new ClassStub(\get_class($message)),
                 'value' => $message,
             ],
             'caller' => $tracedMessage['caller'],
@@ -98,7 +113,7 @@ class MessengerDataCollector extends DataCollector implements LateDataCollectorI
             $exception = $tracedMessage['exception'];
 
             $debugRepresentation['exception'] = [
-                'type' => $exception::class,
+                'type' => \get_class($exception),
                 'value' => $exception,
             ];
         }

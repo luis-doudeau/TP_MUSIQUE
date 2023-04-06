@@ -177,7 +177,6 @@
         <xsd:attribute name="csrf-parameter" type="xsd:string" />
         <xsd:attribute name="csrf-token-generator" type="xsd:string" />
         <xsd:attribute name="csrf-token-id" type="xsd:string" />
-        <xsd:attribute name="enable-csrf" type="xsd:boolean" />
         <xsd:attribute name="path" type="xsd:string" />
         <xsd:attribute name="target" type="xsd:string" />
         <xsd:attribute name="invalidate-session" type="xsd:boolean" />
@@ -378,7 +377,6 @@
             <xsd:element name="method" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="role" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
             <xsd:element name="allow-if" type="xsd:string" minOccurs="0" maxOccurs="1" />
-            <xsd:element name="attribute" type="rule_attribute" minOccurs="0" maxOccurs="1" />
         </xsd:choice>
         <xsd:attribute name="requires-channel" type="xsd:string" />
         <xsd:attribute name="path" type="xsd:string" />
@@ -387,7 +385,6 @@
         <xsd:attribute name="role" type="xsd:string" />
         <xsd:attribute name="methods" type="xsd:string" />
         <xsd:attribute name="allow-if" type="xsd:string" />
-        <xsd:attribute name="route" type="xsd:string" />
     </xsd:complexType>
 
     <xsd:complexType name="role">
@@ -395,14 +392,6 @@
             <xsd:extension base="xsd:string">
                 <xsd:attribute name="id" type="xsd:string" use="required" />
                 <xsd:attribute name="value" type="xsd:string" />
-            </xsd:extension>
-        </xsd:simpleContent>
-    </xsd:complexType>
-
-    <xsd:complexType name="rule_attribute">
-        <xsd:simpleContent>
-            <xsd:extension base="xsd:string">
-                <xsd:attribute name="key" type="xsd:string" use="required" />
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>

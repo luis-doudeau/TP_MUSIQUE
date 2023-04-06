@@ -35,21 +35,33 @@ class ScriptDataGenerator extends AbstractDataGenerator
      */
     private array $scriptCodes = [];
 
+    /**
+     * {@inheritdoc}
+     */
     protected function scanLocales(LocaleScanner $scanner, string $sourceDir): array
     {
         return $scanner->scanLocales($sourceDir.'/lang');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function compileTemporaryBundles(BundleCompilerInterface $compiler, string $sourceDir, string $tempDir)
     {
         $compiler->compile($sourceDir.'/lang', $tempDir);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function preGenerate()
     {
         $this->scriptCodes = [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function generateDataForLocale(BundleEntryReaderInterface $reader, string $tempDir, string $displayLocale): ?array
     {
         $localeBundle = $reader->read($tempDir, $displayLocale);
@@ -68,11 +80,17 @@ class ScriptDataGenerator extends AbstractDataGenerator
         return null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function generateDataForRoot(BundleEntryReaderInterface $reader, string $tempDir): ?array
     {
         return null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function generateDataForMeta(BundleEntryReaderInterface $reader, string $tempDir): ?array
     {
         $this->scriptCodes = array_unique($this->scriptCodes);

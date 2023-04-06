@@ -43,6 +43,9 @@ abstract class AbstractExtension implements FormExtensionInterface
      */
     private bool $typeGuesserLoaded = false;
 
+    /**
+     * {@inheritdoc}
+     */
     public function getType(string $name): FormTypeInterface
     {
         if (!isset($this->types)) {
@@ -56,6 +59,9 @@ abstract class AbstractExtension implements FormExtensionInterface
         return $this->types[$name];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasType(string $name): bool
     {
         if (!isset($this->types)) {
@@ -65,6 +71,9 @@ abstract class AbstractExtension implements FormExtensionInterface
         return isset($this->types[$name]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTypeExtensions(string $name): array
     {
         if (!isset($this->typeExtensions)) {
@@ -75,6 +84,9 @@ abstract class AbstractExtension implements FormExtensionInterface
             ?? [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasTypeExtensions(string $name): bool
     {
         if (!isset($this->typeExtensions)) {
@@ -84,6 +96,9 @@ abstract class AbstractExtension implements FormExtensionInterface
         return isset($this->typeExtensions[$name]) && \count($this->typeExtensions[$name]) > 0;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTypeGuesser(): ?FormTypeGuesserInterface
     {
         if (!$this->typeGuesserLoaded) {
@@ -137,7 +152,7 @@ abstract class AbstractExtension implements FormExtensionInterface
                 throw new UnexpectedTypeException($type, FormTypeInterface::class);
             }
 
-            $this->types[$type::class] = $type;
+            $this->types[\get_class($type)] = $type;
         }
     }
 

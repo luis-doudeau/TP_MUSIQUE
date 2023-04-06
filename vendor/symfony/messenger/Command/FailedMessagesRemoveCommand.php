@@ -28,6 +28,9 @@ use Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface;
 #[AsCommand(name: 'messenger:failed:remove', description: 'Remove given messages from the failure transport')]
 class FailedMessagesRemoveCommand extends AbstractFailedMessagesCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure(): void
     {
         $this
@@ -48,6 +51,9 @@ EOF
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output instanceof ConsoleOutputInterface ? $output->getErrorOutput() : $output);
@@ -74,13 +80,7 @@ EOF
         }
 
         foreach ($ids as $id) {
-            $this->phpSerializer?->acceptPhpIncompleteClass();
-            try {
-                $envelope = $receiver->find($id);
-            } finally {
-                $this->phpSerializer?->rejectPhpIncompleteClass();
-            }
-
+            $envelope = $receiver->find($id);
             if (null === $envelope) {
                 $io->error(sprintf('The message with id "%s" was not found.', $id));
                 continue;

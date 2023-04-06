@@ -55,6 +55,9 @@ class SecurityDataCollector extends DataCollector implements LateDataCollectorIn
         $this->hasVarDumper = class_exists(ClassStub::class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         if (null === $this->tokenStorage) {
@@ -119,7 +122,7 @@ class SecurityDataCollector extends DataCollector implements LateDataCollectorIn
                 'impersonator_user' => $impersonatorUser,
                 'impersonation_exit_path' => null,
                 'token' => $token,
-                'token_class' => $this->hasVarDumper ? new ClassStub($token::class) : $token::class,
+                'token_class' => $this->hasVarDumper ? new ClassStub(\get_class($token)) : \get_class($token),
                 'logout_url' => $logoutUrl,
                 'user' => $token->getUserIdentifier(),
                 'roles' => $assignedRoles,
@@ -137,7 +140,7 @@ class SecurityDataCollector extends DataCollector implements LateDataCollectorIn
                     $voter = $voter->getDecoratedVoter();
                 }
 
-                $this->data['voters'][] = $this->hasVarDumper ? new ClassStub($voter::class) : $voter::class;
+                $this->data['voters'][] = $this->hasVarDumper ? new ClassStub(\get_class($voter)) : \get_class($voter);
             }
 
             // collect voter details
@@ -202,6 +205,9 @@ class SecurityDataCollector extends DataCollector implements LateDataCollectorIn
         $this->data['authenticators'] = $this->firewall ? $this->firewall->getAuthenticatorsInfo() : [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function reset()
     {
         $this->data = [];
@@ -344,6 +350,9 @@ class SecurityDataCollector extends DataCollector implements LateDataCollectorIn
         return $this->data['authenticators'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'security';

@@ -43,6 +43,9 @@ class FormTypeGuesserChain implements FormTypeGuesserInterface
         $this->guessers = array_merge([], ...$tmpGuessers);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessType(string $class, string $property): ?TypeGuess
     {
         return $this->guess(function ($guesser) use ($class, $property) {
@@ -50,6 +53,9 @@ class FormTypeGuesserChain implements FormTypeGuesserInterface
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessRequired(string $class, string $property): ?ValueGuess
     {
         return $this->guess(function ($guesser) use ($class, $property) {
@@ -57,6 +63,9 @@ class FormTypeGuesserChain implements FormTypeGuesserInterface
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessMaxLength(string $class, string $property): ?ValueGuess
     {
         return $this->guess(function ($guesser) use ($class, $property) {
@@ -64,6 +73,9 @@ class FormTypeGuesserChain implements FormTypeGuesserInterface
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessPattern(string $class, string $property): ?ValueGuess
     {
         return $this->guess(function ($guesser) use ($class, $property) {

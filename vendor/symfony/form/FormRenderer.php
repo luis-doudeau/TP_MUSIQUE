@@ -37,16 +37,25 @@ class FormRenderer implements FormRendererInterface
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getEngine(): FormRendererEngineInterface
     {
         return $this->engine;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setTheme(FormView $view, mixed $themes, bool $useDefaultThemes = true)
     {
         $this->engine->setTheme($view, $themes, $useDefaultThemes);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function renderCsrfToken(string $tokenId): string
     {
         if (null === $this->csrfTokenManager) {
@@ -56,6 +65,9 @@ class FormRenderer implements FormRendererInterface
         return $this->csrfTokenManager->getToken($tokenId)->getValue();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function renderBlock(FormView $view, string $blockName, array $variables = []): string
     {
         $resource = $this->engine->getResourceForBlockName($view, $blockName);
@@ -112,6 +124,9 @@ class FormRenderer implements FormRendererInterface
         return $html;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function searchAndRenderBlock(FormView $view, string $blockNameSuffix, array $variables = []): string
     {
         $renderOnlyOnce = 'row' === $blockNameSuffix || 'widget' === $blockNameSuffix;
@@ -262,6 +277,9 @@ class FormRenderer implements FormRendererInterface
         return $html;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function humanize(string $text): string
     {
         return ucfirst(strtolower(trim(preg_replace(['/([A-Z])/', '/[_\s]+/'], ['_$1', ' '], $text))));

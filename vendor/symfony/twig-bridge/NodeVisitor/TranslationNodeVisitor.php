@@ -49,6 +49,9 @@ final class TranslationNodeVisitor extends AbstractNodeVisitor
         return $this->messages;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doEnterNode(Node $node, Environment $env): Node
     {
         if (!$this->enabled) {
@@ -98,11 +101,17 @@ final class TranslationNodeVisitor extends AbstractNodeVisitor
         return $node;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doLeaveNode(Node $node, Environment $env): ?Node
     {
         return $node;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getPriority(): int
     {
         return 0;

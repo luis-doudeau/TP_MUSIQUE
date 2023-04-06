@@ -65,7 +65,7 @@ class __TwigTemplate_e32539a9edabfcd7a600023ced2be3d8 extends Template
     margin: 1em 0;
     width: 100%;
     background-color: var(--table-background);
-    border: 1px solid var(--table-border-color);
+    border: 1px solid var(--table-border);
 }
 
 /* Typography */
@@ -86,7 +86,7 @@ class __TwigTemplate_e32539a9edabfcd7a600023ced2be3d8 extends Template
 .timeline-graph .timeline-subrequest,
 .timeline-graph .timeline-border {
     fill: none;
-    stroke: var(--table-border-color);
+    stroke: var(--table-border);
     stroke-width: 1px;
 }
 
@@ -96,10 +96,7 @@ class __TwigTemplate_e32539a9edabfcd7a600023ced2be3d8 extends Template
 }
 
 .timeline-subrequest-pattern {
-    fill: var(--gray-200);
-}
-.theme-dark .timeline-subrequest-pattern {
-    fill: var(--gray-600);
+    fill: var(--table-border);
 }
 
 /* Timeline periods */
@@ -153,7 +150,7 @@ class __TwigTemplate_e32539a9edabfcd7a600023ced2be3d8 extends Template
     margin: 1em 0;
     width: 100%;
     background-color: var(--table-background);
-    border: 1px solid var(--table-border-color);
+    border: 1px solid var(--table-border);
 }
 
 /* Typography */
@@ -174,7 +171,7 @@ class __TwigTemplate_e32539a9edabfcd7a600023ced2be3d8 extends Template
 .timeline-graph .timeline-subrequest,
 .timeline-graph .timeline-border {
     fill: none;
-    stroke: var(--table-border-color);
+    stroke: var(--table-border);
     stroke-width: 1px;
 }
 
@@ -184,10 +181,7 @@ class __TwigTemplate_e32539a9edabfcd7a600023ced2be3d8 extends Template
 }
 
 .timeline-subrequest-pattern {
-    fill: var(--gray-200);
-}
-.theme-dark .timeline-subrequest-pattern {
-    fill: var(--gray-600);
+    fill: var(--table-border);
 }
 
 /* Timeline periods */
@@ -195,6 +189,6 @@ class __TwigTemplate_e32539a9edabfcd7a600023ced2be3d8 extends Template
 .timeline-graph .timeline-period {
     stroke-width: 0;
 }
-", "@WebProfiler/Collector/time.css.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/web-profiler-bundle/Resources/views/Collector/time.css.twig");
+", "@WebProfiler/Collector/time.css.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/web-profiler-bundle/Resources/views/Collector/time.css.twig");
     }
 }

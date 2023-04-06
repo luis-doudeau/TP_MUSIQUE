@@ -70,7 +70,7 @@ class Passport
      */
     public function addBadge(BadgeInterface $badge): static
     {
-        $this->badges[$badge::class] = $badge;
+        $this->badges[\get_class($badge)] = $badge;
 
         return $this;
     }
@@ -80,13 +80,6 @@ class Passport
         return isset($this->badges[$badgeFqcn]);
     }
 
-    /**
-     * @template TBadge of BadgeInterface
-     *
-     * @param class-string<TBadge> $badgeFqcn
-     *
-     * @return TBadge|null
-     */
     public function getBadge(string $badgeFqcn): ?BadgeInterface
     {
         return $this->badges[$badgeFqcn] ?? null;

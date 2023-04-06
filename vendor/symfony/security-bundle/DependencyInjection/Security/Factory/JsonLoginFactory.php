@@ -39,6 +39,9 @@ class JsonLoginFactory extends AbstractFactory
         return self::PRIORITY;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getKey(): string
     {
         return 'json-login';

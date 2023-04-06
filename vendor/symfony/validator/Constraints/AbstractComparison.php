@@ -54,6 +54,9 @@ abstract class AbstractComparison extends Constraint
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDefaultOption(): ?string
     {
         return 'value';

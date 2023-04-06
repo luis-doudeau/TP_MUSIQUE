@@ -30,6 +30,9 @@ class SerializerExtractor implements PropertyListExtractorInterface
         $this->classMetadataFactory = $classMetadataFactory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getProperties(string $class, array $context = []): ?array
     {
         if (!\array_key_exists('serializer_groups', $context) || (null !== $context['serializer_groups'] && !\is_array($context['serializer_groups']))) {

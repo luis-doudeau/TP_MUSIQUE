@@ -56,86 +56,58 @@ class AppFixtures extends Fixture
             }
             $album->setArtiste($artist);
 
-            // Ajouter les genres associés à l'album
-            if (array_key_exists('genres', $albumData)) {
-                foreach ($albumData['genres'] as $genreName) {
-                    $genre = $manager->getRepository(Genre::class)->findOneBy(['nomGenre' => $genreName]);
-                    if (!$genre) {
-                        $genre = new Genre();
-                        $genre->setNomGenre($genreName);
-                    }
-                    $album->addGenre($genre);
-                }
-            }
-
-            // Créer des instances de Musique pour chaque piste de l'album
-            if (array_key_exists('tracks', $albumData)) {
-                foreach ($albumData['tracks']['items'] as $trackData) {
-                    $musique = new Musique();
-                    $musique->setNomMusique($trackData['name']);
-                    $album->addMusique($musique);
-                    $manager->persist($musique); // Add this line
-                }
+            // Ajouter l'image de l'album s'il y en a une
+            if (array_key_exists('images', $albumData) && !empty($albumData['images'])) {
+                $album->setUrlImage($albumData['images'][0]['url']);
             }
 
             // Persister les entités dans la base de données
             $manager->persist($album);
             $manager->persist($artist);
-            foreach ($album->getGenres() as $genre) {
-                $manager->persist($genre);
-            }
         }
 
         // Parcourir la liste des albums et créer des instances d'Album, Artiste et Genre
-foreach ($albums as $albumData) {
-    $album = new Album();
-    $album->setNomAlbum($albumData['name']);
+        foreach ($albums as $albumData) {
+            $album = new Album();
+            $album->setNomAlbum($albumData['name']);
 
-    // Ajouter l'artiste associé à l'album
-    $artistData = $albumData['artists'][0];
-    $artist = $manager->getRepository(Artiste::class)->findOneBy(['nomArtiste' => $artistData['name']]);
-    if (!$artist) {
-        $artist = new Artiste();
-        $artist->setNomArtiste($artistData['name']);
-    }
-    $album->setArtiste($artist);
-
-    // Ajouter les genres associés à l'album
-    if (array_key_exists('genres', $albumData)) {
-        foreach ($albumData['genres'] as $genreName) {
-            $genre = $manager->getRepository(Genre::class)->findOneBy(['nomGenre' => $genreName]);
-            if (!$genre) {
-                $genre = new Genre();
-                $genre->setNomGenre($genreName);
+            // Ajouter l'artiste associé à l'album
+            $artistData = $albumData['artists'][0];
+            $artist = $manager->getRepository(Artiste::class)->findOneBy(['nomArtiste' => $artistData['name']]);
+            if (!$artist) {
+                $artist = new Artiste();
+                $artist->setNomArtiste($artistData['name']);
             }
-            $album->addGenre($genre);
-        }
-    }
+            $album->setArtiste($artist);
 
-    // Récupérer les morceaux associés à l'album
-    $response = $client->request('GET', 'https://api.spotify.com/v1/albums/' . $albumData['id'] . '/tracks', [
-        'headers' => [
-            'Authorization' => 'Bearer ' . $accessToken,
-        ],
-        'query' => [
-            'limit' => 50,
-        ],
-    ]);
-    $tracks = json_decode($response->getBody()->getContents(), true)['items'];
-    foreach ($tracks as $trackData) {
-        $musique = new Musique();
-        $musique->setNomMusique($trackData['name']);
-        $album->addMusique($musique);
-    }
+            // Récupérer les informations détaillées de l'album
+            $response = $client->request('GET', $albumData['href'], [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $accessToken,
+            ],
+            ]);
+            $albumDetails = json_decode($response->getBody()->getContents(), true);
 
-    // Persister les entités dans la base de données
-    $manager->persist($album);
-    $manager->persist($artist);
-    foreach ($album->getGenres() as $genre) {
-        $manager->persist($genre);
-    }
+
+                    // Ajouter l'image de l'album
+                    if (array_key_exists('images', $albumDetails) && count($albumDetails['images']) > 0) {
+                        $album->setUrlImage($albumDetails['images'][0]['url']);
+                    }
+
+                    // Ajouter les musiques de l'album
+                    if (array_key_exists('tracks', $albumDetails)) {
+                        foreach ($albumDetails['tracks']['items'] as $trackData) {
+                            $musique = new Musique();
+                            $musique->setNomMusique($trackData['name']);
+                            $album->addMusique($musique);
+                            $manager->persist($musique);
+                        }
+                    }
+
+                    // Persister les entités dans la base de données
+                    $manager->persist($album);
+                    $manager->persist($artist);
+                }
+                $manager->flush();
 }
-
-$manager->flush();
-    }
 }

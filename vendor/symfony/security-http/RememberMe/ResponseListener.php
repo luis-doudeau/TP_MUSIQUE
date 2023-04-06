@@ -44,6 +44,9 @@ class ResponseListener implements EventSubscriberInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents(): array
     {
         return [KernelEvents::RESPONSE => 'onKernelResponse'];

@@ -47,6 +47,9 @@ trait FilesystemTrait
         return $pruned;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doFetch(array $ids): iterable
     {
         $values = [];
@@ -73,6 +76,9 @@ trait FilesystemTrait
         return $values;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doHave(string $id): bool
     {
         $file = $this->getFile($id);
@@ -80,6 +86,9 @@ trait FilesystemTrait
         return is_file($file) && (@filemtime($file) > time() || $this->doFetch([$id]));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doSave(array $values, int $lifetime): array|bool
     {
         $expiresAt = $lifetime ? (time() + $lifetime) : 0;

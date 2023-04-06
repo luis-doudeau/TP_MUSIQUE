@@ -22,11 +22,17 @@ class CallbackTransformer implements DataTransformerInterface
         $this->reverseTransform = $reverseTransform(...);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function transform(mixed $data): mixed
     {
         return ($this->transform)($data);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function reverseTransform(mixed $data): mixed
     {
         return ($this->reverseTransform)($data);

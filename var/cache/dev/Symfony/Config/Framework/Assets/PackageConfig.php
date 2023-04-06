@@ -98,7 +98,7 @@ class PackageConfig
     }
 
     /**
-     * @param ParamConfigurator|list<ParamConfigurator|mixed>|mixed $value
+     * @param mixed $value
      *
      * @return $this
      */

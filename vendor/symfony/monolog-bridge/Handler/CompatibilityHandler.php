@@ -26,6 +26,9 @@ if (Logger::API >= 3) {
     {
         abstract private function doHandle(array|LogRecord $record): bool;
 
+        /**
+         * {@inheritdoc}
+         */
         public function handle(LogRecord $record): bool
         {
             return $this->doHandle($record);
@@ -43,6 +46,9 @@ if (Logger::API >= 3) {
     {
         abstract private function doHandle(array|LogRecord $record): bool;
 
+        /**
+         * {@inheritdoc}
+         */
         public function handle(array $record): bool
         {
             return $this->doHandle($record);

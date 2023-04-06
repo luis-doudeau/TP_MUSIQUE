@@ -59,6 +59,9 @@ class MemcachedSessionHandler extends AbstractSessionHandler
         return $this->memcached->quit();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doRead(string $sessionId): string
     {
         return $this->memcached->get($this->prefix.$sessionId) ?: '';
@@ -71,6 +74,9 @@ class MemcachedSessionHandler extends AbstractSessionHandler
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doWrite(string $sessionId, string $data): bool
     {
         return $this->memcached->set($this->prefix.$sessionId, $data, $this->getCompatibleTtl());
@@ -89,6 +95,9 @@ class MemcachedSessionHandler extends AbstractSessionHandler
         return $ttl;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doDestroy(string $sessionId): bool
     {
         $result = $this->memcached->delete($this->prefix.$sessionId);

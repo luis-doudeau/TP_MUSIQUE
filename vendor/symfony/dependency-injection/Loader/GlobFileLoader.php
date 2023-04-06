@@ -18,6 +18,9 @@ namespace Symfony\Component\DependencyInjection\Loader;
  */
 class GlobFileLoader extends FileLoader
 {
+    /**
+     * {@inheritdoc}
+     */
     public function load(mixed $resource, string $type = null): mixed
     {
         foreach ($this->glob($resource, false, $globResource) as $path => $info) {
@@ -29,6 +32,9 @@ class GlobFileLoader extends FileLoader
         return null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports(mixed $resource, string $type = null): bool
     {
         return 'glob' === $type;

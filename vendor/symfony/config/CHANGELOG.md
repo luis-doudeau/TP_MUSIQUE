@@ -1,12 +1,6 @@
 CHANGELOG
 =========
 
-6.2
----
-
- * Deprecate calling `NodeBuilder::setParent()` without any arguments
- * Add a more accurate typehint in generated PHP config
-
 6.1
 ---
 

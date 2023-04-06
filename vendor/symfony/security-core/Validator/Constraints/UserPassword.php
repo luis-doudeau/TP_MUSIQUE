@@ -31,6 +31,9 @@ class UserPassword extends Constraint
         $this->service = $service ?? $this->service;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validatedBy(): string
     {
         return $this->service;

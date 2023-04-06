@@ -50,7 +50,7 @@ final class TraceableAuthenticatorManagerListener extends AbstractListener
         foreach ($request->attributes->get('_security_skipped_authenticators') as $skippedAuthenticator) {
             $this->authenticatorsInfo[] = [
                 'supports' => false,
-                'stub' => $this->hasVardumper ? new ClassStub($skippedAuthenticator::class) : $skippedAuthenticator::class,
+                'stub' => $this->hasVardumper ? new ClassStub(\get_class($skippedAuthenticator)) : \get_class($skippedAuthenticator),
                 'passport' => null,
                 'duration' => 0,
             ];

@@ -133,18 +133,16 @@ abstract class ConstraintValidatorTestCase extends TestCase
         $context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
         $context->setConstraint($this->constraint);
 
-        $contextualValidatorMockBuilder = $this->getMockBuilder(AssertingContextualValidator::class)
-            ->setConstructorArgs([$context]);
-        $contextualValidatorMethods = [
-            'atPath',
-            'validate',
-            'validateProperty',
-            'validatePropertyValue',
-            'getViolations',
-        ];
-
-        $contextualValidatorMockBuilder->onlyMethods($contextualValidatorMethods);
-        $contextualValidator = $contextualValidatorMockBuilder->getMock();
+        $contextualValidator = $this->getMockBuilder(AssertingContextualValidator::class)
+            ->setConstructorArgs([$context])
+            ->setMethods([
+                'atPath',
+                'validate',
+                'validateProperty',
+                'validatePropertyValue',
+                'getViolations',
+            ])
+            ->getMock();
         $contextualValidator->expects($this->any())
             ->method('atPath')
             ->willReturnCallback(function ($path) use ($contextualValidator) {
@@ -188,7 +186,7 @@ abstract class ConstraintValidatorTestCase extends TestCase
     {
         $this->object = $object;
         $this->metadata = \is_object($object)
-            ? new ClassMetadata($object::class)
+            ? new ClassMetadata(\get_class($object))
             : null;
 
         $this->context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
@@ -198,7 +196,7 @@ abstract class ConstraintValidatorTestCase extends TestCase
     {
         $this->object = $object;
         $this->metadata = \is_object($object)
-            ? new PropertyMetadata($object::class, $property)
+            ? new PropertyMetadata(\get_class($object), $property)
             : null;
 
         $this->context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
@@ -297,11 +295,6 @@ abstract class ConstraintValidatorTestCase extends TestCase
         return new ConstraintViolationAssertion($this->context, $message, $this->constraint);
     }
 
-    /**
-     * @return ConstraintValidatorInterface
-     *
-     * @psalm-return T
-     */
     abstract protected function createValidator();
 }
 

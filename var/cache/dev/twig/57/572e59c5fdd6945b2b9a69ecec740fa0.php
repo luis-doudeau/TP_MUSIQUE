@@ -39,57 +39,12 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Profiler/toolbar.css.twig"));
 
-        // line 1
-        echo ".sf-toolbarreset {
-    --sf-toolbar-font-family-system: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", \"Liberation Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";
-    --sf-toolbar-font-family-monospace: \"Ubuntu Mono\", \"JetBrains Mono\", ui-monospace, \"Roboto Mono\", SFMono-Regular, Menlo, Monaco, Consolas,\"Liberation Mono\", \"Courier New\", monospace;
-
-    --sf-toolbar-white: #fff;
-    --sf-toolbar-black: #000;
-    --sf-toolbar-gray-50: #fafafa;
-    --sf-toolbar-gray-100: #f5f5f5;
-    --sf-toolbar-gray-200: #e5e5e5;
-    --sf-toolbar-gray-300: #d4d4d4;
-    --sf-toolbar-gray-400: #a3a3a3;
-    --sf-toolbar-gray-500: #737373;
-    --sf-toolbar-gray-600: #525252;
-    --sf-toolbar-gray-700: #404040;
-    --sf-toolbar-gray-800: #262626;
-    --sf-toolbar-gray-900: #171717;
-    --sf-toolbar-red-50: #FEFBFC;
-    --sf-toolbar-red-100: #FCE9ED;
-    --sf-toolbar-red-200: #F5B8C5;
-    --sf-toolbar-red-300: #EF869C;
-    --sf-toolbar-red-400: #E85574;
-    --sf-toolbar-red-500: #E1244B;
-    --sf-toolbar-red-600: #B41939;
-    --sf-toolbar-red-700: #83122A;
-    --sf-toolbar-red-800: #510B1A;
-    --sf-toolbar-red-900: #20040A;
-    --sf-toolbar-yellow-50: #fef7e1;
-    --sf-toolbar-yellow-100: #fef2cd;
-    --sf-toolbar-yellow-200: #fde496;
-    --sf-toolbar-yellow-300: #fcd55f;
-    --sf-toolbar-yellow-400: #fbc728;
-    --sf-toolbar-yellow-500: #e6af05;
-    --sf-toolbar-yellow-600: #af8503;
-    --sf-toolbar-yellow-700: #785b02;
-    --sf-toolbar-yellow-800: #413101;
-    --sf-toolbar-yellow-900: #0a0800;
-    --sf-toolbar-green-50: #eff5f5;
-    --sf-toolbar-green-100: #deeaea;
-    --sf-toolbar-green-200: #bbd5d5;
-    --sf-toolbar-green-300: #99bfbf;
-    --sf-toolbar-green-400: #76a9a9;
-    --sf-toolbar-green-500: #598e8e;
-    --sf-toolbar-green-600: #436c6c;
-    --sf-toolbar-green-700: #2e4949;
-    --sf-toolbar-green-800: #182727;
-    --sf-toolbar-green-900: #030404;
-}
-
+        // line 2
+        $context["colors"] = ["success" => "#4F805D", "warning" => "#A46A1F", "error" => "#B0413E"];
+        // line 3
+        echo "
 .sf-minitoolbar {
-    background-color: var(--sf-toolbar-gray-800);
+    background-color: #222;
     border-top-left-radius: 4px;
     bottom: 0;
     box-sizing: border-box;
@@ -108,7 +63,6 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
 }
 .sf-minitoolbar svg,
 .sf-minitoolbar img {
-    color: var(--sf-toolbar-gray-200);
     max-height: 24px;
     max-width: 24px;
     display: inline;
@@ -123,7 +77,7 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
     display: none;
 }
 
-.sf-toolbarreset *:not(svg rect) {
+.sf-toolbarreset * {
     box-sizing: content-box;
     vertical-align: baseline;
     letter-spacing: normal;
@@ -131,11 +85,11 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
 }
 
 .sf-toolbarreset {
-    background-color: var(--sf-toolbar-gray-800);
+    background-color: #222;
     bottom: 0;
-    box-shadow: inset 0 1px 0 var(--sf-toolbar-black), 0 -1px 0 rgba(0, 0, 0, 0.5);
-    color: var(--sf-toolbar-gray-200);
-    font: 11px var(--sf-toolbar-font-family-system);
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    color: #EEE;
+    font: 11px Arial, sans-serif;
     left: 0;
     margin: 0;
     padding: 0 36px 0 0;
@@ -151,7 +105,7 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
     -moz-osx-font-smoothing: auto;
 }
 .sf-toolbarreset abbr {
-    border: dashed var(--sf-toolbar-gray-500);
+    border: dashed #777;
     border-width: 0 0 1px;
 }
 .sf-toolbarreset svg,
@@ -162,26 +116,22 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
 }
 
 .sf-toolbarreset .sf-cancel-button {
-    color: var(--sf-toolbar-gray-700);
+    color: #444;
 }
 
 .sf-toolbarreset .hide-button {
-    background: var(--sf-toolbar-gray-800);
-    color: var(--sf-toolbar-gray-300);
+    background: #444;
     display: block;
     position: absolute;
-    top: 2px;
+    top: 0;
     right: 0;
     width: 36px;
-    height: 34px;
+    height: 36px;
     cursor: pointer;
     text-align: center;
     border: none;
     margin: 0;
     padding: 0;
-}
-.sf-toolbarreset .hide-button:hover {
-    background: var(--sf-toolbar-gray-700);
 }
 .sf-toolbarreset .hide-button svg {
     max-height: 18px;
@@ -194,7 +144,6 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
     float: left;
     height: 36px;
     margin-right: 0;
-    position: relative;
     white-space: nowrap;
     max-width: 15%;
 }
@@ -210,16 +159,15 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
     display: inline-block;
 }
 .sf-toolbar-block .sf-toolbar-value {
-    color: var(--sf-toolbar-gray-100);
+    color: #F5F5F5;
     font-size: 13px;
     line-height: 36px;
     padding: 0;
 }
 .sf-toolbar-block .sf-toolbar-label,
 .sf-toolbar-block .sf-toolbar-class-separator {
-    color: var(--sf-toolbar-gray-400);
+    color: #AAA;
     font-size: 12px;
-    margin-left: 2px;
 }
 
 .sf-toolbar-block .sf-toolbar-info {
@@ -228,7 +176,7 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
     z-index: 100000;
 }
 .sf-toolbar-block hr {
-    border-top: 1px solid var(--sf-toolbar-gray-500);
+    border-top: 1px solid #777;
     margin: 4px 0;
     padding-top: 4px;
 }
@@ -253,7 +201,6 @@ class __TwigTemplate_fe334528111dc02963230690e46212e4 extends Template
 }
 
 .sf-toolbar-block .sf-toolbar-info-piece .sf-toolbar-status {
-    border-radius: 4px;
     padding: 2px 5px;
     margin-bottom: 0;
 }
@@ -274,13 +221,13 @@ div.sf-toolbar .sf-toolbar-block a:hover {
 }
 
 .sf-toolbar-block .sf-toolbar-info-piece b {
-    color: var(--sf-toolbar-gray-400);
+    color: #AAA;
     display: table-cell;
     font-size: 11px;
     padding: 4px 8px 4px 0;
 }
 .sf-toolbar-block:not(.sf-toolbar-block-dump) .sf-toolbar-info-piece span {
-    color: var(--sf-toolbar-gray-100);
+    color: #F5F5F5;
 }
 .sf-toolbar-block .sf-toolbar-info-piece span {
     font-size: 12px;
@@ -290,11 +237,9 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 
 .sf-toolbar-block .sf-toolbar-info {
-    background-color: var(--sf-toolbar-gray-700);
-    border-radius: 4px;
-    border-bottom-left-radius: 0;
+    background-color: #444;
     bottom: 36px;
-    color: var(--sf-toolbar-gray-100);
+    color: #F5F5F5;
     display: none;
     padding: 9px 0;
     position: absolute;
@@ -306,62 +251,64 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 
 .sf-toolbar-block .sf-toolbar-status {
     display: inline-block;
-    color: var(--sf-toolbar-white);
-    background-color: var(--sf-toolbar-gray-600);
+    color: #FFF;
+    background-color: #666;
     padding: 3px 6px;
-    margin: 0 4px;
+    margin-bottom: 2px;
+    vertical-align: middle;
     min-width: 15px;
     min-height: 13px;
     text-align: center;
 }
 
-.sf-toolbar-block .sf-toolbar-status-green,
-.sf-toolbar-block .sf-toolbar-info .sf-toolbar-status-green {
-    background-color: #059669;
+.sf-toolbar-block .sf-toolbar-status-green {
+    background-color: ";
+        // line 223
+        echo twig_get_attribute($this->env, $this->source, (isset($context["colors"]) || array_key_exists("colors", $context) ? $context["colors"] : (function () { throw new RuntimeError('Variable "colors" does not exist.', 223, $this->source); })()), "success", [], "any", false, false, false, 223);
+        echo ";
 }
-.sf-toolbar-block .sf-toolbar-status.sf-toolbar-status-red,
-.sf-toolbar-block .sf-toolbar-info .sf-toolbar-status.sf-toolbar-status-red {
-    background-color: var(--sf-toolbar-red-500);
-    color: var(--sf-toolbar-red-50);
+.sf-toolbar-block .sf-toolbar-status-red {
+    background-color: ";
+        // line 226
+        echo twig_get_attribute($this->env, $this->source, (isset($context["colors"]) || array_key_exists("colors", $context) ? $context["colors"] : (function () { throw new RuntimeError('Variable "colors" does not exist.', 226, $this->source); })()), "error", [], "any", false, false, false, 226);
+        echo ";
 }
-.sf-toolbar-block .sf-toolbar-status.sf-toolbar-status-yellow,
-.sf-toolbar-block .sf-toolbar-info .sf-toolbar-status.sf-toolbar-status-yellow {
-    background-color: var(--sf-toolbar-yellow-300);
-    color: var(--sf-toolbar-yellow-800);
+.sf-toolbar-block .sf-toolbar-status-yellow {
+    background-color: ";
+        // line 229
+        echo twig_get_attribute($this->env, $this->source, (isset($context["colors"]) || array_key_exists("colors", $context) ? $context["colors"] : (function () { throw new RuntimeError('Variable "colors" does not exist.', 229, $this->source); })()), "warning", [], "any", false, false, false, 229);
+        echo ";
 }
 
 .sf-toolbar-block.sf-toolbar-status-green {
-    background-color: #059669;
-    color: var(--sf-toolbar-white);
+    background-color: ";
+        // line 233
+        echo twig_get_attribute($this->env, $this->source, (isset($context["colors"]) || array_key_exists("colors", $context) ? $context["colors"] : (function () { throw new RuntimeError('Variable "colors" does not exist.', 233, $this->source); })()), "success", [], "any", false, false, false, 233);
+        echo ";
+    color: #FFF;
 }
-.sf-toolbar-block.sf-toolbar-status-red::before,
-.sf-toolbar-block.sf-toolbar-status-yellow::before {
-    background: var(--sf-toolbar-yellow-400);
-    border-radius: 6px;
-    content: '';
-    position: absolute;
-    bottom: 1px;
-    left: 0;
-    width: 98%;
-    height: 3px;
-    z-index: 10005;
+.sf-toolbar-block.sf-toolbar-status-red {
+    background-color: ";
+        // line 237
+        echo twig_get_attribute($this->env, $this->source, (isset($context["colors"]) || array_key_exists("colors", $context) ? $context["colors"] : (function () { throw new RuntimeError('Variable "colors" does not exist.', 237, $this->source); })()), "error", [], "any", false, false, false, 237);
+        echo ";
+    color: #FFF;
 }
-.sf-toolbar-block.sf-toolbar-status-red::before {
-    background: var(--sf-toolbar-red-400);
-}
-.sf-toolbar-block-request.sf-toolbar-block.sf-toolbar-status-red::before,
-.sf-toolbar-block-request.sf-toolbar-block.sf-toolbar-status-yellow::before {
-    display: none;
+.sf-toolbar-block.sf-toolbar-status-yellow {
+    background-color: ";
+        // line 241
+        echo twig_get_attribute($this->env, $this->source, (isset($context["colors"]) || array_key_exists("colors", $context) ? $context["colors"] : (function () { throw new RuntimeError('Variable "colors" does not exist.', 241, $this->source); })()), "warning", [], "any", false, false, false, 241);
+        echo ";
+    color: #FFF;
 }
 
 .sf-toolbar-block-request .sf-toolbar-status {
-    border-radius: 6px;
-    color: #fff;
+    color: #FFF;
     display: inline-block;
-    flex-shrink: 0;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 4px 8px;
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 10px;
 }
 .sf-toolbar-block-request .sf-toolbar-info-piece a {
     background-color: transparent;
@@ -375,26 +322,11 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     padding: 2px 4px;
     line-height: 18px;
 }
-.sf-toolbar-block.sf-toolbar-block-request .sf-toolbar-redirection-status.sf-toolbar-status-yellow {
-    background-color: var(--sf-toolbar-yellow-300);
-    border-radius: 4px;
-    color: var(--sf-toolbar-yellow-800);
-    padding: 1px 4px;
-}
-.sf-toolbar-block.sf-toolbar-block-request .sf-toolbar-info-piece .sf-toolbar-redirection-method {
-    background: transparent;
-    color: var(--sf-toolbar-gray-300);
-    border: 1px solid var(--sf-toolbar-gray-400);
-    padding: 1px 4px;
-}
 .sf-toolbar-block-request .sf-toolbar-info-piece span.sf-toolbar-redirection-method {
     font-size: 12px;
     height: 17px;
     line-height: 17px;
     margin-right: 5px;
-}
-.sf-toolbar-block-request .sf-toolbar-request-icon svg {
-    stroke-width: 3px;
 }
 
 .sf-toolbar-block-ajax .sf-toolbar-icon {
@@ -404,31 +336,28 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 .sf-toolbar-status-green .sf-toolbar-label,
 .sf-toolbar-status-yellow .sf-toolbar-label,
 .sf-toolbar-status-red .sf-toolbar-label {
-    color: var(--sf-toolbar-white);
+    color: #FFF;
+}
+.sf-toolbar-status-green svg path,
+.sf-toolbar-status-green svg .sf-svg-path,
+.sf-toolbar-status-red svg path,
+.sf-toolbar-status-red svg .sf-svg-path,
+.sf-toolbar-status-yellow svg path,
+.sf-toolbar-status-yellow svg .sf-svg-path {
+    fill: #FFF;
 }
 .sf-toolbar-block-config svg path,
 .sf-toolbar-block-config svg .sf-svg-path {
-    fill: var(--sf-toolbar-white);
+    fill: #FFF;
 }
 
 .sf-toolbar-block .sf-toolbar-icon {
-    color: var(--sf-toolbar-gray-300);
-    align-items: center;
-    display: flex;
+    display: block;
     height: 36px;
     padding: 0 7px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.sf-toolbar-block:hover .sf-toolbar-icon {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    box-shadow: 1px 0 0 var(--sf-toolbar-black), inset 0 -1px 0 var(--sf-toolbar-black);
-}
-.sf-toolbar-block.sf-toolbar-block-right:hover .sf-toolbar-icon {
-    box-shadow: -2px 0 0 var(--sf-toolbar-black), inset 0 -2px 0 var(--sf-toolbar-black);
-}
-
 .sf-toolbar-block-request .sf-toolbar-icon {
     padding-left: 0;
     padding-right: 0;
@@ -437,22 +366,17 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 .sf-toolbar-block .sf-toolbar-icon img,
 .sf-toolbar-block .sf-toolbar-icon svg {
     border-width: 0;
+    position: relative;
+    top: 8px;
+    vertical-align: baseline;
 }
 
 .sf-toolbar-block .sf-toolbar-icon img + span,
 .sf-toolbar-block .sf-toolbar-icon svg + span {
     margin-left: 4px;
 }
-.sf-toolbar-block-config .sf-toolbar-icon .sf-toolbar-value,
-.sf-toolbar-block.sf-toolbar-block-sf-cli .sf-toolbar-value {
-    margin-left: 5px;
-}
-.sf-toolbar-block-config .sf-toolbar-icon .sf-toolbar-label,
-.sf-toolbar-block.sf-toolbar-block-sf-cli .sf-toolbar-label {
-    margin-left: 0;
-}
-.sf-toolbar-block.sf-toolbar-block-sf-cli:hover .sf-toolbar-icon {
-    box-shadow: 2px 0 0 var(--sf-toolbar-black), inset 0 -2px 0 var(--sf-toolbar-black);
+.sf-toolbar-block-config .sf-toolbar-icon .sf-toolbar-value {
+    margin-left: 4px;
 }
 
 .sf-toolbar-block:hover,
@@ -461,7 +385,7 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 .sf-toolbar-block:hover .sf-toolbar-icon,
 .sf-toolbar-block.hover .sf-toolbar-icon {
-    background-color: var(--sf-toolbar-gray-700);
+    background-color: #444;
     position: relative;
     z-index: 10002;
 }
@@ -479,29 +403,26 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     overflow-y: auto;
 }
 .sf-toolbar-info-piece b.sf-toolbar-ajax-info {
-    color: var(--sf-toolbar-gray-100);
+    color: #F5F5F5;
 }
 .sf-toolbar-ajax-requests {
-    border: 1px solid var(--sf-toolbar-gray-500);
-    font-variant: tabular-nums;
-    margin: 5px 0 0;
+    table-layout: auto;
     width: 100%;
 }
 .sf-toolbar-ajax-requests td {
-    background-color: var(--sf-toolbar-gray-700);
-    border: 1px solid var(--sf-toolbar-gray-500);
-    color: var(--sf-toolbar-gray-100);
+    background-color: #444;
+    border-bottom: 1px solid #777;
+    color: #F5F5F5;
     font-size: 12px;
     padding: 4px;
-    vertical-align: middle;
 }
-.sf-toolbar-ajax-requests thead {
-    border: 0;
+.sf-toolbar-ajax-requests tr:last-child td {
+    border-bottom: 0;
 }
 .sf-toolbar-ajax-requests th {
-    background-color: var(--sf-toolbar-gray-800);
-    border: 1px solid var(--sf-toolbar-gray-500);
-    color: var(--sf-toolbar-gray-200);
+    background-color: #222;
+    border-bottom: 0;
+    color: #AAA;
     font-size: 11px;
     padding: 4px;
 }
@@ -520,17 +441,13 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 .sf-ajax-request-duration {
     text-align: right;
 }
-.sf-toolbar-block .sf-toolbar-info-piece .sf-toolbar-ajax-requests .sf-toolbar-status {
-    font-size: 11px;
-    padding: 1px 3px;
-}
 .sf-ajax-request-loading {
     animation: sf-blink .5s ease-in-out infinite;
 }
 @keyframes sf-blink {
-    0% { background: var(--sf-toolbar-gray-800); }
-    50% { background: var(--sf-toolbar-gray-700); }
-    100% { background: var(--sf-toolbar-gray-800); }
+    0% { background: #222; }
+    50% { background: #444; }
+    100% { background: #222; }
 }
 
 .sf-toolbar-block.sf-toolbar-block-dump .sf-toolbar-info {
@@ -542,8 +459,8 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 
 .sf-toolbar-block-dump pre.sf-dump {
-    background-color: var(--sf-toolbar-gray-800);
-    border-color: var(--sf-toolbar-gray-500);
+    background-color: #222;
+    border-color: #777;
     border-radius: 0;
     margin: 6px 0 12px 0;
 }
@@ -561,18 +478,11 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     display: block;
 }
 .sf-toolbar-block-dump .sf-toolbar-info-piece .sf-toolbar-file-line {
-    color: var(--sf-toolbar-gray-400);
+    color: #AAA;
     margin-left: 4px;
 }
 .sf-toolbar-block-dump .sf-toolbar-info img {
     display: none;
-}
-
-.sf-toolbar-block-serializer .detailed-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 15px;
-    margin-top: 15px;
 }
 
 /* Responsive Design */
@@ -587,21 +497,26 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 /* Legacy Design - these styles are maintained to make old panels look
    a bit better on the new toolbar */
 .sf-toolbar-block .sf-toolbar-info-piece-additional-detail {
-    color: var(--sf-toolbar-gray-400);
+    color: #AAA;
     font-size: 12px;
 }
 .sf-toolbar-status-green .sf-toolbar-info-piece-additional-detail,
 .sf-toolbar-status-yellow .sf-toolbar-info-piece-additional-detail,
 .sf-toolbar-status-red .sf-toolbar-info-piece-additional-detail {
-    color: var(--sf-toolbar-white);
+    color: #FFF;
 }
 
 @media (min-width: 768px) {
+
     .sf-toolbar-icon .sf-toolbar-label,
     .sf-toolbar-icon .sf-toolbar-value {
         display: inline;
     }
 
+    .sf-toolbar-block .sf-toolbar-icon img,
+    .sf-toolbar-block .sf-toolbar-icon svg {
+        top: 6px;
+    }
     .sf-toolbar-block-time .sf-toolbar-icon svg,
     .sf-toolbar-block-memory .sf-toolbar-icon svg {
         display: none;
@@ -621,24 +536,20 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
         padding-left: 5px;
     }
     .sf-toolbar-block-request .sf-toolbar-icon {
-        display: flex;
-        align-items: center;
         padding-left: 0;
         padding-right: 0;
     }
     .sf-toolbar-block-request .sf-toolbar-label {
-        margin-left: 4px;
-        margin-right: 1px;
-    }
-    .sf-toolbar-block-request .sf-toolbar-status + .sf-toolbar-request-icon {
-        display: inline-flex;
         margin-left: 5px;
     }
-    .sf-toolbar-block-request .sf-toolbar-icon .sf-toolbar-request-icon + .sf-toolbar-label {
+    .sf-toolbar-block-request .sf-toolbar-status + svg {
+        margin-left: 5px;
+    }
+    .sf-toolbar-block-request .sf-toolbar-icon svg + .sf-toolbar-label {
         margin-left: 0;
      }
     .sf-toolbar-block-request .sf-toolbar-label + .sf-toolbar-value {
-        margin-right: 5px;
+        margin-right: 10px;
     }
 
     .sf-toolbar-block-request:hover .sf-toolbar-info {
@@ -657,10 +568,6 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
         margin-left: 0;
         margin-right: 0;
     }
-    .sf-toolbarreset .sf-toolbar-block.sf-toolbar-block-right:not(.sf-toolbar-block-sf-cli) .sf-toolbar-info {
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 0;
-    }
 }
 
 @media (min-width: 1024px) {
@@ -677,9 +584,9 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 
 /***** Error Toolbar *****/
 .sf-error-toolbar .sf-toolbarreset {
-    background: var(--sf-toolbar-gray-800);
-    color: var(--sf-toolbar-gray-100);
-    font: 13px/36px var(--sf-toolbar-font-family-system);
+    background: #222;
+    color: #f5f5f5;
+    font: 13px/36px Arial, sans-serif;
     height: 36px;
     padding: 0 15px;
     text-align: left;
@@ -730,63 +637,23 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
         return "@WebProfiler/Profiler/toolbar.css.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  43 => 1,);
+        return array (  300 => 241,  293 => 237,  286 => 233,  279 => 229,  273 => 226,  267 => 223,  45 => 3,  43 => 2,);
     }
 
     public function getSourceContext()
     {
-        return new Source(".sf-toolbarreset {
-    --sf-toolbar-font-family-system: system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", \"Liberation Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";
-    --sf-toolbar-font-family-monospace: \"Ubuntu Mono\", \"JetBrains Mono\", ui-monospace, \"Roboto Mono\", SFMono-Regular, Menlo, Monaco, Consolas,\"Liberation Mono\", \"Courier New\", monospace;
-
-    --sf-toolbar-white: #fff;
-    --sf-toolbar-black: #000;
-    --sf-toolbar-gray-50: #fafafa;
-    --sf-toolbar-gray-100: #f5f5f5;
-    --sf-toolbar-gray-200: #e5e5e5;
-    --sf-toolbar-gray-300: #d4d4d4;
-    --sf-toolbar-gray-400: #a3a3a3;
-    --sf-toolbar-gray-500: #737373;
-    --sf-toolbar-gray-600: #525252;
-    --sf-toolbar-gray-700: #404040;
-    --sf-toolbar-gray-800: #262626;
-    --sf-toolbar-gray-900: #171717;
-    --sf-toolbar-red-50: #FEFBFC;
-    --sf-toolbar-red-100: #FCE9ED;
-    --sf-toolbar-red-200: #F5B8C5;
-    --sf-toolbar-red-300: #EF869C;
-    --sf-toolbar-red-400: #E85574;
-    --sf-toolbar-red-500: #E1244B;
-    --sf-toolbar-red-600: #B41939;
-    --sf-toolbar-red-700: #83122A;
-    --sf-toolbar-red-800: #510B1A;
-    --sf-toolbar-red-900: #20040A;
-    --sf-toolbar-yellow-50: #fef7e1;
-    --sf-toolbar-yellow-100: #fef2cd;
-    --sf-toolbar-yellow-200: #fde496;
-    --sf-toolbar-yellow-300: #fcd55f;
-    --sf-toolbar-yellow-400: #fbc728;
-    --sf-toolbar-yellow-500: #e6af05;
-    --sf-toolbar-yellow-600: #af8503;
-    --sf-toolbar-yellow-700: #785b02;
-    --sf-toolbar-yellow-800: #413101;
-    --sf-toolbar-yellow-900: #0a0800;
-    --sf-toolbar-green-50: #eff5f5;
-    --sf-toolbar-green-100: #deeaea;
-    --sf-toolbar-green-200: #bbd5d5;
-    --sf-toolbar-green-300: #99bfbf;
-    --sf-toolbar-green-400: #76a9a9;
-    --sf-toolbar-green-500: #598e8e;
-    --sf-toolbar-green-600: #436c6c;
-    --sf-toolbar-green-700: #2e4949;
-    --sf-toolbar-green-800: #182727;
-    --sf-toolbar-green-900: #030404;
-}
+        return new Source("{# when updating any of these colors, do the same in profiler.css.twig #}
+{% set colors = { 'success': '#4F805D', 'warning': '#A46A1F', 'error': '#B0413E' } %}
 
 .sf-minitoolbar {
-    background-color: var(--sf-toolbar-gray-800);
+    background-color: #222;
     border-top-left-radius: 4px;
     bottom: 0;
     box-sizing: border-box;
@@ -805,7 +672,6 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 .sf-minitoolbar svg,
 .sf-minitoolbar img {
-    color: var(--sf-toolbar-gray-200);
     max-height: 24px;
     max-width: 24px;
     display: inline;
@@ -820,7 +686,7 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     display: none;
 }
 
-.sf-toolbarreset *:not(svg rect) {
+.sf-toolbarreset * {
     box-sizing: content-box;
     vertical-align: baseline;
     letter-spacing: normal;
@@ -828,11 +694,11 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 
 .sf-toolbarreset {
-    background-color: var(--sf-toolbar-gray-800);
+    background-color: #222;
     bottom: 0;
-    box-shadow: inset 0 1px 0 var(--sf-toolbar-black), 0 -1px 0 rgba(0, 0, 0, 0.5);
-    color: var(--sf-toolbar-gray-200);
-    font: 11px var(--sf-toolbar-font-family-system);
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    color: #EEE;
+    font: 11px Arial, sans-serif;
     left: 0;
     margin: 0;
     padding: 0 36px 0 0;
@@ -848,7 +714,7 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     -moz-osx-font-smoothing: auto;
 }
 .sf-toolbarreset abbr {
-    border: dashed var(--sf-toolbar-gray-500);
+    border: dashed #777;
     border-width: 0 0 1px;
 }
 .sf-toolbarreset svg,
@@ -859,26 +725,22 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 
 .sf-toolbarreset .sf-cancel-button {
-    color: var(--sf-toolbar-gray-700);
+    color: #444;
 }
 
 .sf-toolbarreset .hide-button {
-    background: var(--sf-toolbar-gray-800);
-    color: var(--sf-toolbar-gray-300);
+    background: #444;
     display: block;
     position: absolute;
-    top: 2px;
+    top: 0;
     right: 0;
     width: 36px;
-    height: 34px;
+    height: 36px;
     cursor: pointer;
     text-align: center;
     border: none;
     margin: 0;
     padding: 0;
-}
-.sf-toolbarreset .hide-button:hover {
-    background: var(--sf-toolbar-gray-700);
 }
 .sf-toolbarreset .hide-button svg {
     max-height: 18px;
@@ -891,7 +753,6 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     float: left;
     height: 36px;
     margin-right: 0;
-    position: relative;
     white-space: nowrap;
     max-width: 15%;
 }
@@ -907,16 +768,15 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     display: inline-block;
 }
 .sf-toolbar-block .sf-toolbar-value {
-    color: var(--sf-toolbar-gray-100);
+    color: #F5F5F5;
     font-size: 13px;
     line-height: 36px;
     padding: 0;
 }
 .sf-toolbar-block .sf-toolbar-label,
 .sf-toolbar-block .sf-toolbar-class-separator {
-    color: var(--sf-toolbar-gray-400);
+    color: #AAA;
     font-size: 12px;
-    margin-left: 2px;
 }
 
 .sf-toolbar-block .sf-toolbar-info {
@@ -925,7 +785,7 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     z-index: 100000;
 }
 .sf-toolbar-block hr {
-    border-top: 1px solid var(--sf-toolbar-gray-500);
+    border-top: 1px solid #777;
     margin: 4px 0;
     padding-top: 4px;
 }
@@ -950,7 +810,6 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 
 .sf-toolbar-block .sf-toolbar-info-piece .sf-toolbar-status {
-    border-radius: 4px;
     padding: 2px 5px;
     margin-bottom: 0;
 }
@@ -971,13 +830,13 @@ div.sf-toolbar .sf-toolbar-block a:hover {
 }
 
 .sf-toolbar-block .sf-toolbar-info-piece b {
-    color: var(--sf-toolbar-gray-400);
+    color: #AAA;
     display: table-cell;
     font-size: 11px;
     padding: 4px 8px 4px 0;
 }
 .sf-toolbar-block:not(.sf-toolbar-block-dump) .sf-toolbar-info-piece span {
-    color: var(--sf-toolbar-gray-100);
+    color: #F5F5F5;
 }
 .sf-toolbar-block .sf-toolbar-info-piece span {
     font-size: 12px;
@@ -987,11 +846,9 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 
 .sf-toolbar-block .sf-toolbar-info {
-    background-color: var(--sf-toolbar-gray-700);
-    border-radius: 4px;
-    border-bottom-left-radius: 0;
+    background-color: #444;
     bottom: 36px;
-    color: var(--sf-toolbar-gray-100);
+    color: #F5F5F5;
     display: none;
     padding: 9px 0;
     position: absolute;
@@ -1003,62 +860,46 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 
 .sf-toolbar-block .sf-toolbar-status {
     display: inline-block;
-    color: var(--sf-toolbar-white);
-    background-color: var(--sf-toolbar-gray-600);
+    color: #FFF;
+    background-color: #666;
     padding: 3px 6px;
-    margin: 0 4px;
+    margin-bottom: 2px;
+    vertical-align: middle;
     min-width: 15px;
     min-height: 13px;
     text-align: center;
 }
 
-.sf-toolbar-block .sf-toolbar-status-green,
-.sf-toolbar-block .sf-toolbar-info .sf-toolbar-status-green {
-    background-color: #059669;
+.sf-toolbar-block .sf-toolbar-status-green {
+    background-color: {{ colors.success|raw }};
 }
-.sf-toolbar-block .sf-toolbar-status.sf-toolbar-status-red,
-.sf-toolbar-block .sf-toolbar-info .sf-toolbar-status.sf-toolbar-status-red {
-    background-color: var(--sf-toolbar-red-500);
-    color: var(--sf-toolbar-red-50);
+.sf-toolbar-block .sf-toolbar-status-red {
+    background-color: {{ colors.error|raw }};
 }
-.sf-toolbar-block .sf-toolbar-status.sf-toolbar-status-yellow,
-.sf-toolbar-block .sf-toolbar-info .sf-toolbar-status.sf-toolbar-status-yellow {
-    background-color: var(--sf-toolbar-yellow-300);
-    color: var(--sf-toolbar-yellow-800);
+.sf-toolbar-block .sf-toolbar-status-yellow {
+    background-color: {{ colors.warning|raw }};
 }
 
 .sf-toolbar-block.sf-toolbar-status-green {
-    background-color: #059669;
-    color: var(--sf-toolbar-white);
+    background-color: {{ colors.success|raw }};
+    color: #FFF;
 }
-.sf-toolbar-block.sf-toolbar-status-red::before,
-.sf-toolbar-block.sf-toolbar-status-yellow::before {
-    background: var(--sf-toolbar-yellow-400);
-    border-radius: 6px;
-    content: '';
-    position: absolute;
-    bottom: 1px;
-    left: 0;
-    width: 98%;
-    height: 3px;
-    z-index: 10005;
+.sf-toolbar-block.sf-toolbar-status-red {
+    background-color: {{ colors.error|raw }};
+    color: #FFF;
 }
-.sf-toolbar-block.sf-toolbar-status-red::before {
-    background: var(--sf-toolbar-red-400);
-}
-.sf-toolbar-block-request.sf-toolbar-block.sf-toolbar-status-red::before,
-.sf-toolbar-block-request.sf-toolbar-block.sf-toolbar-status-yellow::before {
-    display: none;
+.sf-toolbar-block.sf-toolbar-status-yellow {
+    background-color: {{ colors.warning|raw }};
+    color: #FFF;
 }
 
 .sf-toolbar-block-request .sf-toolbar-status {
-    border-radius: 6px;
-    color: #fff;
+    color: #FFF;
     display: inline-block;
-    flex-shrink: 0;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 4px 8px;
+    font-size: 14px;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 10px;
 }
 .sf-toolbar-block-request .sf-toolbar-info-piece a {
     background-color: transparent;
@@ -1072,26 +913,11 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     padding: 2px 4px;
     line-height: 18px;
 }
-.sf-toolbar-block.sf-toolbar-block-request .sf-toolbar-redirection-status.sf-toolbar-status-yellow {
-    background-color: var(--sf-toolbar-yellow-300);
-    border-radius: 4px;
-    color: var(--sf-toolbar-yellow-800);
-    padding: 1px 4px;
-}
-.sf-toolbar-block.sf-toolbar-block-request .sf-toolbar-info-piece .sf-toolbar-redirection-method {
-    background: transparent;
-    color: var(--sf-toolbar-gray-300);
-    border: 1px solid var(--sf-toolbar-gray-400);
-    padding: 1px 4px;
-}
 .sf-toolbar-block-request .sf-toolbar-info-piece span.sf-toolbar-redirection-method {
     font-size: 12px;
     height: 17px;
     line-height: 17px;
     margin-right: 5px;
-}
-.sf-toolbar-block-request .sf-toolbar-request-icon svg {
-    stroke-width: 3px;
 }
 
 .sf-toolbar-block-ajax .sf-toolbar-icon {
@@ -1101,31 +927,28 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 .sf-toolbar-status-green .sf-toolbar-label,
 .sf-toolbar-status-yellow .sf-toolbar-label,
 .sf-toolbar-status-red .sf-toolbar-label {
-    color: var(--sf-toolbar-white);
+    color: #FFF;
+}
+.sf-toolbar-status-green svg path,
+.sf-toolbar-status-green svg .sf-svg-path,
+.sf-toolbar-status-red svg path,
+.sf-toolbar-status-red svg .sf-svg-path,
+.sf-toolbar-status-yellow svg path,
+.sf-toolbar-status-yellow svg .sf-svg-path {
+    fill: #FFF;
 }
 .sf-toolbar-block-config svg path,
 .sf-toolbar-block-config svg .sf-svg-path {
-    fill: var(--sf-toolbar-white);
+    fill: #FFF;
 }
 
 .sf-toolbar-block .sf-toolbar-icon {
-    color: var(--sf-toolbar-gray-300);
-    align-items: center;
-    display: flex;
+    display: block;
     height: 36px;
     padding: 0 7px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.sf-toolbar-block:hover .sf-toolbar-icon {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    box-shadow: 1px 0 0 var(--sf-toolbar-black), inset 0 -1px 0 var(--sf-toolbar-black);
-}
-.sf-toolbar-block.sf-toolbar-block-right:hover .sf-toolbar-icon {
-    box-shadow: -2px 0 0 var(--sf-toolbar-black), inset 0 -2px 0 var(--sf-toolbar-black);
-}
-
 .sf-toolbar-block-request .sf-toolbar-icon {
     padding-left: 0;
     padding-right: 0;
@@ -1134,22 +957,17 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 .sf-toolbar-block .sf-toolbar-icon img,
 .sf-toolbar-block .sf-toolbar-icon svg {
     border-width: 0;
+    position: relative;
+    top: 8px;
+    vertical-align: baseline;
 }
 
 .sf-toolbar-block .sf-toolbar-icon img + span,
 .sf-toolbar-block .sf-toolbar-icon svg + span {
     margin-left: 4px;
 }
-.sf-toolbar-block-config .sf-toolbar-icon .sf-toolbar-value,
-.sf-toolbar-block.sf-toolbar-block-sf-cli .sf-toolbar-value {
-    margin-left: 5px;
-}
-.sf-toolbar-block-config .sf-toolbar-icon .sf-toolbar-label,
-.sf-toolbar-block.sf-toolbar-block-sf-cli .sf-toolbar-label {
-    margin-left: 0;
-}
-.sf-toolbar-block.sf-toolbar-block-sf-cli:hover .sf-toolbar-icon {
-    box-shadow: 2px 0 0 var(--sf-toolbar-black), inset 0 -2px 0 var(--sf-toolbar-black);
+.sf-toolbar-block-config .sf-toolbar-icon .sf-toolbar-value {
+    margin-left: 4px;
 }
 
 .sf-toolbar-block:hover,
@@ -1158,7 +976,7 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 .sf-toolbar-block:hover .sf-toolbar-icon,
 .sf-toolbar-block.hover .sf-toolbar-icon {
-    background-color: var(--sf-toolbar-gray-700);
+    background-color: #444;
     position: relative;
     z-index: 10002;
 }
@@ -1176,29 +994,26 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     overflow-y: auto;
 }
 .sf-toolbar-info-piece b.sf-toolbar-ajax-info {
-    color: var(--sf-toolbar-gray-100);
+    color: #F5F5F5;
 }
 .sf-toolbar-ajax-requests {
-    border: 1px solid var(--sf-toolbar-gray-500);
-    font-variant: tabular-nums;
-    margin: 5px 0 0;
+    table-layout: auto;
     width: 100%;
 }
 .sf-toolbar-ajax-requests td {
-    background-color: var(--sf-toolbar-gray-700);
-    border: 1px solid var(--sf-toolbar-gray-500);
-    color: var(--sf-toolbar-gray-100);
+    background-color: #444;
+    border-bottom: 1px solid #777;
+    color: #F5F5F5;
     font-size: 12px;
     padding: 4px;
-    vertical-align: middle;
 }
-.sf-toolbar-ajax-requests thead {
-    border: 0;
+.sf-toolbar-ajax-requests tr:last-child td {
+    border-bottom: 0;
 }
 .sf-toolbar-ajax-requests th {
-    background-color: var(--sf-toolbar-gray-800);
-    border: 1px solid var(--sf-toolbar-gray-500);
-    color: var(--sf-toolbar-gray-200);
+    background-color: #222;
+    border-bottom: 0;
+    color: #AAA;
     font-size: 11px;
     padding: 4px;
 }
@@ -1217,17 +1032,13 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 .sf-ajax-request-duration {
     text-align: right;
 }
-.sf-toolbar-block .sf-toolbar-info-piece .sf-toolbar-ajax-requests .sf-toolbar-status {
-    font-size: 11px;
-    padding: 1px 3px;
-}
 .sf-ajax-request-loading {
     animation: sf-blink .5s ease-in-out infinite;
 }
 @keyframes sf-blink {
-    0% { background: var(--sf-toolbar-gray-800); }
-    50% { background: var(--sf-toolbar-gray-700); }
-    100% { background: var(--sf-toolbar-gray-800); }
+    0% { background: #222; }
+    50% { background: #444; }
+    100% { background: #222; }
 }
 
 .sf-toolbar-block.sf-toolbar-block-dump .sf-toolbar-info {
@@ -1239,8 +1050,8 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 }
 
 .sf-toolbar-block-dump pre.sf-dump {
-    background-color: var(--sf-toolbar-gray-800);
-    border-color: var(--sf-toolbar-gray-500);
+    background-color: #222;
+    border-color: #777;
     border-radius: 0;
     margin: 6px 0 12px 0;
 }
@@ -1258,18 +1069,11 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
     display: block;
 }
 .sf-toolbar-block-dump .sf-toolbar-info-piece .sf-toolbar-file-line {
-    color: var(--sf-toolbar-gray-400);
+    color: #AAA;
     margin-left: 4px;
 }
 .sf-toolbar-block-dump .sf-toolbar-info img {
     display: none;
-}
-
-.sf-toolbar-block-serializer .detailed-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 15px;
-    margin-top: 15px;
 }
 
 /* Responsive Design */
@@ -1284,21 +1088,26 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 /* Legacy Design - these styles are maintained to make old panels look
    a bit better on the new toolbar */
 .sf-toolbar-block .sf-toolbar-info-piece-additional-detail {
-    color: var(--sf-toolbar-gray-400);
+    color: #AAA;
     font-size: 12px;
 }
 .sf-toolbar-status-green .sf-toolbar-info-piece-additional-detail,
 .sf-toolbar-status-yellow .sf-toolbar-info-piece-additional-detail,
 .sf-toolbar-status-red .sf-toolbar-info-piece-additional-detail {
-    color: var(--sf-toolbar-white);
+    color: #FFF;
 }
 
 @media (min-width: 768px) {
+
     .sf-toolbar-icon .sf-toolbar-label,
     .sf-toolbar-icon .sf-toolbar-value {
         display: inline;
     }
 
+    .sf-toolbar-block .sf-toolbar-icon img,
+    .sf-toolbar-block .sf-toolbar-icon svg {
+        top: 6px;
+    }
     .sf-toolbar-block-time .sf-toolbar-icon svg,
     .sf-toolbar-block-memory .sf-toolbar-icon svg {
         display: none;
@@ -1318,24 +1127,20 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
         padding-left: 5px;
     }
     .sf-toolbar-block-request .sf-toolbar-icon {
-        display: flex;
-        align-items: center;
         padding-left: 0;
         padding-right: 0;
     }
     .sf-toolbar-block-request .sf-toolbar-label {
-        margin-left: 4px;
-        margin-right: 1px;
-    }
-    .sf-toolbar-block-request .sf-toolbar-status + .sf-toolbar-request-icon {
-        display: inline-flex;
         margin-left: 5px;
     }
-    .sf-toolbar-block-request .sf-toolbar-icon .sf-toolbar-request-icon + .sf-toolbar-label {
+    .sf-toolbar-block-request .sf-toolbar-status + svg {
+        margin-left: 5px;
+    }
+    .sf-toolbar-block-request .sf-toolbar-icon svg + .sf-toolbar-label {
         margin-left: 0;
      }
     .sf-toolbar-block-request .sf-toolbar-label + .sf-toolbar-value {
-        margin-right: 5px;
+        margin-right: 10px;
     }
 
     .sf-toolbar-block-request:hover .sf-toolbar-info {
@@ -1354,10 +1159,6 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
         margin-left: 0;
         margin-right: 0;
     }
-    .sf-toolbarreset .sf-toolbar-block.sf-toolbar-block-right:not(.sf-toolbar-block-sf-cli) .sf-toolbar-info {
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 0;
-    }
 }
 
 @media (min-width: 1024px) {
@@ -1374,9 +1175,9 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
 
 /***** Error Toolbar *****/
 .sf-error-toolbar .sf-toolbarreset {
-    background: var(--sf-toolbar-gray-800);
-    color: var(--sf-toolbar-gray-100);
-    font: 13px/36px var(--sf-toolbar-font-family-system);
+    background: #222;
+    color: #f5f5f5;
+    font: 13px/36px Arial, sans-serif;
     height: 36px;
     padding: 0 15px;
     text-align: left;
@@ -1413,6 +1214,6 @@ div.sf-toolbar  .sf-toolbar-block .sf-toolbar-info-piece.sf-toolbar-info-php-ext
         display: none !important;
     }
 }
-", "@WebProfiler/Profiler/toolbar.css.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar.css.twig");
+", "@WebProfiler/Profiler/toolbar.css.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar.css.twig");
     }
 }

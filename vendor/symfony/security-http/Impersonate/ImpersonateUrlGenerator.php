@@ -65,7 +65,9 @@ class ImpersonateUrlGenerator
             throw new \LogicException('Unable to generate the impersonate exit URL without a firewall configured for the user switch.');
         }
 
-        $targetUri ??= $request->getRequestUri();
+        if (null === $targetUri) {
+            $targetUri = $request->getRequestUri();
+        }
 
         $targetUri .= (parse_url($targetUri, \PHP_URL_QUERY) ? '&' : '?').http_build_query([$switchUserConfig['parameter'] => SwitchUserListener::EXIT_VALUE], '', '&');
 

@@ -47,7 +47,7 @@
     <h2>Log Messages</h2>
 
     {% if collector.processedLogs is empty %}
-        <div class="empty empty-panel">
+        <div class="empty">
             <p>No log messages available.</p>
         </div>
     {% else %}
@@ -131,10 +131,8 @@
             </colgroup>
 
             <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Message</th>
-                </tr>
+                <th>Time</th>
+                <th>Message</th>
             </thead>
 
             <tbody>
@@ -187,7 +185,7 @@
     <details class="container-compilation-logs">
         <summary>
             <h4>Container Compilation Logs <span class="text-muted">({{ compilerLogTotal }})</span></h4>
-            <span class="text-muted">Log messages generated during the compilation of the service container.</span>
+            <p class="text-muted">Log messages generated during the compilation of the service container.</p>
         </summary>
 
         {% if collector.compilerLogs is empty %}

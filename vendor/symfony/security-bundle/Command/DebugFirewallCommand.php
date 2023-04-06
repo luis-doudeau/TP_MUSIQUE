@@ -218,7 +218,7 @@ EOF
             array_map(
                 static function ($authenticator) {
                     return [
-                        $authenticator::class,
+                        \get_class($authenticator),
                     ];
                 },
                 $authenticators
@@ -253,7 +253,7 @@ EOF
         }
 
         if (method_exists($callable, '__invoke')) {
-            return sprintf('%s::__invoke()', $callable::class);
+            return sprintf('%s::__invoke()', \get_class($callable));
         }
 
         throw new \InvalidArgumentException('Callable is not describable.');

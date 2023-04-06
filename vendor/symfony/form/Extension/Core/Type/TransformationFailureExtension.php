@@ -35,6 +35,9 @@ class TransformationFailureExtension extends AbstractTypeExtension
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getExtendedTypes(): iterable
     {
         return [FormType::class];

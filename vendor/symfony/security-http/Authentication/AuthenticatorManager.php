@@ -83,7 +83,7 @@ class AuthenticatorManager implements AuthenticatorManagerInterface, UserAuthent
         $token = $this->eventDispatcher->dispatch(new AuthenticationTokenCreatedEvent($token, $passport))->getAuthenticatedToken();
 
         // authenticate this in the system
-        return $this->handleAuthenticationSuccess($token, $passport, $request, $authenticator, $this->tokenStorage->getToken());
+        return $this->handleAuthenticationSuccess($token, $passport, $request, $authenticator);
     }
 
     public function supports(Request $request): ?bool
@@ -102,13 +102,13 @@ class AuthenticatorManager implements AuthenticatorManagerInterface, UserAuthent
         $skippedAuthenticators = [];
         $lazy = true;
         foreach ($this->authenticators as $authenticator) {
-            $this->logger?->debug('Checking support on authenticator.', ['firewall_name' => $this->firewallName, 'authenticator' => $authenticator::class]);
+            $this->logger?->debug('Checking support on authenticator.', ['firewall_name' => $this->firewallName, 'authenticator' => \get_class($authenticator)]);
 
             if (false !== $supports = $authenticator->supports($request)) {
                 $authenticators[] = $authenticator;
                 $lazy = $lazy && null === $supports;
             } else {
-                $this->logger?->debug('Authenticator does not support the request.', ['firewall_name' => $this->firewallName, 'authenticator' => $authenticator::class]);
+                $this->logger?->debug('Authenticator does not support the request.', ['firewall_name' => $this->firewallName, 'authenticator' => \get_class($authenticator)]);
                 $skippedAuthenticators[] = $authenticator;
             }
         }
@@ -165,7 +165,6 @@ class AuthenticatorManager implements AuthenticatorManagerInterface, UserAuthent
     private function executeAuthenticator(AuthenticatorInterface $authenticator, Request $request): ?Response
     {
         $passport = null;
-        $previousToken = $this->tokenStorage->getToken();
 
         try {
             // get the passport from the Authenticator
@@ -182,7 +181,7 @@ class AuthenticatorManager implements AuthenticatorManagerInterface, UserAuthent
                     throw new BadCredentialsException(sprintf('Authentication failed: Security badge "%s" is not resolved, did you forget to register the correct listeners?', get_debug_type($badge)));
                 }
 
-                $resolvedBadges[] = $badge::class;
+                $resolvedBadges[] = \get_class($badge);
             }
 
             $missingRequiredBadges = array_diff($this->requiredBadges, $resolvedBadges);
@@ -214,7 +213,7 @@ class AuthenticatorManager implements AuthenticatorManagerInterface, UserAuthent
         }
 
         // success! (sets the token on the token storage, etc)
-        $response = $this->handleAuthenticationSuccess($authenticatedToken, $passport, $request, $authenticator, $previousToken);
+        $response = $this->handleAuthenticationSuccess($authenticatedToken, $passport, $request, $authenticator);
         if ($response instanceof Response) {
             return $response;
         }
@@ -224,7 +223,7 @@ class AuthenticatorManager implements AuthenticatorManagerInterface, UserAuthent
         return null;
     }
 
-    private function handleAuthenticationSuccess(TokenInterface $authenticatedToken, Passport $passport, Request $request, AuthenticatorInterface $authenticator, ?TokenInterface $previousToken): ?Response
+    private function handleAuthenticationSuccess(TokenInterface $authenticatedToken, Passport $passport, Request $request, AuthenticatorInterface $authenticator): ?Response
     {
         $this->tokenStorage->setToken($authenticatedToken);
 
@@ -234,7 +233,7 @@ class AuthenticatorManager implements AuthenticatorManagerInterface, UserAuthent
             $this->eventDispatcher->dispatch($loginEvent, SecurityEvents::INTERACTIVE_LOGIN);
         }
 
-        $this->eventDispatcher->dispatch($loginSuccessEvent = new LoginSuccessEvent($authenticator, $passport, $authenticatedToken, $request, $response, $this->firewallName, $previousToken));
+        $this->eventDispatcher->dispatch($loginSuccessEvent = new LoginSuccessEvent($authenticator, $passport, $authenticatedToken, $request, $response, $this->firewallName));
 
         return $loginSuccessEvent->getResponse();
     }

@@ -29,6 +29,9 @@ if (trait_exists(FormattableHandlerTrait::class)) {
         use CompatibilityProcessingHandler;
         use ServerLogHandlerTrait;
 
+        /**
+         * {@inheritdoc}
+         */
         protected function getDefaultFormatter(): FormatterInterface
         {
             return new VarDumperFormatter();
@@ -44,6 +47,9 @@ if (trait_exists(FormattableHandlerTrait::class)) {
         use CompatibilityProcessingHandler;
         use ServerLogHandlerTrait;
 
+        /**
+         * {@inheritdoc}
+         */
         protected function getDefaultFormatter()
         {
             return new VarDumperFormatter();
@@ -121,6 +127,9 @@ trait ServerLogHandlerTrait
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefaultFormatter(): FormatterInterface
     {
         return new VarDumperFormatter();

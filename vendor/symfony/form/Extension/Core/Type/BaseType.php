@@ -29,12 +29,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class BaseType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->setDisabled($options['disabled']);
         $builder->setAutoInitialize($options['auto_initialize']);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $name = $form->getName();
@@ -55,7 +61,9 @@ abstract class BaseType extends AbstractType
                 $uniqueBlockPrefix = '_'.$blockName;
             }
 
-            $translationDomain ??= $view->parent->vars['translation_domain'];
+            if (null === $translationDomain) {
+                $translationDomain = $view->parent->vars['translation_domain'];
+            }
 
             $labelTranslationParameters = array_merge($view->parent->vars['label_translation_parameters'], $labelTranslationParameters);
             $attrTranslationParameters = array_merge($view->parent->vars['attr_translation_parameters'], $attrTranslationParameters);
@@ -119,6 +127,9 @@ abstract class BaseType extends AbstractType
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

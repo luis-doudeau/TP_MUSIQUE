@@ -31,6 +31,9 @@ class DataCollectorListener implements EventSubscriberInterface
         $this->dataCollector = $dataCollector;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents(): array
     {
         return [

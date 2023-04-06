@@ -18,6 +18,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RepeatedType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Overwrite required option for child fields
@@ -41,6 +44,9 @@ class RepeatedType extends AbstractType
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -59,6 +65,9 @@ class RepeatedType extends AbstractType
         $resolver->setAllowedTypes('second_options', 'array');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix(): string
     {
         return 'repeated';

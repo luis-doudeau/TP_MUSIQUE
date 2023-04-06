@@ -281,7 +281,9 @@ class Crawler implements \Countable, \IteratorAggregate
             throw new \InvalidArgumentException('Attaching DOM nodes from multiple documents in the same crawler is forbidden.');
         }
 
-        $this->document ??= $node->ownerDocument;
+        if (null === $this->document) {
+            $this->document = $node->ownerDocument;
+        }
 
         // Don't add duplicate nodes in the Crawler
         if (\in_array($node, $this->nodes, true)) {

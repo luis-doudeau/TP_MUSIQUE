@@ -43,7 +43,7 @@ class __TwigTemplate_6d0cd837257f6dbb34a34711b2927095 extends Template
         echo "/*
  * Copyright (c) 2017 ZURB, inc. -- MIT License
  *
- * https://github.com/foundation/foundation-emails/blob/v2.2.1/dist/foundation-emails.css
+ * https://raw.githubusercontent.com/foundation/foundation-emails/v2.2.1/dist/foundation-emails.css
  */
 
 .wrapper {
@@ -1731,7 +1731,7 @@ body.outlook p {
         return new Source("/*
  * Copyright (c) 2017 ZURB, inc. -- MIT License
  *
- * https://github.com/foundation/foundation-emails/blob/v2.2.1/dist/foundation-emails.css
+ * https://raw.githubusercontent.com/foundation/foundation-emails/v2.2.1/dist/foundation-emails.css
  */
 
 .wrapper {
@@ -3395,6 +3395,6 @@ body.outlook p {
         min-width: 0;
     }
 }
-", "@email/zurb_2/main.css", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/twig-bridge/Resources/views/Email/zurb_2/main.css");
+", "@email/zurb_2/main.css", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/twig-bridge/Resources/views/Email/zurb_2/main.css");
     }
 }

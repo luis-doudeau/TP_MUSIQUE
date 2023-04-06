@@ -31,6 +31,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
 #[AsCommand(name: 'about', description: 'Display information about the current project')]
 class AboutCommand extends Command
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -44,6 +47,9 @@ EOT
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -67,7 +73,7 @@ EOT
             new TableSeparator(),
             ['<info>Kernel</>'],
             new TableSeparator(),
-            ['Type', $kernel::class],
+            ['Type', \get_class($kernel)],
             ['Environment', $kernel->getEnvironment()],
             ['Debug', $kernel->isDebug() ? 'true' : 'false'],
             ['Charset', $kernel->getCharset()],
@@ -81,8 +87,8 @@ EOT
             ['Architecture', (\PHP_INT_SIZE * 8).' bits'],
             ['Intl locale', class_exists(\Locale::class, false) && \Locale::getDefault() ? \Locale::getDefault() : 'n/a'],
             ['Timezone', date_default_timezone_get().' (<comment>'.(new \DateTime())->format(\DateTime::W3C).'</>)'],
-            ['OPcache', \extension_loaded('Zend OPcache') && filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOL) ? 'true' : 'false'],
-            ['APCu', \extension_loaded('apcu') && filter_var(\ini_get('apc.enabled'), \FILTER_VALIDATE_BOOL) ? 'true' : 'false'],
+            ['OPcache', \extension_loaded('Zend OPcache') && filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOLEAN) ? 'true' : 'false'],
+            ['APCu', \extension_loaded('apcu') && filter_var(\ini_get('apc.enabled'), \FILTER_VALIDATE_BOOLEAN) ? 'true' : 'false'],
             ['Xdebug', \extension_loaded('xdebug') ? 'true' : 'false'],
         ];
 
@@ -114,15 +120,15 @@ EOT
 
     private static function isExpired(string $date): bool
     {
-        $date = \DateTimeImmutable::createFromFormat('d/m/Y', '01/'.$date);
+        $date = \DateTime::createFromFormat('d/m/Y', '01/'.$date);
 
-        return false !== $date && new \DateTimeImmutable() > $date->modify('last day of this month 23:59:59');
+        return false !== $date && new \DateTime() > $date->modify('last day of this month 23:59:59');
     }
 
     private static function daysBeforeExpiration(string $date): string
     {
-        $date = \DateTimeImmutable::createFromFormat('d/m/Y', '01/'.$date);
+        $date = \DateTime::createFromFormat('d/m/Y', '01/'.$date);
 
-        return (new \DateTimeImmutable())->diff($date->modify('last day of this month 23:59:59'))->format('in %R%a days');
+        return (new \DateTime())->diff($date->modify('last day of this month 23:59:59'))->format('in %R%a days');
     }
 }

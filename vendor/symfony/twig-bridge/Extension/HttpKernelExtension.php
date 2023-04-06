@@ -22,6 +22,9 @@ use Twig\TwigFunction;
  */
 final class HttpKernelExtension extends AbstractExtension
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getFunctions(): array
     {
         return [

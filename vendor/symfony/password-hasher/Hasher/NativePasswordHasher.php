@@ -71,7 +71,7 @@ final class NativePasswordHasher implements PasswordHasherInterface
         ];
     }
 
-    public function hash(#[\SensitiveParameter] string $plainPassword): string
+    public function hash(string $plainPassword): string
     {
         if ($this->isPasswordTooLong($plainPassword)) {
             throw new InvalidPasswordException();
@@ -84,7 +84,7 @@ final class NativePasswordHasher implements PasswordHasherInterface
         return password_hash($plainPassword, $this->algorithm, $this->options);
     }
 
-    public function verify(string $hashedPassword, #[\SensitiveParameter] string $plainPassword): bool
+    public function verify(string $hashedPassword, string $plainPassword): bool
     {
         if ('' === $plainPassword || $this->isPasswordTooLong($plainPassword)) {
             return false;
@@ -110,6 +110,9 @@ final class NativePasswordHasher implements PasswordHasherInterface
         return password_verify($plainPassword, $hashedPassword);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function needsRehash(string $hashedPassword): bool
     {
         return password_needs_rehash($hashedPassword, $this->algorithm, $this->options);

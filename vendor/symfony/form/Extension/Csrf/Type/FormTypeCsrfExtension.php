@@ -86,6 +86,9 @@ class FormTypeCsrfExtension extends AbstractTypeExtension
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -97,6 +100,9 @@ class FormTypeCsrfExtension extends AbstractTypeExtension
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getExtendedTypes(): iterable
     {
         return [FormType::class];

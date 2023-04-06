@@ -174,7 +174,9 @@ class StreamWrapper
 
                 if ('' !== $data = $chunk->getContent()) {
                     if (\strlen($data) > $count) {
-                        $this->content ??= substr($data, $count);
+                        if (null === $this->content) {
+                            $this->content = substr($data, $count);
+                        }
                         $data = substr($data, 0, $count);
                     }
                     $this->offset += \strlen($data);

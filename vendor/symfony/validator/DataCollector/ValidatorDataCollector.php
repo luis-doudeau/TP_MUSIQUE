@@ -37,6 +37,9 @@ class ValidatorDataCollector extends DataCollector implements LateDataCollectorI
         $this->reset();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         // Everything is collected once, on kernel terminate.
@@ -50,6 +53,9 @@ class ValidatorDataCollector extends DataCollector implements LateDataCollectorI
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function lateCollect()
     {
         $collected = $this->validator->getCollectedData();
@@ -69,6 +75,9 @@ class ValidatorDataCollector extends DataCollector implements LateDataCollectorI
         return $this->data['violations_count'];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'validator';

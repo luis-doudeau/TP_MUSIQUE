@@ -21,6 +21,9 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 class DateTimeValidator extends DateValidator
 {
+    /**
+     * {@inheritdoc}
+     */
     public function validate(mixed $value, Constraint $constraint)
     {
         if (!$constraint instanceof DateTime) {

@@ -28,6 +28,9 @@ class ValidationMiddleware implements MiddlewareInterface
         $this->validator = $validator;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function handle(Envelope $envelope, StackInterface $stack): Envelope
     {
         $message = $envelope->getMessage();

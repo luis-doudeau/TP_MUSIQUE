@@ -77,6 +77,9 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get($key, $default = null): mixed
     {
         try {
@@ -94,6 +97,9 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         return $item->isHit() ? $item->get() : $default;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function set($key, $value, $ttl = null): bool
     {
         try {
@@ -114,6 +120,9 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         return $this->pool->save($item);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function delete($key): bool
     {
         try {
@@ -125,11 +134,17 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function clear(): bool
     {
         return $this->pool->clear();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getMultiple($keys, $default = null): iterable
     {
         if ($keys instanceof \Traversable) {
@@ -162,6 +177,9 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         return $values;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setMultiple($values, $ttl = null): bool
     {
         $valuesIsArray = \is_array($values);
@@ -210,6 +228,9 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         return $this->pool->commit() && $ok;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function deleteMultiple($keys): bool
     {
         if ($keys instanceof \Traversable) {
@@ -227,6 +248,9 @@ class Psr16Cache implements CacheInterface, PruneableInterface, ResettableInterf
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function has($key): bool
     {
         try {

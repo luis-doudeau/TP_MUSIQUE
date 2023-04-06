@@ -16,8 +16,6 @@ class AccessControlConfig
     private $host;
     private $port;
     private $ips;
-    private $attributes;
-    private $route;
     private $methods;
     private $allowIf;
     private $roles;
@@ -91,11 +89,11 @@ class AccessControlConfig
     }
 
     /**
-     * @param ParamConfigurator|list<ParamConfigurator|mixed>|string $value
+     * @param mixed $value
      *
      * @return $this
      */
-    public function ips(ParamConfigurator|string|array $value): static
+    public function ips(mixed $value): static
     {
         $this->_usedProperties['ips'] = true;
         $this->ips = $value;
@@ -104,35 +102,11 @@ class AccessControlConfig
     }
 
     /**
-     * @return $this
-     */
-    public function attribute(string $key, mixed $value): static
-    {
-        $this->_usedProperties['attributes'] = true;
-        $this->attributes[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * @default null
-     * @param ParamConfigurator|mixed $value
-     * @return $this
-     */
-    public function route($value): static
-    {
-        $this->_usedProperties['route'] = true;
-        $this->route = $value;
-
-        return $this;
-    }
-
-    /**
-     * @param ParamConfigurator|list<ParamConfigurator|mixed>|string $value
+     * @param mixed $value
      *
      * @return $this
      */
-    public function methods(ParamConfigurator|string|array $value): static
+    public function methods(mixed $value): static
     {
         $this->_usedProperties['methods'] = true;
         $this->methods = $value;
@@ -154,11 +128,11 @@ class AccessControlConfig
     }
 
     /**
-     * @param ParamConfigurator|list<ParamConfigurator|mixed>|string $value
+     * @param mixed $value
      *
      * @return $this
      */
-    public function roles(ParamConfigurator|string|array $value): static
+    public function roles(mixed $value): static
     {
         $this->_usedProperties['roles'] = true;
         $this->roles = $value;
@@ -204,18 +178,6 @@ class AccessControlConfig
             unset($value['ips']);
         }
 
-        if (array_key_exists('attributes', $value)) {
-            $this->_usedProperties['attributes'] = true;
-            $this->attributes = $value['attributes'];
-            unset($value['attributes']);
-        }
-
-        if (array_key_exists('route', $value)) {
-            $this->_usedProperties['route'] = true;
-            $this->route = $value['route'];
-            unset($value['route']);
-        }
-
         if (array_key_exists('methods', $value)) {
             $this->_usedProperties['methods'] = true;
             $this->methods = $value['methods'];
@@ -259,12 +221,6 @@ class AccessControlConfig
         }
         if (isset($this->_usedProperties['ips'])) {
             $output['ips'] = $this->ips;
-        }
-        if (isset($this->_usedProperties['attributes'])) {
-            $output['attributes'] = $this->attributes;
-        }
-        if (isset($this->_usedProperties['route'])) {
-            $output['route'] = $this->route;
         }
         if (isset($this->_usedProperties['methods'])) {
             $output['methods'] = $this->methods;

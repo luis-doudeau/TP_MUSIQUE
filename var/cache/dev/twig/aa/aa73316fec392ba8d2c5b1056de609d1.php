@@ -46,7 +46,7 @@ class __TwigTemplate_55158ca2ed518958886f1894b9387d73 extends Template
     ";
         // line 2
         echo twig_include($this->env, $context, "@WebProfiler/Profiler/toolbar.html.twig", ["templates" => ["request" => "@WebProfiler/Profiler/cancel.html.twig"], "profile" => null, "profiler_url" => $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("_profiler", ["token" =>         // line 7
-(isset($context["token"]) || array_key_exists("token", $context) ? $context["token"] : (function () { throw new RuntimeError('Variable "token" does not exist.', 7, $this->source); })())]), "profiler_markup_version" => 3]);
+(isset($context["token"]) || array_key_exists("token", $context) ? $context["token"] : (function () { throw new RuntimeError('Variable "token" does not exist.', 7, $this->source); })())]), "profiler_markup_version" => 2]);
         // line 9
         echo "
 </div>
@@ -117,7 +117,7 @@ class __TwigTemplate_55158ca2ed518958886f1894b9387d73 extends Template
         },
         profile: null,
         profiler_url: url('_profiler', {token: token}),
-        profiler_markup_version: 3,
+        profiler_markup_version: 2,
     }) }}
 </div>
 
@@ -131,6 +131,6 @@ class __TwigTemplate_55158ca2ed518958886f1894b9387d73 extends Template
         Sfjs.loadToolbar('{{ token }}');
     })();
 /*]]>*/</script>
-", "@WebProfiler/Profiler/toolbar_js.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar_js.html.twig");
+", "@WebProfiler/Profiler/toolbar_js.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/toolbar_js.html.twig");
     }
 }

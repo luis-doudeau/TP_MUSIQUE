@@ -104,7 +104,7 @@ class XmlReferenceDumper
                     if ($prototype->hasDefaultValue()) {
                         $prototypeValue = $prototype->getDefaultValue();
                     } else {
-                        $prototypeValue = match ($prototype::class) {
+                        $prototypeValue = match (\get_class($prototype)) {
                             ScalarNode::class => 'scalar value',
                             FloatNode::class,
                             IntegerNode::class => 'numeric value',

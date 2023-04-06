@@ -24,7 +24,6 @@ use Symfony\Component\HttpKernel\Controller\ArgumentResolver\UidValueResolver;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver;
 use Symfony\Component\HttpKernel\Controller\ErrorController;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory;
-use Symfony\Component\HttpKernel\EventListener\CacheAttributeListener;
 use Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener;
 use Symfony\Component\HttpKernel\EventListener\ErrorListener;
 use Symfony\Component\HttpKernel\EventListener\LocaleListener;
@@ -118,9 +117,5 @@ return static function (ContainerConfigurator $container) {
             ])
             ->tag('kernel.event_subscriber')
             ->tag('monolog.logger', ['channel' => 'request'])
-
-        ->set('controller.cache_attribute_listener', CacheAttributeListener::class)
-            ->tag('kernel.event_subscriber')
-
     ;
 };

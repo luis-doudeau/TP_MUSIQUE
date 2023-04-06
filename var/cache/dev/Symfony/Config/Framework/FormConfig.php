@@ -48,7 +48,6 @@ class FormConfig
     /**
      * @default null
      * @param ParamConfigurator|bool $value
-     * @deprecated The child node "legacy_error_messages" at path "form" is deprecated.
      * @return $this
      */
     public function legacyErrorMessages($value): static

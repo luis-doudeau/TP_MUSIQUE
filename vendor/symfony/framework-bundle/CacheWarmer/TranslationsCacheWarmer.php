@@ -34,6 +34,8 @@ class TranslationsCacheWarmer implements CacheWarmerInterface, ServiceSubscriber
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return string[]
      */
     public function warmUp(string $cacheDir): array
@@ -47,11 +49,17 @@ class TranslationsCacheWarmer implements CacheWarmerInterface, ServiceSubscriber
         return [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isOptional(): bool
     {
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedServices(): array
     {
         return [

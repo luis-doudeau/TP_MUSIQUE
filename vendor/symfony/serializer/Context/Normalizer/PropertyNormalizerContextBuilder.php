@@ -11,8 +11,6 @@
 
 namespace Symfony\Component\Serializer\Context\Normalizer;
 
-use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
-
 /**
  * A helper providing autocompletion for available PropertyNormalizer options.
  *
@@ -20,11 +18,4 @@ use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
  */
 final class PropertyNormalizerContextBuilder extends AbstractObjectNormalizerContextBuilder
 {
-    /**
-     * Configures whether fields should be output based on visibility.
-     */
-    public function withNormalizeVisibility(int $normalizeVisibility): static
-    {
-        return $this->with(PropertyNormalizer::NORMALIZE_VISIBILITY, $normalizeVisibility);
-    }
 }

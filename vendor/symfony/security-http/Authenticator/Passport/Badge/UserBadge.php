@@ -13,7 +13,6 @@ namespace Symfony\Component\Security\Http\Authenticator\Passport\Badge;
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\EventListener\UserProviderListener;
@@ -28,8 +27,6 @@ use Symfony\Component\Security\Http\EventListener\UserProviderListener;
  */
 class UserBadge implements BadgeInterface
 {
-    public const MAX_USERNAME_LENGTH = 4096;
-
     private string $userIdentifier;
     /** @var callable|null */
     private $userLoader;
@@ -50,10 +47,6 @@ class UserBadge implements BadgeInterface
      */
     public function __construct(string $userIdentifier, callable $userLoader = null)
     {
-        if (\strlen($userIdentifier) > self::MAX_USERNAME_LENGTH) {
-            throw new BadCredentialsException('Username too long.');
-        }
-
         $this->userIdentifier = $userIdentifier;
         $this->userLoader = $userLoader;
     }

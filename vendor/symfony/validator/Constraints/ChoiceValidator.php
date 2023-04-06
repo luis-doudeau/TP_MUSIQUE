@@ -26,6 +26,9 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 class ChoiceValidator extends ConstraintValidator
 {
+    /**
+     * {@inheritdoc}
+     */
     public function validate(mixed $value, Constraint $constraint)
     {
         if (!$constraint instanceof Choice) {
@@ -62,7 +65,7 @@ class ChoiceValidator extends ConstraintValidator
 
         if ($constraint->multiple) {
             foreach ($value as $_value) {
-                if ($constraint->match xor \in_array($_value, $choices, true)) {
+                if (!\in_array($_value, $choices, true)) {
                     $this->context->buildViolation($constraint->multipleMessage)
                         ->setParameter('{{ value }}', $this->formatValue($_value))
                         ->setParameter('{{ choices }}', $this->formatValues($choices))
@@ -95,7 +98,7 @@ class ChoiceValidator extends ConstraintValidator
 
                 return;
             }
-        } elseif ($constraint->match xor \in_array($value, $choices, true)) {
+        } elseif (!\in_array($value, $choices, true)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $this->formatValue($value))
                 ->setParameter('{{ choices }}', $this->formatValues($choices))

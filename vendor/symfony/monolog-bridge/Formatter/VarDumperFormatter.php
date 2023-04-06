@@ -43,6 +43,9 @@ class VarDumperFormatter implements FormatterInterface
         return $record;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function formatBatch(array $records): mixed
     {
         foreach ($records as $k => $record) {

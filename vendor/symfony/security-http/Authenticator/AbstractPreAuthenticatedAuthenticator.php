@@ -91,9 +91,10 @@ abstract class AbstractPreAuthenticatedAuthenticator implements InteractiveAuthe
 
     public function authenticate(Request $request): Passport
     {
-        $userBadge = new UserBadge($request->attributes->get('_pre_authenticated_username'), $this->userProvider->loadUserByIdentifier(...));
-
-        return new SelfValidatingPassport($userBadge, [new PreAuthenticatedUserBadge()]);
+        return new SelfValidatingPassport(
+            new UserBadge($request->attributes->get('_pre_authenticated_username'), $this->userProvider->loadUserByIdentifier(...)),
+            [new PreAuthenticatedUserBadge()]
+        );
     }
 
     public function createToken(Passport $passport, string $firewallName): TokenInterface

@@ -36,6 +36,9 @@ abstract class AbstractRecursivePass implements CompilerPassInterface
     private ExpressionLanguage $expressionLanguage;
     private bool $inExpression = false;
 
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
         $this->container = $container;
@@ -72,9 +75,6 @@ abstract class AbstractRecursivePass implements CompilerPassInterface
         if (\is_array($value)) {
             foreach ($value as $k => $v) {
                 if ($isRoot) {
-                    if ($v->hasTag('container.excluded')) {
-                        continue;
-                    }
                     $this->currentId = $k;
                 }
                 if ($v !== $processedValue = $this->processValue($v, $isRoot)) {
@@ -150,8 +150,8 @@ abstract class AbstractRecursivePass implements CompilerPassInterface
                 }
             } elseif ($class instanceof Definition) {
                 $class = $class->getClass();
-            } else {
-                $class ??= $definition->getClass();
+            } elseif (null === $class) {
+                $class = $definition->getClass();
             }
 
             return $this->getReflectionMethod(new Definition($class), $method);

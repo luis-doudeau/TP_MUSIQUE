@@ -98,6 +98,9 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureSchema(Schema $schema, Connection $forConnection): void
     {
         // only update the schema for this connection
@@ -112,6 +115,9 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         $this->addTableToSchema($schema);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prune(): bool
     {
         $deleteSql = "DELETE FROM $this->table WHERE $this->lifetimeCol + $this->timeCol <= ?";
@@ -132,6 +138,9 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doFetch(array $ids): iterable
     {
         $now = time();
@@ -166,6 +175,9 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doHave(string $id): bool
     {
         $sql = "SELECT 1 FROM $this->table WHERE $this->idCol = ? AND ($this->lifetimeCol IS NULL OR $this->lifetimeCol + $this->timeCol > ?)";
@@ -180,6 +192,9 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         return (bool) $result->fetchOne();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doClear(string $namespace): bool
     {
         if ('' === $namespace) {
@@ -200,6 +215,9 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doDelete(array $ids): bool
     {
         $sql = "DELETE FROM $this->table WHERE $this->idCol IN (?)";
@@ -211,6 +229,9 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function doSave(array $values, int $lifetime): array|bool
     {
         if (!$values = $this->marshaller->marshall($values, $failed)) {
@@ -309,22 +330,6 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
         return $failed;
     }
 
-    /**
-     * @internal
-     */
-    protected function getId($key)
-    {
-        if ('pgsql' !== $this->platformName ??= $this->getPlatformName()) {
-            return parent::getId($key);
-        }
-
-        if (str_contains($key, "\0") || str_contains($key, '%') || !preg_match('//u', $key)) {
-            $key = rawurlencode($key);
-        }
-
-        return parent::getId($key);
-    }
-
     private function getPlatformName(): string
     {
         if (isset($this->platformName)) {
@@ -342,7 +347,7 @@ class DoctrineDbalAdapter extends AbstractAdapter implements PruneableInterface
             $platform instanceof \Doctrine\DBAL\Platforms\OraclePlatform => $this->platformName = 'oci',
             $platform instanceof \Doctrine\DBAL\Platforms\SQLServerPlatform,
             $platform instanceof \Doctrine\DBAL\Platforms\SQLServer2012Platform => $this->platformName = 'sqlsrv',
-            default => $this->platformName = $platform::class,
+            default => $this->platformName = \get_class($platform),
         };
     }
 

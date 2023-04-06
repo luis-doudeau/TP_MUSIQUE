@@ -32,6 +32,8 @@ class ContainerConstraintValidatorFactory implements ConstraintValidatorFactoryI
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws ValidatorException      When the validator class does not exist
      * @throws UnexpectedTypeException When the validator is not an instance of ConstraintValidatorInterface
      */

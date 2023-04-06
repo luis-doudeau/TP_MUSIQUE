@@ -50,6 +50,9 @@ class RouterDebugCommand extends Command
         $this->fileLinkFormatter = $fileLinkFormatter;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -70,6 +73,8 @@ EOF
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws InvalidArgumentException When route does not exist
      */
     protected function execute(InputInterface $input, OutputInterface $output): int

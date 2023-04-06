@@ -75,14 +75,14 @@ class UniqueEntityValidator extends ConstraintValidator
                 throw new ConstraintDefinitionException(sprintf('Object manager "%s" does not exist.', $constraint->em));
             }
         } else {
-            $em = $this->registry->getManagerForClass($entity::class);
+            $em = $this->registry->getManagerForClass(\get_class($entity));
 
             if (!$em) {
                 throw new ConstraintDefinitionException(sprintf('Unable to find the object manager associated with an entity of class "%s".', get_debug_type($entity)));
             }
         }
 
-        $class = $em->getClassMetadata($entity::class);
+        $class = $em->getClassMetadata(\get_class($entity));
 
         $criteria = [];
         $hasNullValue = false;
@@ -136,7 +136,7 @@ class UniqueEntityValidator extends ConstraintValidator
                 throw new ConstraintDefinitionException(sprintf('The "%s" entity repository does not support the "%s" entity. The entity should be an instance of or extend "%s".', $constraint->entityClass, $class->getName(), $supportedClass));
             }
         } else {
-            $repository = $em->getRepository($entity::class);
+            $repository = $em->getRepository(\get_class($entity));
         }
 
         $arguments = [$criteria];
@@ -203,7 +203,7 @@ class UniqueEntityValidator extends ConstraintValidator
             return (string) $value;
         }
 
-        if ($class->getName() !== $idClass = $value::class) {
+        if ($class->getName() !== $idClass = \get_class($value)) {
             // non unique value might be a composite PK that consists of other entity objects
             if ($em->getMetadataFactory()->hasMetadataFor($idClass)) {
                 $identifiers = $em->getClassMetadata($idClass)->getIdentifierValues($value);
@@ -224,7 +224,7 @@ class UniqueEntityValidator extends ConstraintValidator
             if (!\is_object($id) || $id instanceof \DateTimeInterface) {
                 $idAsString = $this->formatValue($id, self::PRETTY_DATE);
             } else {
-                $idAsString = sprintf('object("%s")', $id::class);
+                $idAsString = sprintf('object("%s")', \get_class($id));
             }
 
             $id = sprintf('%s => %s', $field, $idAsString);

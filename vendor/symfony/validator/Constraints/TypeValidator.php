@@ -52,6 +52,9 @@ class TypeValidator extends ConstraintValidator
         'xdigit' => 'ctype_xdigit',
     ];
 
+    /**
+     * {@inheritdoc}
+     */
     public function validate(mixed $value, Constraint $constraint)
     {
         if (!$constraint instanceof Type) {

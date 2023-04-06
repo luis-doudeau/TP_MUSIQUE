@@ -1,11 +1,6 @@
 CHANGELOG
 =========
 
-6.2
----
-
- * Add `EmojiTransliterator` to translate emoji to many locales
-
 6.0
 ---
 

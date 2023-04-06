@@ -35,6 +35,9 @@ final class DumpExtension extends AbstractExtension
         $this->dumper = $dumper;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFunctions(): array
     {
         return [
@@ -42,6 +45,9 @@ final class DumpExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTokenParsers(): array
     {
         return [new DumpTokenParser()];
@@ -68,7 +74,7 @@ final class DumpExtension extends AbstractExtension
         }
 
         $dump = fopen('php://memory', 'r+');
-        $this->dumper ??= new HtmlDumper();
+        $this->dumper = $this->dumper ?? new HtmlDumper();
         $this->dumper->setCharset($env->getCharset());
 
         foreach ($vars as $value) {

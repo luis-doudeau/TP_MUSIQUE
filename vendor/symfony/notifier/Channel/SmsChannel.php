@@ -29,7 +29,9 @@ class SmsChannel extends AbstractChannel
             $message = $notification->asSmsMessage($recipient, $transportName);
         }
 
-        $message ??= SmsMessage::fromNotification($notification, $recipient);
+        if (null === $message) {
+            $message = SmsMessage::fromNotification($notification, $recipient);
+        }
 
         if (null !== $transportName) {
             $message->transport($transportName);

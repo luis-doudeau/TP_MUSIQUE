@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Album
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+	<style>
+		.container {
+			max-width: 600px;
+		}
+
+		h1 {
+			font-size: 2.5rem;
+			font-weight: bold;
+			text-align: center;
+			margin-bottom: 2rem;
+		}
+
+		.card {
+			border: none;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		.btn-secondary {
+			background-color: #1db954;
+			border-color: #1db954;
+			color: #fff;
+			font-weight: bold;
+			padding: 0.5rem 1rem;
+			border-radius: 0;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.btn-secondary:hover {
+			background-color: #1ed760;
+			border-color: #1ed760;
+			color: #fff;
+		}
+
+		form label {
+			font-weight: bold;
+			font-size: 1.2rem;
+		}
+
+		form input,
+		form select {
+			border: none;
+			border-radius: 0;
+			border-bottom: 1px solid #e1e1e1;
+			font-size: 1.2rem;
+			padding: 0.5rem;
+			margin-bottom: 1.5rem;
+		}
+
+		form input:focus,
+		form select:focus {
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+			border-bottom: 2px solid #1db954;
+		}
+
+		form input[type="submit"] {
+			background-color: #1db954;
+			border-color: #1db954;
+			color: #fff;
+			font-weight: bold;
+			padding: 0.5rem 1rem;
+			border-radius: 0;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		form input[type="submit"]:hover {
+			background-color: #1ed760;
+			border-color: #1ed760;
+			color: #fff;
+		}
+
+		.alert-danger {
+			background-color: #f8d7da;
+			border-color: #f5c6cb;
+			color: #721c24;
+			padding: 1rem;
+			margin-bottom: 1rem;
+			border-radius: 0;
+			font-size: 1.2rem;
+			font-weight: bold;
+		}
+
+		.card {
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+		}
+
+		.card-body {
+			padding: 3rem;
+		}
+
+		.btn-outline-secondary {
+			border-color: #1DB954;
+			color: #1DB954;
+		}
+
+		.btn-outline-secondary:hover {
+			background-color: #1DB954;
+			color: #fff;
+		}
+
+		.bi-chevron-left {
+			font-size: 1.2rem;
+			margin-right: 0.5rem;
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="container my-5">
+		<h1 class="mb-4">Edit Album</h1>
+
+		<div class="card shadow">
+
+			<div class="card-body">
+				{{ include('album/_form.html.twig', {'button_label': 'Update'}) }}
+			</div>
+		</div>
+		<div class="mt-5 d-flex justify-content-between align-items-center">
+			<a class="btn btn-outline-secondary" href="{{ path('app_album_index') }}">
+				<i class="bi bi-chevron-left me-2"></i>Back to list
+			</a>
+
+			{{ include('album/_delete_form.html.twig') }}</div>
+	</div>
+	<style>
+		.card {
+			border: none;
+			border-radius: 0;
+			box-shadow: none;
+		}
+
+		.card-body {
+			padding: 3rem;
+		}
+
+		.btn-outline-secondary {
+			border-color: #1DB954;
+			color: #1DB954;
+		}
+
+		.btn-outline-secondary:hover {
+			background-color: #1DB954;
+			color: #fff;
+		}
+
+		.bi-chevron-left {
+			font-size: 1.2rem;
+			margin-right: 0.5rem;
+		}
+	</style>
+{% endblock %}

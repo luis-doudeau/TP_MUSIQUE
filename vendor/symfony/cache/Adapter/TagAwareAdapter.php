@@ -114,6 +114,9 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function invalidateTags(array $tags): bool
     {
         $ids = [];
@@ -126,11 +129,17 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         return !$tags || $this->tags->deleteItems($ids);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasItem(mixed $key): bool
     {
         return $this->getItem($key)->isHit();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getItem(mixed $key): CacheItem
     {
         foreach ($this->getItems([$key]) as $item) {
@@ -138,6 +147,9 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getItems(array $keys = []): iterable
     {
         $tagKeys = [];
@@ -194,6 +206,9 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         return (self::$setCacheItemTags)($bufferedItems, $itemTags);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function clear(string $prefix = ''): bool
     {
         if ('' !== $prefix) {
@@ -213,11 +228,17 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         return $this->pool->clear();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function deleteItem(mixed $key): bool
     {
         return $this->deleteItems([$key]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function deleteItems(array $keys): bool
     {
         foreach ($keys as $key) {
@@ -229,6 +250,9 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         return $this->pool->deleteItems($keys);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function save(CacheItemInterface $item): bool
     {
         if (!$item instanceof CacheItem) {
@@ -239,6 +263,9 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         return $this->commit();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function saveDeferred(CacheItemInterface $item): bool
     {
         if (!$item instanceof CacheItem) {
@@ -249,6 +276,9 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function commit(): bool
     {
         if (!$items = $this->deferred) {
@@ -274,11 +304,17 @@ class TagAwareAdapter implements TagAwareAdapterInterface, TagAwareCacheInterfac
         return $ok;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prune(): bool
     {
         return $this->pool instanceof PruneableInterface && $this->pool->prune();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function reset()
     {
         $this->commit();

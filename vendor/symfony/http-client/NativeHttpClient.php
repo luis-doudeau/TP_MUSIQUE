@@ -61,6 +61,8 @@ final class NativeHttpClient implements HttpClientInterface, LoggerAwareInterfac
 
     /**
      * @see HttpClientInterface::OPTIONS_DEFAULTS for available options
+     *
+     * {@inheritdoc}
      */
     public function request(string $method, string $url, array $options = []): ResponseInterface
     {
@@ -252,6 +254,9 @@ final class NativeHttpClient implements HttpClientInterface, LoggerAwareInterfac
         return new NativeResponse($this->multi, $context, implode('', $url), $options, $info, $resolver, $onProgress, $this->logger);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function stream(ResponseInterface|iterable $responses, float $timeout = null): ResponseStreamInterface
     {
         if ($responses instanceof NativeResponse) {

@@ -45,6 +45,9 @@ class ConstraintViolationList implements \IteratorAggregate, ConstraintViolation
         return $self;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __toString(): string
     {
         $string = '';
@@ -56,11 +59,17 @@ class ConstraintViolationList implements \IteratorAggregate, ConstraintViolation
         return $string;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function add(ConstraintViolationInterface $violation)
     {
         $this->violations[] = $violation;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addAll(ConstraintViolationListInterface $otherList)
     {
         foreach ($otherList as $violation) {
@@ -68,6 +77,9 @@ class ConstraintViolationList implements \IteratorAggregate, ConstraintViolation
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(int $offset): ConstraintViolationInterface
     {
         if (!isset($this->violations[$offset])) {
@@ -77,22 +89,33 @@ class ConstraintViolationList implements \IteratorAggregate, ConstraintViolation
         return $this->violations[$offset];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function has(int $offset): bool
     {
         return isset($this->violations[$offset]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function set(int $offset, ConstraintViolationInterface $violation)
     {
         $this->violations[$offset] = $violation;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function remove(int $offset)
     {
         unset($this->violations[$offset]);
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return \ArrayIterator<int, ConstraintViolationInterface>
      */
     public function getIterator(): \ArrayIterator

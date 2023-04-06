@@ -21,6 +21,9 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
  */
 class IniFileLoader extends FileLoader
 {
+    /**
+     * {@inheritdoc}
+     */
     public function load(mixed $resource, string $type = null): mixed
     {
         $path = $this->locator->locate($resource);
@@ -38,11 +41,7 @@ class IniFileLoader extends FileLoader
 
         if (isset($result['parameters']) && \is_array($result['parameters'])) {
             foreach ($result['parameters'] as $key => $value) {
-                if (\is_array($value)) {
-                    $this->container->setParameter($key, array_map($this->phpize(...), $value));
-                } else {
-                    $this->container->setParameter($key, $this->phpize($value));
-                }
+                $this->container->setParameter($key, $this->phpize($value));
             }
         }
 
@@ -55,6 +54,9 @@ class IniFileLoader extends FileLoader
         return null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports(mixed $resource, string $type = null): bool
     {
         if (!\is_string($resource)) {

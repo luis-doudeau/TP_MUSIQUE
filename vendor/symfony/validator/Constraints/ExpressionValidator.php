@@ -29,6 +29,9 @@ class ExpressionValidator extends ConstraintValidator
         $this->expressionLanguage = $expressionLanguage;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validate(mixed $value, Constraint $constraint)
     {
         if (!$constraint instanceof Expression) {
@@ -39,7 +42,7 @@ class ExpressionValidator extends ConstraintValidator
         $variables['value'] = $value;
         $variables['this'] = $this->context->getObject();
 
-        if ($constraint->negate xor $this->getExpressionLanguage()->evaluate($constraint->expression, $variables)) {
+        if (!$this->getExpressionLanguage()->evaluate($constraint->expression, $variables)) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $this->formatValue($value, self::OBJECT_TO_STRING))
                 ->setCode(Expression::EXPRESSION_FAILED_ERROR)
@@ -49,6 +52,10 @@ class ExpressionValidator extends ConstraintValidator
 
     private function getExpressionLanguage(): ExpressionLanguage
     {
-        return $this->expressionLanguage ??= new ExpressionLanguage();
+        if (null === $this->expressionLanguage) {
+            $this->expressionLanguage = new ExpressionLanguage();
+        }
+
+        return $this->expressionLanguage;
     }
 }

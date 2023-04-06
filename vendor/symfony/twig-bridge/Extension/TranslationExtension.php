@@ -58,6 +58,9 @@ final class TranslationExtension extends AbstractExtension
         return $this->translator;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFunctions(): array
     {
         return [
@@ -65,6 +68,9 @@ final class TranslationExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFilters(): array
     {
         return [
@@ -72,6 +78,9 @@ final class TranslationExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTokenParsers(): array
     {
         return [
@@ -83,6 +92,9 @@ final class TranslationExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getNodeVisitors(): array
     {
         return [$this->getTranslationNodeVisitor(), new TranslationDefaultDomainNodeVisitor()];
@@ -101,10 +113,6 @@ final class TranslationExtension extends AbstractExtension
         if ($message instanceof TranslatableInterface) {
             if ([] !== $arguments && !\is_string($arguments)) {
                 throw new \TypeError(sprintf('Argument 2 passed to "%s()" must be a locale passed as a string when the message is a "%s", "%s" given.', __METHOD__, TranslatableInterface::class, get_debug_type($arguments)));
-            }
-
-            if ($message instanceof TranslatableMessage && '' === $message->getMessage()) {
-                return '';
             }
 
             return $message->trans($this->getTranslator(), $locale ?? (\is_string($arguments) ? $arguments : null));

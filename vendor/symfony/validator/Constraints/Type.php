@@ -49,11 +49,17 @@ class Type extends Constraint
         $this->message = $message ?? $this->message;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDefaultOption(): ?string
     {
         return 'type';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRequiredOptions(): array
     {
         return ['type'];

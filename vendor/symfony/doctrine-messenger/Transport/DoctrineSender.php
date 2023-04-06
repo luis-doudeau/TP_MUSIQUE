@@ -34,6 +34,9 @@ class DoctrineSender implements SenderInterface
         $this->serializer = $serializer ?? new PhpSerializer();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function send(Envelope $envelope): Envelope
     {
         $encodedMessage = $this->serializer->encode($envelope);

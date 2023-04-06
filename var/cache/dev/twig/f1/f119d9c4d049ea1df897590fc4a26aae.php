@@ -462,7 +462,7 @@ class __TwigTemplate_a22a4365121bada72e76ca2c64c02c2f extends Template
 
             <div class=\"tab ";
             // line 180
-            echo ((( !twig_get_attribute($this->env, $this->source, (isset($context["collector"]) || array_key_exists("collector", $context) ? $context["collector"] : (function () { throw new RuntimeError('Variable "collector" does not exist.', 180, $this->source); })()), "firewall", [], "any", false, false, false, 180) || twig_test_empty(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["collector"]) || array_key_exists("collector", $context) ? $context["collector"] : (function () { throw new RuntimeError('Variable "collector" does not exist.', 180, $this->source); })()), "firewall", [], "any", false, false, false, 180), "security_enabled", [], "any", false, false, false, 180)))) ? ("disabled") : (""));
+            echo ((twig_test_empty(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["collector"]) || array_key_exists("collector", $context) ? $context["collector"] : (function () { throw new RuntimeError('Variable "collector" does not exist.', 180, $this->source); })()), "firewall", [], "any", false, false, false, 180), "security_enabled", [], "any", false, false, false, 180))) ? ("disabled") : (""));
             echo "\">
                 <h3 class=\"tab-title\">Firewall</h3>
                 <div class=\"tab-content\">
@@ -1276,7 +1276,7 @@ $context["voter_detail"], "vote", [], "array", false, false, false, 423) == twig
                 </div>
             </div>
 
-            <div class=\"tab {{ (not collector.firewall or collector.firewall.security_enabled is empty) ? 'disabled' }}\">
+            <div class=\"tab {{ collector.firewall.security_enabled is empty ? 'disabled' }}\">
                 <h3 class=\"tab-title\">Firewall</h3>
                 <div class=\"tab-content\">
                     {% if collector.firewall %}
@@ -1543,6 +1543,6 @@ $context["voter_detail"], "vote", [], "array", false, false, false, 423) == twig
         </div>
     {% endif %}
 {% endblock %}
-", "@Security/Collector/security.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/security-bundle/Resources/views/Collector/security.html.twig");
+", "@Security/Collector/security.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/security-bundle/Resources/views/Collector/security.html.twig");
     }
 }

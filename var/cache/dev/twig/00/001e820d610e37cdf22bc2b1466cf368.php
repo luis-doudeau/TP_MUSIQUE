@@ -102,7 +102,7 @@ class __TwigTemplate_5e9a15acde3a823fb3888810dbe2c3e0 extends Template
         // line 15
         if (twig_test_empty(twig_get_attribute($this->env, $this->source, (isset($context["collector"]) || array_key_exists("collector", $context) ? $context["collector"] : (function () { throw new RuntimeError('Variable "collector" does not exist.', 15, $this->source); })()), "calledlisteners", [], "any", false, false, false, 15))) {
             // line 16
-            echo "        <div class=\"empty empty-panel\">
+            echo "        <div class=\"empty\">
             <p>No events have been recorded. Check that debugging is enabled in the kernel.</p>
         </div>
     ";
@@ -378,7 +378,7 @@ class __TwigTemplate_5e9a15acde3a823fb3888810dbe2c3e0 extends Template
     <h2>Event Dispatcher</h2>
 
     {% if collector.calledlisteners is empty %}
-        <div class=\"empty empty-panel\">
+        <div class=\"empty\">
             <p>No events have been recorded. Check that debugging is enabled in the kernel.</p>
         </div>
     {% else %}
@@ -482,6 +482,6 @@ class __TwigTemplate_5e9a15acde3a823fb3888810dbe2c3e0 extends Template
         {% endfor %}
     </table>
 {% endmacro %}
-", "@WebProfiler/Collector/events.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
+", "@WebProfiler/Collector/events.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
     }
 }

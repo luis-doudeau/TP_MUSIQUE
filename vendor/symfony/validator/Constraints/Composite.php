@@ -29,6 +29,8 @@ use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 abstract class Composite extends Constraint
 {
     /**
+     * {@inheritdoc}
+     *
      * The groups of the composite and its nested constraints are made
      * consistent using the following strategy:
      *
@@ -66,7 +68,7 @@ abstract class Composite extends Constraint
         foreach ($nestedConstraints as $constraint) {
             if (!$constraint instanceof Constraint) {
                 if (\is_object($constraint)) {
-                    $constraint = $constraint::class;
+                    $constraint = \get_class($constraint);
                 }
 
                 throw new ConstraintDefinitionException(sprintf('The value "%s" is not an instance of Constraint in constraint "%s".', $constraint, static::class));
@@ -109,6 +111,8 @@ abstract class Composite extends Constraint
     }
 
     /**
+     * {@inheritdoc}
+     *
      * Implicit group names are forwarded to nested constraints.
      */
     public function addImplicitGroupName(string $group)

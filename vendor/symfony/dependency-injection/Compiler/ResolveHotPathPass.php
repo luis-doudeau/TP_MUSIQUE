@@ -25,6 +25,9 @@ class ResolveHotPathPass extends AbstractRecursivePass
 {
     private array $resolvedIds = [];
 
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
         try {
@@ -35,6 +38,9 @@ class ResolveHotPathPass extends AbstractRecursivePass
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function processValue(mixed $value, bool $isRoot = false): mixed
     {
         if ($value instanceof ArgumentInterface) {

@@ -23,6 +23,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LanguageType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -71,11 +74,17 @@ class LanguageType extends AbstractType
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent(): ?string
     {
         return ChoiceType::class;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix(): string
     {
         return 'language';

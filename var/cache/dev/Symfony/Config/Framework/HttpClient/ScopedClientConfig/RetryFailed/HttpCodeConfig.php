@@ -28,11 +28,11 @@ class HttpCodeConfig
     }
 
     /**
-     * @param ParamConfigurator|list<ParamConfigurator|mixed> $value
+     * @param mixed $value
      *
      * @return $this
      */
-    public function methods(ParamConfigurator|array $value): static
+    public function methods(mixed $value): static
     {
         $this->_usedProperties['methods'] = true;
         $this->methods = $value;

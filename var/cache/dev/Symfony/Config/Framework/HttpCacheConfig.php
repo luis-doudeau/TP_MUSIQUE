@@ -20,7 +20,6 @@ class HttpCacheConfig
     private $allowRevalidate;
     private $staleWhileRevalidate;
     private $staleIfError;
-    private $terminateOnCacheHit;
     private $_usedProperties = [];
 
     /**
@@ -153,19 +152,6 @@ class HttpCacheConfig
         return $this;
     }
 
-    /**
-     * @default null
-     * @param ParamConfigurator|bool $value
-     * @return $this
-     */
-    public function terminateOnCacheHit($value): static
-    {
-        $this->_usedProperties['terminateOnCacheHit'] = true;
-        $this->terminateOnCacheHit = $value;
-
-        return $this;
-    }
-
     public function __construct(array $value = [])
     {
         if (array_key_exists('enabled', $value)) {
@@ -228,12 +214,6 @@ class HttpCacheConfig
             unset($value['stale_if_error']);
         }
 
-        if (array_key_exists('terminate_on_cache_hit', $value)) {
-            $this->_usedProperties['terminateOnCacheHit'] = true;
-            $this->terminateOnCacheHit = $value['terminate_on_cache_hit'];
-            unset($value['terminate_on_cache_hit']);
-        }
-
         if ([] !== $value) {
             throw new InvalidConfigurationException(sprintf('The following keys are not supported by "%s": ', __CLASS__).implode(', ', array_keys($value)));
         }
@@ -271,9 +251,6 @@ class HttpCacheConfig
         }
         if (isset($this->_usedProperties['staleIfError'])) {
             $output['stale_if_error'] = $this->staleIfError;
-        }
-        if (isset($this->_usedProperties['terminateOnCacheHit'])) {
-            $output['terminate_on_cache_hit'] = $this->terminateOnCacheHit;
         }
 
         return $output;

@@ -29,12 +29,17 @@ abstract class AbstractPhpFileCacheWarmer implements CacheWarmerInterface
         $this->phpArrayFile = $phpArrayFile;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isOptional(): bool
     {
         return true;
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return string[] A list of classes to preload on PHP 7.4+
      */
     public function warmUp(string $cacheDir): array

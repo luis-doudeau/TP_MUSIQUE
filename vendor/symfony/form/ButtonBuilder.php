@@ -173,6 +173,9 @@ class ButtonBuilder implements \IteratorAggregate, FormBuilderInterface
         throw new BadMethodCallException('Buttons do not support data transformers.');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setAttribute(string $name, mixed $value): static
     {
         $this->attributes[$name] = $value;
@@ -180,6 +183,9 @@ class ButtonBuilder implements \IteratorAggregate, FormBuilderInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setAttributes(array $attributes): static
     {
         $this->attributes = $attributes;
@@ -194,10 +200,6 @@ class ButtonBuilder implements \IteratorAggregate, FormBuilderInterface
      */
     public function setDataMapper(DataMapperInterface $dataMapper = null): static
     {
-        if (1 > \func_num_args()) {
-            trigger_deprecation('symfony/form', '6.2', 'Calling "%s()" without any arguments is deprecated, pass null explicitly instead.', __METHOD__);
-        }
-
         throw new BadMethodCallException('Buttons do not support data mappers.');
     }
 
@@ -413,6 +415,9 @@ class ButtonBuilder implements \IteratorAggregate, FormBuilderInterface
         throw new BadMethodCallException('Buttons do not support event dispatching.');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return $this->name;

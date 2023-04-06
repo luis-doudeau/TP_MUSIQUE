@@ -39,12 +39,9 @@ class MessengerConfig
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @return \Symfony\Config\Framework\Messenger\RoutingConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\Framework\Messenger\RoutingConfig : static)
      */
-    public function routing(string $message_class, array $value = []): \Symfony\Config\Framework\Messenger\RoutingConfig|static
+    public function routing(string $message_class, mixed $value = []): \Symfony\Config\Framework\Messenger\RoutingConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['routing'] = true;
@@ -79,12 +76,9 @@ class MessengerConfig
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @return \Symfony\Config\Framework\Messenger\TransportConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\Framework\Messenger\TransportConfig : static)
      */
-    public function transport(string $name, string|array $value = []): \Symfony\Config\Framework\Messenger\TransportConfig|static
+    public function transport(string $name, mixed $value = []): \Symfony\Config\Framework\Messenger\TransportConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['transports'] = true;
@@ -146,7 +140,7 @@ class MessengerConfig
     }
 
     /**
-     * @default {"messenger.bus.default":{"default_middleware":{"enabled":true,"allow_no_handlers":false,"allow_no_senders":true},"middleware":[]}}
+     * @default {"messenger.bus.default":{"default_middleware":true,"middleware":[]}}
     */
     public function bus(string $name, array $value = []): \Symfony\Config\Framework\Messenger\BusConfig
     {

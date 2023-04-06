@@ -40,11 +40,7 @@ class __TwigTemplate_87d2abd3c4bdb3f6c25d1e98725b45d4 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "@WebProfiler/Icon/search.svg"));
 
         // line 1
-        echo "<svg xmlns=\"http://www.w3.org/2000/svg\" data-icon-name=\"icon-tabler-search\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
-    <path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"></path>
-    <circle cx=\"10\" cy=\"10\" r=\"7\"></circle>
-    <line x1=\"21\" y1=\"21\" x2=\"15\" y2=\"15\"></line>
-</svg>
+        echo "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"#AAA\" d=\"M11.6.4A8 8 0 0 0 5.2 13L.8 17.5a1.3 1.3 0 0 0-.4.9c0 .3.1.6.4.9s.5.3.9.3c.3 0 .6 0 .9-.3l4.3-4.5a7.9 7.9 0 0 0 4.7 1.5 8 8 0 0 0 0-16zm5.5 8a5.5 5.5 0 0 1-5.5 5.4 5.5 5.5 0 1 1 5.5-5.5z\"/></svg>
 ";
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -66,11 +62,7 @@ class __TwigTemplate_87d2abd3c4bdb3f6c25d1e98725b45d4 extends Template
 
     public function getSourceContext()
     {
-        return new Source("<svg xmlns=\"http://www.w3.org/2000/svg\" data-icon-name=\"icon-tabler-search\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\">
-    <path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"></path>
-    <circle cx=\"10\" cy=\"10\" r=\"7\"></circle>
-    <line x1=\"21\" y1=\"21\" x2=\"15\" y2=\"15\"></line>
-</svg>
-", "@WebProfiler/Icon/search.svg", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/web-profiler-bundle/Resources/views/Icon/search.svg");
+        return new Source("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"#AAA\" d=\"M11.6.4A8 8 0 0 0 5.2 13L.8 17.5a1.3 1.3 0 0 0-.4.9c0 .3.1.6.4.9s.5.3.9.3c.3 0 .6 0 .9-.3l4.3-4.5a7.9 7.9 0 0 0 4.7 1.5 8 8 0 0 0 0-16zm5.5 8a5.5 5.5 0 0 1-5.5 5.4 5.5 5.5 0 1 1 5.5-5.5z\"/></svg>
+", "@WebProfiler/Icon/search.svg", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/web-profiler-bundle/Resources/views/Icon/search.svg");
     }
 }

@@ -22,6 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CountryType extends AbstractType
 {
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -47,11 +50,17 @@ class CountryType extends AbstractType
         $resolver->setAllowedTypes('alpha3', 'bool');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent(): ?string
     {
         return ChoiceType::class;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix(): string
     {
         return 'country';

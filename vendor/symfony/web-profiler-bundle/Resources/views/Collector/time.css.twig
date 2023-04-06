@@ -23,7 +23,7 @@
     margin: 1em 0;
     width: 100%;
     background-color: var(--table-background);
-    border: 1px solid var(--table-border-color);
+    border: 1px solid var(--table-border);
 }
 
 /* Typography */
@@ -44,7 +44,7 @@
 .timeline-graph .timeline-subrequest,
 .timeline-graph .timeline-border {
     fill: none;
-    stroke: var(--table-border-color);
+    stroke: var(--table-border);
     stroke-width: 1px;
 }
 
@@ -54,10 +54,7 @@
 }
 
 .timeline-subrequest-pattern {
-    fill: var(--gray-200);
-}
-.theme-dark .timeline-subrequest-pattern {
-    fill: var(--gray-600);
+    fill: var(--table-border);
 }
 
 /* Timeline periods */

@@ -43,6 +43,9 @@ class DebugAutowiringCommand extends ContainerDebugCommand
         parent::__construct($name);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -65,6 +68,9 @@ EOF
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -81,7 +87,7 @@ EOF
                 return false !== stripos(str_replace('\\', '', $serviceId), $searchNormalized) && !str_starts_with($serviceId, '.');
             });
 
-            if (!$serviceIds) {
+            if (empty($serviceIds)) {
                 $errorIo->error(sprintf('No autowirable classes or interfaces found matching "%s"', $search));
 
                 return 1;
@@ -100,9 +106,6 @@ EOF
         $previousId = '-';
         $serviceIdsNb = 0;
         foreach ($serviceIds as $serviceId) {
-            if ($builder->hasDefinition($serviceId) && $builder->getDefinition($serviceId)->hasTag('container.excluded')) {
-                continue;
-            }
             $text = [];
             $resolvedServiceId = $serviceId;
             if (!str_starts_with($serviceId, $previousId)) {

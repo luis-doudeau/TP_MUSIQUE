@@ -91,6 +91,9 @@ class ConsoleFormatter implements FormatterInterface
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function formatBatch(array $records): mixed
     {
         foreach ($records as $key => $record) {

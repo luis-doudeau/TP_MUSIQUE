@@ -39,6 +39,9 @@ use Symfony\Component\Yaml\Yaml;
 #[AsCommand(name: 'config:dump-reference', description: 'Dump the default configuration for an extension')]
 class ConfigDumpReferenceCommand extends AbstractConfigCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -72,6 +75,8 @@ EOF
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws \LogicException
      */
     protected function execute(InputInterface $input, OutputInterface $output): int

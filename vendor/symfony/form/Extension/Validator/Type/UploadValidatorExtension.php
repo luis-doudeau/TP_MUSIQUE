@@ -32,6 +32,9 @@ class UploadValidatorExtension extends AbstractTypeExtension
         $this->translationDomain = $translationDomain;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $translator = $this->translator;
@@ -43,6 +46,9 @@ class UploadValidatorExtension extends AbstractTypeExtension
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getExtendedTypes(): iterable
     {
         return [FormType::class];

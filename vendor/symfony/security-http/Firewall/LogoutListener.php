@@ -54,6 +54,9 @@ class LogoutListener extends AbstractListener
         $this->eventDispatcher = $eventDispatcher;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports(Request $request): ?bool
     {
         return $this->requiresLogout($request);

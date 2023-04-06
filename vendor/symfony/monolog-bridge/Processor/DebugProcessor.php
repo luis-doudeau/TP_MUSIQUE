@@ -33,7 +33,7 @@ class DebugProcessor implements DebugLoggerInterface, ResetInterface
 
     private function doInvoke(array|LogRecord $record): array|LogRecord
     {
-        $key = $this->requestStack && ($request = $this->requestStack->getCurrentRequest()) ? spl_object_id($request) : '';
+        $hash = $this->requestStack && ($request = $this->requestStack->getCurrentRequest()) ? spl_object_hash($request) : '';
 
         $timestamp = $timestampRfc3339 = false;
         if ($record['datetime'] instanceof \DateTimeInterface) {
@@ -43,7 +43,7 @@ class DebugProcessor implements DebugLoggerInterface, ResetInterface
             $timestampRfc3339 = (new \DateTimeImmutable($record['datetime']))->format(\DateTimeInterface::RFC3339_EXTENDED);
         }
 
-        $this->records[$key][] = [
+        $this->records[$hash][] = [
             'timestamp' => $timestamp,
             'timestamp_rfc3339' => $timestampRfc3339,
             'message' => $record['message'],
@@ -53,8 +53,8 @@ class DebugProcessor implements DebugLoggerInterface, ResetInterface
             'channel' => $record['channel'] ?? '',
         ];
 
-        if (!isset($this->errorCount[$key])) {
-            $this->errorCount[$key] = 0;
+        if (!isset($this->errorCount[$hash])) {
+            $this->errorCount[$hash] = 0;
         }
 
         switch ($record['level']) {
@@ -62,16 +62,19 @@ class DebugProcessor implements DebugLoggerInterface, ResetInterface
             case Logger::CRITICAL:
             case Logger::ALERT:
             case Logger::EMERGENCY:
-                ++$this->errorCount[$key];
+                ++$this->errorCount[$hash];
         }
 
         return $record;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getLogs(Request $request = null): array
     {
         if (null !== $request) {
-            return $this->records[spl_object_id($request)] ?? [];
+            return $this->records[spl_object_hash($request)] ?? [];
         }
 
         if (0 === \count($this->records)) {
@@ -81,21 +84,30 @@ class DebugProcessor implements DebugLoggerInterface, ResetInterface
         return array_merge(...array_values($this->records));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function countErrors(Request $request = null): int
     {
         if (null !== $request) {
-            return $this->errorCount[spl_object_id($request)] ?? 0;
+            return $this->errorCount[spl_object_hash($request)] ?? 0;
         }
 
         return array_sum($this->errorCount);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function clear()
     {
         $this->records = [];
         $this->errorCount = [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function reset()
     {
         $this->clear();

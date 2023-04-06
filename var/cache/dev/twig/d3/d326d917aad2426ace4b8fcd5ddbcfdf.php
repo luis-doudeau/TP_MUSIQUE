@@ -41,18 +41,20 @@ class __TwigTemplate_8efda345fd776891b30480b9a69091ab extends Template
 
         // line 1
         echo "<div id=\"header\">
-    <h1>";
-        // line 2
+    <div class=\"container\">
+        <h1>";
+        // line 3
         echo twig_source($this->env, "@WebProfiler/Icon/symfony.svg");
-        echo " Symfony Profiler</h1>
+        echo " Symfony <span>Profiler</span></h1>
 
-    <div class=\"search\">
-        <form method=\"get\" action=\"https://symfony.com/search\" target=\"_blank\">
-            <div class=\"form-row\">
-                <input name=\"q\" id=\"search-id\" type=\"search\" placeholder=\"search on symfony.com\" aria-label=\"Search on symfony.com\">
-                <button type=\"submit\" class=\"visually-hidden\">Search</button>
-            </div>
-       </form>
+        <div class=\"search\">
+            <form method=\"get\" action=\"https://symfony.com/search\" target=\"_blank\">
+                <div class=\"form-row\">
+                    <input name=\"q\" id=\"search-id\" type=\"search\" placeholder=\"search on symfony.com\">
+                    <button type=\"submit\" class=\"btn\">Search</button>
+                </div>
+           </form>
+        </div>
     </div>
 </div>
 ";
@@ -76,23 +78,25 @@ class __TwigTemplate_8efda345fd776891b30480b9a69091ab extends Template
 
     public function getDebugInfo()
     {
-        return array (  46 => 2,  43 => 1,);
+        return array (  47 => 3,  43 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("<div id=\"header\">
-    <h1>{{ source('@WebProfiler/Icon/symfony.svg') }} Symfony Profiler</h1>
+    <div class=\"container\">
+        <h1>{{ source('@WebProfiler/Icon/symfony.svg') }} Symfony <span>Profiler</span></h1>
 
-    <div class=\"search\">
-        <form method=\"get\" action=\"https://symfony.com/search\" target=\"_blank\">
-            <div class=\"form-row\">
-                <input name=\"q\" id=\"search-id\" type=\"search\" placeholder=\"search on symfony.com\" aria-label=\"Search on symfony.com\">
-                <button type=\"submit\" class=\"visually-hidden\">Search</button>
-            </div>
-       </form>
+        <div class=\"search\">
+            <form method=\"get\" action=\"https://symfony.com/search\" target=\"_blank\">
+                <div class=\"form-row\">
+                    <input name=\"q\" id=\"search-id\" type=\"search\" placeholder=\"search on symfony.com\">
+                    <button type=\"submit\" class=\"btn\">Search</button>
+                </div>
+           </form>
+        </div>
     </div>
 </div>
-", "@WebProfiler/Profiler/header.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/header.html.twig");
+", "@WebProfiler/Profiler/header.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/header.html.twig");
     }
 }

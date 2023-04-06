@@ -44,7 +44,11 @@ class MergeCollectionListener implements EventSubscriberInterface
     public function onSubmit(FormEvent $event)
     {
         $dataToMergeInto = $event->getForm()->getNormData();
-        $data = $event->getData() ?? [];
+        $data = $event->getData();
+
+        if (null === $data) {
+            $data = [];
+        }
 
         if (!\is_array($data) && !($data instanceof \Traversable && $data instanceof \ArrayAccess)) {
             throw new UnexpectedTypeException($data, 'array or (\Traversable and \ArrayAccess)');

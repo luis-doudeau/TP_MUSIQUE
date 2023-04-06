@@ -40,6 +40,9 @@ class XmlFileLoader extends FileLoader
 
     protected $autoRegisterAliasesForSinglyImplementedInterfaces = false;
 
+    /**
+     * {@inheritdoc}
+     */
     public function load(mixed $resource, string $type = null): mixed
     {
         $path = $this->locator->locate($resource);
@@ -92,6 +95,9 @@ class XmlFileLoader extends FileLoader
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports(mixed $resource, string $type = null): bool
     {
         if (!\is_string($resource)) {
@@ -178,7 +184,7 @@ class XmlFileLoader extends FileLoader
                         }
                         $excludes = [$service->getAttribute('exclude')];
                     }
-                    $this->registerClasses($definition, (string) $service->getAttribute('namespace'), (string) $service->getAttribute('resource'), $excludes, $file);
+                    $this->registerClasses($definition, (string) $service->getAttribute('namespace'), (string) $service->getAttribute('resource'), $excludes);
                 } else {
                     $this->setDefinition((string) $service->getAttribute('id'), $definition);
                 }
@@ -336,13 +342,10 @@ class XmlFileLoader extends FileLoader
         $tags = $this->getChildren($service, 'tag');
 
         foreach ($tags as $tag) {
-            if ('' === $tagName = $tag->childElementCount || '' === $tag->nodeValue ? $tag->getAttribute('name') : $tag->nodeValue) {
-                throw new InvalidArgumentException(sprintf('The tag name for service "%s" in "%s" must be a non-empty string.', (string) $service->getAttribute('id'), $file));
-            }
-
-            $parameters = $this->getTagAttributes($tag, sprintf('The attribute name of tag "%s" for service "%s" in %s must be a non-empty string.', $tagName, (string) $service->getAttribute('id'), $file));
+            $parameters = [];
+            $tagName = $tag->nodeValue;
             foreach ($tag->attributes as $name => $node) {
-                if ('name' === $name) {
+                if ('name' === $name && '' === $tagName) {
                     continue;
                 }
 
@@ -351,6 +354,10 @@ class XmlFileLoader extends FileLoader
                 }
                 // keep not normalized key
                 $parameters[$name] = XmlUtils::phpize($node->nodeValue);
+            }
+
+            if ('' === $tagName && '' === $tagName = $tag->getAttribute('name')) {
+                throw new InvalidArgumentException(sprintf('The tag name for service "%s" in "%s" must be a non-empty string.', $service->getAttribute('id'), $file));
             }
 
             $definition->addTag($tagName, $parameters);
@@ -537,15 +544,7 @@ class XmlFileLoader extends FileLoader
                         throw new InvalidArgumentException(sprintf('Tag "<%s>" with type="%s" has no or empty "tag" attribute in "%s".', $name, $type, $file));
                     }
 
-                    $excludes = array_column($this->getChildren($arg, 'exclude'), 'nodeValue');
-                    if ($arg->hasAttribute('exclude')) {
-                        if (\count($excludes) > 0) {
-                            throw new InvalidArgumentException('You cannot use both the attribute "exclude" and <exclude> tags at the same time.');
-                        }
-                        $excludes = [$arg->getAttribute('exclude')];
-                    }
-
-                    $arguments[$key] = new TaggedIteratorArgument($arg->getAttribute('tag'), $arg->getAttribute('index-by') ?: null, $arg->getAttribute('default-index-method') ?: null, $forLocator, $arg->getAttribute('default-priority-method') ?: null, $excludes);
+                    $arguments[$key] = new TaggedIteratorArgument($arg->getAttribute('tag'), $arg->getAttribute('index-by') ?: null, $arg->getAttribute('default-index-method') ?: null, $forLocator, $arg->getAttribute('default-priority-method') ?: null);
 
                     if ($forLocator) {
                         $arguments[$key] = new ServiceLocatorArgument($arguments[$key]);
@@ -589,30 +588,6 @@ class XmlFileLoader extends FileLoader
         }
 
         return $children;
-    }
-
-    private function getTagAttributes(\DOMNode $node, string $missingName): array
-    {
-        $parameters = [];
-        $children = $this->getChildren($node, 'attribute');
-
-        foreach ($children as $childNode) {
-            if ('' === $name = $childNode->getAttribute('name')) {
-                throw new InvalidArgumentException($missingName);
-            }
-
-            if ($this->getChildren($childNode, 'attribute')) {
-                $parameters[$name] = $this->getTagAttributes($childNode, $missingName);
-            } else {
-                if (str_contains($name, '-') && !str_contains($name, '_') && !\array_key_exists($normalizedName = str_replace('-', '_', $name), $parameters)) {
-                    $parameters[$normalizedName] = XmlUtils::phpize($childNode->nodeValue);
-                }
-                // keep not normalized key
-                $parameters[$name] = XmlUtils::phpize($childNode->nodeValue);
-            }
-        }
-
-        return $parameters;
     }
 
     /**

@@ -40,6 +40,9 @@ class ComposerResource implements SelfCheckingResourceInterface
         return __CLASS__;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isFresh(int $timestamp): bool
     {
         self::refresh();

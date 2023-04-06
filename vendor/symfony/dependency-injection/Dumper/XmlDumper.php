@@ -137,14 +137,8 @@ class XmlDumper extends Dumper
                 } else {
                     $tag->appendChild($this->document->createTextNode($name));
                 }
-
-                // Check if we have recursive attributes
-                if (array_filter($attributes, \is_array(...))) {
-                    $this->addTagRecursiveAttributes($tag, $attributes);
-                } else {
-                    foreach ($attributes as $key => $value) {
-                        $tag->setAttribute($key, $value ?? '');
-                    }
+                foreach ($attributes as $key => $value) {
+                    $tag->setAttribute($key, $value ?? '');
                 }
                 $service->appendChild($tag);
             }
@@ -267,22 +261,6 @@ class XmlDumper extends Dumper
         $parent->appendChild($services);
     }
 
-    private function addTagRecursiveAttributes(\DOMElement $parent, array $attributes)
-    {
-        foreach ($attributes as $name => $value) {
-            $attribute = $this->document->createElement('attribute');
-            $attribute->setAttribute('name', $name);
-
-            if (\is_array($value)) {
-                $this->addTagRecursiveAttributes($attribute, $value);
-            } else {
-                $attribute->appendChild($this->document->createTextNode($value));
-            }
-
-            $parent->appendChild($attribute);
-        }
-    }
-
     private function convertParameters(array $parameters, string $type, \DOMElement $parent, string $keyAttribute = 'key')
     {
         $withKeys = !array_is_list($parameters);
@@ -307,15 +285,6 @@ class XmlDumper extends Dumper
                     }
                     if (null !== $tag->getDefaultPriorityMethod()) {
                         $element->setAttribute('default-priority-method', $tag->getDefaultPriorityMethod());
-                    }
-                }
-                if ($excludes = $tag->getExclude()) {
-                    if (1 === \count($excludes)) {
-                        $element->setAttribute('exclude', $excludes[0]);
-                    } else {
-                        foreach ($excludes as $exclude) {
-                            $element->appendChild($this->document->createElement('exclude', $exclude));
-                        }
                     }
                 }
             } elseif ($value instanceof IteratorArgument) {
@@ -349,7 +318,7 @@ class XmlDumper extends Dumper
                 $element->setAttribute('type', 'expression');
                 $text = $this->document->createTextNode(self::phpToXml((string) $value));
                 $element->appendChild($text);
-            } elseif (\is_string($value) && !preg_match('/^[^\x00-\x08\x0B\x0C\x0E-\x1F\x7F]*+$/u', $value)) {
+            } elseif (\is_string($value) && !preg_match('/^[^\x00-\x08\x0B\x0E-\x1A\x1C-\x1F\x7F]*+$/u', $value)) {
                 $element->setAttribute('type', 'binary');
                 $text = $this->document->createTextNode(self::phpToXml(base64_encode($value)));
                 $element->appendChild($text);
@@ -412,7 +381,7 @@ class XmlDumper extends Dumper
             case $value instanceof Parameter:
                 return '%'.$value.'%';
             case $value instanceof \UnitEnum:
-                return sprintf('%s::%s', $value::class, $value->name);
+                return sprintf('%s::%s', \get_class($value), $value->name);
             case \is_object($value) || \is_resource($value):
                 throw new RuntimeException('Unable to dump a service container if a parameter is an object or a resource.');
             default:

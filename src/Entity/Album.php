@@ -6,7 +6,6 @@ use App\Repository\AlbumRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\{CascadeType, OneToMany};
 
 #[ORM\Entity(repositoryClass: AlbumRepository::class)]
 class Album
@@ -19,19 +18,21 @@ class Album
     #[ORM\Column(length: 255)]
     private ?string $nomAlbum = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $urlImage = null;
+
+
+    /**
+    * @ORM\OneToMany(targetEntity=Musique::class, mappedBy="album", cascade={"persist"})
+    */
+    private $musiques;
+
     #[ORM\ManyToOne(inversedBy: 'albums')]
     private ?Artiste $artiste = null;
-
-    #[ORM\OneToMany(mappedBy: 'album', targetEntity: Musique::class, cascade: ['persist'])]
-    private Collection $musiques;
-
-    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'albums')]
-    private Collection $genres;
 
     public function __construct()
     {
         $this->musiques = new ArrayCollection();
-        $this->genres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,14 +52,14 @@ class Album
         return $this;
     }
 
-    public function getArtiste(): ?Artiste
+    public function getUrlImage(): ?string
     {
-        return $this->artiste;
+        return $this->urlImage;
     }
 
-    public function setArtiste(?Artiste $artiste): self
+    public function setUrlImage(string $urlImage): self
     {
-        $this->artiste = $artiste;
+        $this->urlImage = $urlImage;
 
         return $this;
     }
@@ -93,27 +94,21 @@ class Album
         return $this;
     }
 
-    /**
-     * @return Collection<int, Genre>
-     */
-    public function getGenres(): Collection
+    public function getArtiste(): ?Artiste
     {
-        return $this->genres;
+        return $this->artiste;
     }
 
-    public function addGenre(Genre $genre): self
+    public function setArtiste(?Artiste $artiste): self
     {
-        if (!$this->genres->contains($genre)) {
-            $this->genres->add($genre);
-        }
+        $this->artiste = $artiste;
 
         return $this;
     }
 
-    public function removeGenre(Genre $genre): self
+    public function __toString()
     {
-        $this->genres->removeElement($genre);
-
-        return $this;
+        return $this->nomAlbum;
     }
+
 }

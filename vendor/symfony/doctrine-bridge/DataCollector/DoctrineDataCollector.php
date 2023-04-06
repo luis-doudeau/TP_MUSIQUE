@@ -53,6 +53,9 @@ class DoctrineDataCollector extends DataCollector
         $this->loggers[$name] = $logger;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         $this->data = [
@@ -129,11 +132,17 @@ class DoctrineDataCollector extends DataCollector
         return $time;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'db';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getCasters(): array
     {
         return parent::getCasters() + [
@@ -176,7 +185,9 @@ class DoctrineDataCollector extends DataCollector
     {
         $query['explainable'] = true;
         $query['runnable'] = true;
-        $query['params'] ??= [];
+        if (null === $query['params']) {
+            $query['params'] = [];
+        }
         if (!\is_array($query['params'])) {
             $query['params'] = [$query['params']];
         }

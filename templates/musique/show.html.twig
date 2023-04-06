@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Musique
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<img src="{{ musique.album.urlImage }}" alt="{{ musique.album.nomAlbum }}" class="img-fluid rounded">
+			</div>
+			<div class="col-md-8">
+				<h1 class="mb-4">{{ musique.nomMusique }}</h1>
+				<p class="lead">Album:
+					{{ musique.album.nomAlbum }}</p>
+				<p>Artiste:
+					{{ musique.album.artiste.nomArtiste }}</p>
+
+			</div>
+		</div>
+		<hr>
+
+		<a href="{{ path('app_musique_index') }}" class="btn btn-secondary mb-2">Retour à la liste</a>
+
+		<a href="{{ path('app_musique_edit', {'id': musique.id}) }}" class="btn btn-primary mb-2">Modifier</a>
+
+		{{ include('musique/_delete_form.html.twig') }}
+	</div>
+{% endblock %}

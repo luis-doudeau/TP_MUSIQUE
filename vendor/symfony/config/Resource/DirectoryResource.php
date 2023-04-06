@@ -56,6 +56,9 @@ class DirectoryResource implements SelfCheckingResourceInterface
         return $this->pattern;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isFresh(int $timestamp): bool
     {
         if (!is_dir($this->resource)) {

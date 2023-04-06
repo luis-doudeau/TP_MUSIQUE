@@ -32,6 +32,9 @@ class ServiceLocator extends BaseServiceLocator
         parent::__construct($serviceMap);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(string $id): mixed
     {
         return match (\count($this->serviceMap[$id] ?? [])) {
@@ -41,6 +44,9 @@ class ServiceLocator extends BaseServiceLocator
         };
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getProvidedServices(): array
     {
         return $this->serviceTypes ??= array_map(function () { return '?'; }, $this->serviceMap);

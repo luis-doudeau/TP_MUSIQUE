@@ -95,6 +95,8 @@ class Translator extends BaseTranslator implements WarmableInterface
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @return string[]
      */
     public function warmUp(string $cacheDir): array
@@ -126,6 +128,9 @@ class Translator extends BaseTranslator implements WarmableInterface
         $this->resources[] = [$format, $resource, $locale, $domain];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function initializeCatalogue(string $locale)
     {
         $this->initialize();

@@ -33,11 +33,17 @@ class Traverse extends Constraint
         parent::__construct($traverse);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getDefaultOption(): ?string
     {
         return 'traverse';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTargets(): string|array
     {
         return self::CLASS_CONSTRAINT;

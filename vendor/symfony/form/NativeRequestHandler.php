@@ -40,6 +40,8 @@ class NativeRequestHandler implements RequestHandlerInterface
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws Exception\UnexpectedTypeException If the $request is not null
      */
     public function handleRequest(FormInterface $form, mixed $request = null)
@@ -122,6 +124,9 @@ class NativeRequestHandler implements RequestHandlerInterface
         $form->submit($data, 'PATCH' !== $method);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isFileUpload(mixed $data): bool
     {
         // POST data will always be strings or arrays of strings. Thus, we can be sure

@@ -19,8 +19,6 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Florian Eckerstorfer <florian@eckerstorfer.org>
- *
- * @extends BaseDateTimeTransformer<string>
  */
 class DateTimeToLocalizedStringTransformer extends BaseDateTimeTransformer
 {
@@ -45,8 +43,13 @@ class DateTimeToLocalizedStringTransformer extends BaseDateTimeTransformer
     {
         parent::__construct($inputTimezone, $outputTimezone);
 
-        $dateFormat ??= \IntlDateFormatter::MEDIUM;
-        $timeFormat ??= \IntlDateFormatter::SHORT;
+        if (null === $dateFormat) {
+            $dateFormat = \IntlDateFormatter::MEDIUM;
+        }
+
+        if (null === $timeFormat) {
+            $timeFormat = \IntlDateFormatter::SHORT;
+        }
 
         if (!\in_array($dateFormat, self::$formats, true)) {
             throw new UnexpectedTypeException($dateFormat, implode('", "', self::$formats));
@@ -92,7 +95,7 @@ class DateTimeToLocalizedStringTransformer extends BaseDateTimeTransformer
     /**
      * Transforms a localized date string/array into a normalized date.
      *
-     * @param string $value Localized date string
+     * @param string|array $value Localized date string/array
      *
      * @throws TransformationFailedException if the given value is not a string,
      *                                       if the date could not be parsed

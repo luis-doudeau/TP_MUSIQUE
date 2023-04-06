@@ -41,6 +41,9 @@ class MailerHandler extends AbstractProcessingHandler
         $this->messageTemplate = $messageTemplate instanceof Email ? $messageTemplate : $messageTemplate(...);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function handleBatch(array $records): void
     {
         $messages = [];
@@ -62,11 +65,14 @@ class MailerHandler extends AbstractProcessingHandler
             }
         }
 
-        if ($messages) {
+        if (!empty($messages)) {
             $this->send((string) $this->getFormatter()->formatBatch($messages), $messages);
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     private function doWrite(array|LogRecord $record): void
     {
         $this->send((string) $record['formatted'], [$record]);

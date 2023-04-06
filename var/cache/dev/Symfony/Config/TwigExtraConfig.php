@@ -27,13 +27,10 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
     private $_usedProperties = [];
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @default {"enabled":false}
      * @return \Symfony\Config\TwigExtra\CacheConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\TwigExtra\CacheConfig : static)
      */
-    public function cache(array $value = []): \Symfony\Config\TwigExtra\CacheConfig|static
+    public function cache(mixed $value = []): \Symfony\Config\TwigExtra\CacheConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['cache'] = true;
@@ -53,13 +50,10 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @default {"enabled":false}
      * @return \Symfony\Config\TwigExtra\HtmlConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\TwigExtra\HtmlConfig : static)
      */
-    public function html(array $value = []): \Symfony\Config\TwigExtra\HtmlConfig|static
+    public function html(mixed $value = []): \Symfony\Config\TwigExtra\HtmlConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['html'] = true;
@@ -79,13 +73,10 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @default {"enabled":false}
      * @return \Symfony\Config\TwigExtra\MarkdownConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\TwigExtra\MarkdownConfig : static)
      */
-    public function markdown(array $value = []): \Symfony\Config\TwigExtra\MarkdownConfig|static
+    public function markdown(mixed $value = []): \Symfony\Config\TwigExtra\MarkdownConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['markdown'] = true;
@@ -105,13 +96,10 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @default {"enabled":false}
      * @return \Symfony\Config\TwigExtra\IntlConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\TwigExtra\IntlConfig : static)
      */
-    public function intl(array $value = []): \Symfony\Config\TwigExtra\IntlConfig|static
+    public function intl(mixed $value = []): \Symfony\Config\TwigExtra\IntlConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['intl'] = true;
@@ -131,13 +119,10 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @default {"enabled":false}
      * @return \Symfony\Config\TwigExtra\CssinlinerConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\TwigExtra\CssinlinerConfig : static)
      */
-    public function cssinliner(array $value = []): \Symfony\Config\TwigExtra\CssinlinerConfig|static
+    public function cssinliner(mixed $value = []): \Symfony\Config\TwigExtra\CssinlinerConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['cssinliner'] = true;
@@ -157,13 +142,10 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @default {"enabled":false}
      * @return \Symfony\Config\TwigExtra\InkyConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\TwigExtra\InkyConfig : static)
      */
-    public function inky(array $value = []): \Symfony\Config\TwigExtra\InkyConfig|static
+    public function inky(mixed $value = []): \Symfony\Config\TwigExtra\InkyConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['inky'] = true;
@@ -183,13 +165,10 @@ class TwigExtraConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @default {"enabled":false}
      * @return \Symfony\Config\TwigExtra\StringConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\TwigExtra\StringConfig : static)
      */
-    public function string(array $value = []): \Symfony\Config\TwigExtra\StringConfig|static
+    public function string(mixed $value = []): \Symfony\Config\TwigExtra\StringConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['string'] = true;

@@ -29,6 +29,9 @@ class FormValidator extends ConstraintValidator
      */
     private \SplObjectStorage $resolvedGroups;
 
+    /**
+     * {@inheritdoc}
+     */
     public function validate(mixed $form, Constraint $formConstraint)
     {
         if (!$formConstraint instanceof Form) {

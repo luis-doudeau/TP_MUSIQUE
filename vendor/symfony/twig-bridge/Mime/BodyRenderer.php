@@ -11,12 +11,9 @@
 
 namespace Symfony\Bridge\Twig\Mime;
 
-use League\HTMLToMarkdown\HtmlConverterInterface;
+use League\HTMLToMarkdown\HtmlConverter;
 use Symfony\Component\Mime\BodyRendererInterface;
 use Symfony\Component\Mime\Exception\InvalidArgumentException;
-use Symfony\Component\Mime\HtmlToTextConverter\DefaultHtmlToTextConverter;
-use Symfony\Component\Mime\HtmlToTextConverter\HtmlToTextConverterInterface;
-use Symfony\Component\Mime\HtmlToTextConverter\LeagueHtmlToMarkdownConverter;
 use Symfony\Component\Mime\Message;
 use Twig\Environment;
 
@@ -27,13 +24,19 @@ final class BodyRenderer implements BodyRendererInterface
 {
     private Environment $twig;
     private array $context;
-    private HtmlToTextConverterInterface $converter;
+    private HtmlConverter $converter;
 
-    public function __construct(Environment $twig, array $context = [], HtmlToTextConverterInterface $converter = null)
+    public function __construct(Environment $twig, array $context = [])
     {
         $this->twig = $twig;
         $this->context = $context;
-        $this->converter = $converter ?: (interface_exists(HtmlConverterInterface::class) ? new LeagueHtmlToMarkdownConverter() : new DefaultHtmlToTextConverter());
+        if (class_exists(HtmlConverter::class)) {
+            $this->converter = new HtmlConverter([
+                'hard_break' => true,
+                'strip_tags' => true,
+                'remove_nodes' => 'head style',
+            ]);
+        }
     }
 
     public function render(Message $message): void
@@ -42,12 +45,14 @@ final class BodyRenderer implements BodyRendererInterface
             return;
         }
 
-        if (null === $message->getTextTemplate() && null === $message->getHtmlTemplate()) {
-            // email has already been rendered
+        $messageContext = $message->getContext();
+
+        $previousRenderingKey = $messageContext[__CLASS__] ?? null;
+        unset($messageContext[__CLASS__]);
+        $currentRenderingKey = $this->getFingerPrint($message);
+        if ($previousRenderingKey === $currentRenderingKey) {
             return;
         }
-
-        $messageContext = $message->getContext();
 
         if (isset($messageContext['email'])) {
             throw new InvalidArgumentException(sprintf('A "%s" context cannot have an "email" entry as this is a reserved variable.', get_debug_type($message)));
@@ -65,12 +70,36 @@ final class BodyRenderer implements BodyRendererInterface
             $message->html($this->twig->render($template, $vars));
         }
 
-        $message->markAsRendered();
-
         // if text body is empty, compute one from the HTML body
         if (!$message->getTextBody() && null !== $html = $message->getHtmlBody()) {
-            $text = $this->converter->convert(\is_resource($html) ? stream_get_contents($html) : $html, $message->getHtmlCharset());
-            $message->text($text, $message->getHtmlCharset());
+            $message->text($this->convertHtmlToText(\is_resource($html) ? stream_get_contents($html) : $html));
         }
+        $message->context($message->getContext() + [__CLASS__ => $currentRenderingKey]);
+    }
+
+    private function getFingerPrint(TemplatedEmail $message): string
+    {
+        $messageContext = $message->getContext();
+        unset($messageContext[__CLASS__]);
+
+        $payload = [$messageContext, $message->getTextTemplate(), $message->getHtmlTemplate()];
+        try {
+            $serialized = serialize($payload);
+        } catch (\Exception) {
+            // Serialization of 'Closure' is not allowed
+            // Happens when context contain a closure, in that case, we assume that context always change.
+            $serialized = random_bytes(8);
+        }
+
+        return md5($serialized);
+    }
+
+    private function convertHtmlToText(string $html): string
+    {
+        if (isset($this->converter)) {
+            return $this->converter->convert($html);
+        }
+
+        return strip_tags(preg_replace('{<(head|style)\b.*?</\1>}is', '', $html));
     }
 }

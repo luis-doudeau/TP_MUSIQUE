@@ -235,6 +235,9 @@ class RememberMeFactory implements AuthenticatorFactoryInterface, PrependExtensi
         return new Reference($tokenVerifierId, ContainerInterface::NULL_ON_INVALID_REFERENCE);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepend(ContainerBuilder $container)
     {
         $rememberMeSecureDefault = false;

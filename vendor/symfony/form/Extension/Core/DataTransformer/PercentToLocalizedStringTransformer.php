@@ -20,8 +20,6 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Florian Eckerstorfer <florian@eckerstorfer.org>
- *
- * @implements DataTransformerInterface<int|float, string>
  */
 class PercentToLocalizedStringTransformer implements DataTransformerInterface
 {
@@ -48,7 +46,9 @@ class PercentToLocalizedStringTransformer implements DataTransformerInterface
      */
     public function __construct(int $scale = null, string $type = null, int $roundingMode = \NumberFormatter::ROUND_HALFUP, bool $html5Format = false)
     {
-        $type ??= self::FRACTIONAL;
+        if (null === $type) {
+            $type = self::FRACTIONAL;
+        }
 
         if (!\in_array($type, self::$types, true)) {
             throw new UnexpectedTypeException($type, implode('", "', self::$types));

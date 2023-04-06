@@ -22,7 +22,6 @@ use Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterLdapLocat
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterTokenUsageTrackingPass;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\ReplaceDecoratedRememberMeHandlerPass;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\SortFirewallListenersPass;
-use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AccessTokenFactory;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\CustomAuthenticatorFactory;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FormLoginFactory;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FormLoginLdapFactory;
@@ -70,7 +69,6 @@ class SecurityBundle extends Bundle
         $extension->addAuthenticatorFactory(new CustomAuthenticatorFactory());
         $extension->addAuthenticatorFactory(new LoginThrottlingFactory());
         $extension->addAuthenticatorFactory(new LoginLinkFactory());
-        $extension->addAuthenticatorFactory(new AccessTokenFactory());
 
         $extension->addUserProviderFactory(new InMemoryFactory());
         $extension->addUserProviderFactory(new LdapFactory());

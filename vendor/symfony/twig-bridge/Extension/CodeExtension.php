@@ -33,6 +33,9 @@ final class CodeExtension extends AbstractExtension
         $this->charset = $charset;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFilters(): array
     {
         return [

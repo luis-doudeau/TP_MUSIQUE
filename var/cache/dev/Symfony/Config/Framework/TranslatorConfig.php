@@ -38,11 +38,11 @@ class TranslatorConfig
     }
 
     /**
-     * @param ParamConfigurator|list<ParamConfigurator|mixed>|string $value
+     * @param mixed $value
      *
      * @return $this
      */
-    public function fallbacks(ParamConfigurator|string|array $value): static
+    public function fallbacks(mixed $value): static
     {
         $this->_usedProperties['fallbacks'] = true;
         $this->fallbacks = $value;
@@ -117,13 +117,10 @@ class TranslatorConfig
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @default {"enabled":false,"accents":true,"expansion_factor":1,"brackets":true,"parse_html":false,"localizable_html_attributes":[]}
      * @return \Symfony\Config\Framework\Translator\PseudoLocalizationConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\Framework\Translator\PseudoLocalizationConfig : static)
      */
-    public function pseudoLocalization(array $value = []): \Symfony\Config\Framework\Translator\PseudoLocalizationConfig|static
+    public function pseudoLocalization(mixed $value = []): \Symfony\Config\Framework\Translator\PseudoLocalizationConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['pseudoLocalization'] = true;

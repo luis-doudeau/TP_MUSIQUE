@@ -18,8 +18,6 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Bernhard Schussek <bschussek@gmail.com>
- *
- * @implements DataTransformerInterface<Collection, array>
  */
 class CollectionToArrayTransformer implements DataTransformerInterface
 {

@@ -24,6 +24,9 @@ class TraceableMessageBus implements MessageBusInterface
         $this->decoratedBus = $decoratedBus;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function dispatch(object $message, array $stamps = []): Envelope
     {
         $envelope = Envelope::wrap($message, $stamps);

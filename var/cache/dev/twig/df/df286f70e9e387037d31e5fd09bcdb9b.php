@@ -343,7 +343,7 @@ class __TwigTemplate_7eeb24585a45d2bb7eb07e9b9c106766 extends Template
         }
         if (!$context['_iterated']) {
             // line 99
-            echo "        <div class=\"empty empty-panel\">
+            echo "        <div class=\"empty\">
             <p>No calls to the validator were collected during this request.</p>
         </div>
     ";
@@ -474,11 +474,11 @@ class __TwigTemplate_7eeb24585a45d2bb7eb07e9b9c106766 extends Template
             {% endif %}
         </div>
     {% else %}
-        <div class=\"empty empty-panel\">
+        <div class=\"empty\">
             <p>No calls to the validator were collected during this request.</p>
         </div>
     {% endfor %}
 {% endblock %}
-", "@WebProfiler/Collector/validator.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/web-profiler-bundle/Resources/views/Collector/validator.html.twig");
+", "@WebProfiler/Collector/validator.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/web-profiler-bundle/Resources/views/Collector/validator.html.twig");
     }
 }

@@ -43,6 +43,9 @@ class DateIntervalType extends AbstractType
         'choice' => ChoiceType::class,
     ];
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (!$options['with_years'] && !$options['with_months'] && !$options['with_weeks'] && !$options['with_days'] && !$options['with_hours'] && !$options['with_minutes'] && !$options['with_seconds']) {
@@ -145,6 +148,9 @@ class DateIntervalType extends AbstractType
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $vars = [
@@ -157,6 +163,9 @@ class DateIntervalType extends AbstractType
         $view->vars = array_replace($view->vars, $vars);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $compound = function (Options $options) {
@@ -268,6 +277,9 @@ class DateIntervalType extends AbstractType
         $resolver->setAllowedTypes('labels', 'array');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix(): string
     {
         return 'dateinterval';

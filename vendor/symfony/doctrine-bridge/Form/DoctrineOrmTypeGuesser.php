@@ -44,6 +44,9 @@ class DoctrineOrmTypeGuesser implements FormTypeGuesserInterface
         $this->registry = $registry;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessType(string $class, string $property): ?TypeGuess
     {
         if (!$ret = $this->getMetadata($class)) {
@@ -84,6 +87,9 @@ class DoctrineOrmTypeGuesser implements FormTypeGuesserInterface
         };
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessRequired(string $class, string $property): ?ValueGuess
     {
         $classMetadatas = $this->getMetadata($class);
@@ -121,6 +127,9 @@ class DoctrineOrmTypeGuesser implements FormTypeGuesserInterface
         return null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessMaxLength(string $class, string $property): ?ValueGuess
     {
         $ret = $this->getMetadata($class);
@@ -139,6 +148,9 @@ class DoctrineOrmTypeGuesser implements FormTypeGuesserInterface
         return null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessPattern(string $class, string $property): ?ValueGuess
     {
         $ret = $this->getMetadata($class);

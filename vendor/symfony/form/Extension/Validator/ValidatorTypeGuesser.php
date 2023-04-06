@@ -64,6 +64,9 @@ class ValidatorTypeGuesser implements FormTypeGuesserInterface
         $this->metadataFactory = $metadataFactory;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessType(string $class, string $property): ?TypeGuess
     {
         return $this->guess($class, $property, function (Constraint $constraint) {
@@ -71,15 +74,21 @@ class ValidatorTypeGuesser implements FormTypeGuesserInterface
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessRequired(string $class, string $property): ?ValueGuess
     {
         return $this->guess($class, $property, function (Constraint $constraint) {
             return $this->guessRequiredForConstraint($constraint);
-            // If we don't find any constraint telling otherwise, we can assume
-            // that a field is not required (with LOW_CONFIDENCE)
+        // If we don't find any constraint telling otherwise, we can assume
+        // that a field is not required (with LOW_CONFIDENCE)
         }, false);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessMaxLength(string $class, string $property): ?ValueGuess
     {
         return $this->guess($class, $property, function (Constraint $constraint) {
@@ -87,6 +96,9 @@ class ValidatorTypeGuesser implements FormTypeGuesserInterface
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function guessPattern(string $class, string $property): ?ValueGuess
     {
         return $this->guess($class, $property, function (Constraint $constraint) {
@@ -99,7 +111,7 @@ class ValidatorTypeGuesser implements FormTypeGuesserInterface
      */
     public function guessTypeForConstraint(Constraint $constraint): ?TypeGuess
     {
-        switch ($constraint::class) {
+        switch (\get_class($constraint)) {
             case Type::class:
                 switch ($constraint->type) {
                     case 'array':
@@ -190,7 +202,7 @@ class ValidatorTypeGuesser implements FormTypeGuesserInterface
      */
     public function guessRequiredForConstraint(Constraint $constraint): ?ValueGuess
     {
-        return match ($constraint::class) {
+        return match (\get_class($constraint)) {
             NotNull::class,
             NotBlank::class,
             IsTrue::class => new ValueGuess(true, Guess::HIGH_CONFIDENCE),
@@ -203,7 +215,7 @@ class ValidatorTypeGuesser implements FormTypeGuesserInterface
      */
     public function guessMaxLengthForConstraint(Constraint $constraint): ?ValueGuess
     {
-        switch ($constraint::class) {
+        switch (\get_class($constraint)) {
             case Length::class:
                 if (is_numeric($constraint->max)) {
                     return new ValueGuess($constraint->max, Guess::HIGH_CONFIDENCE);
@@ -231,7 +243,7 @@ class ValidatorTypeGuesser implements FormTypeGuesserInterface
      */
     public function guessPatternForConstraint(Constraint $constraint): ?ValueGuess
     {
-        switch ($constraint::class) {
+        switch (\get_class($constraint)) {
             case Length::class:
                 if (is_numeric($constraint->min)) {
                     return new ValueGuess(sprintf('.{%s,}', (string) $constraint->min), Guess::LOW_CONFIDENCE);

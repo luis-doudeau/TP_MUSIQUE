@@ -47,6 +47,9 @@ class DateTimeType extends AbstractType
         \IntlDateFormatter::SHORT,
     ];
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $parts = ['year', 'month', 'day', 'hour'];
@@ -199,6 +202,9 @@ class DateTimeType extends AbstractType
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['widget'] = $options['widget'];
@@ -220,6 +226,9 @@ class DateTimeType extends AbstractType
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $compound = function (Options $options) {
@@ -339,6 +348,9 @@ class DateTimeType extends AbstractType
         });
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix(): string
     {
         return 'datetime';

@@ -24,6 +24,9 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 class CountryValidator extends ConstraintValidator
 {
+    /**
+     * {@inheritdoc}
+     */
     public function validate(mixed $value, Constraint $constraint)
     {
         if (!$constraint instanceof Country) {

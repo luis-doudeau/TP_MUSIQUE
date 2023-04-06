@@ -176,13 +176,6 @@ class Parser
 
     protected function parseConditionalExpression(Node\Node $expr)
     {
-        while ($this->stream->current->test(Token::PUNCTUATION_TYPE, '??')) {
-            $this->stream->next();
-            $expr2 = $this->parseExpression();
-
-            $expr = new Node\NullCoalesceNode($expr, $expr2);
-        }
-
         while ($this->stream->current->test(Token::PUNCTUATION_TYPE, '?')) {
             $this->stream->next();
             if (!$this->stream->current->test(Token::PUNCTUATION_TYPE, ':')) {
@@ -404,7 +397,7 @@ class Parser
         $args = [];
         $this->stream->expect(Token::PUNCTUATION_TYPE, '(', 'A list of arguments must begin with an opening parenthesis');
         while (!$this->stream->current->test(Token::PUNCTUATION_TYPE, ')')) {
-            if ($args) {
+            if (!empty($args)) {
                 $this->stream->expect(Token::PUNCTUATION_TYPE, ',', 'Arguments must be separated by a comma');
             }
 

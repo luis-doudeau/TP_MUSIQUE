@@ -57,11 +57,11 @@ class RememberMeConfig
     }
 
     /**
-     * @param ParamConfigurator|list<ParamConfigurator|mixed>|string $value
+     * @param mixed $value
      *
      * @return $this
      */
-    public function userProviders(ParamConfigurator|string|array $value): static
+    public function userProviders(mixed $value): static
     {
         $this->_usedProperties['userProviders'] = true;
         $this->userProviders = $value;
@@ -96,12 +96,9 @@ class RememberMeConfig
     }
 
     /**
-     * @template TValue
-     * @param TValue $value
      * @return \Symfony\Config\Security\FirewallConfig\RememberMe\TokenProviderConfig|$this
-     * @psalm-return (TValue is array ? \Symfony\Config\Security\FirewallConfig\RememberMe\TokenProviderConfig : static)
      */
-    public function tokenProvider(string|array $value = []): \Symfony\Config\Security\FirewallConfig\RememberMe\TokenProviderConfig|static
+    public function tokenProvider(mixed $value = []): \Symfony\Config\Security\FirewallConfig\RememberMe\TokenProviderConfig|static
     {
         if (!\is_array($value)) {
             $this->_usedProperties['tokenProvider'] = true;

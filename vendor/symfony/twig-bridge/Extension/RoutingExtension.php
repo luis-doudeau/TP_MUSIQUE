@@ -32,6 +32,9 @@ final class RoutingExtension extends AbstractExtension
         $this->generator = $generator;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFunctions(): array
     {
         return [
@@ -55,7 +58,7 @@ final class RoutingExtension extends AbstractExtension
      * saving the unneeded automatic escaping for performance reasons.
      *
      * The URL generation process percent encodes non-alphanumeric characters. So there is no risk
-     * that malicious/invalid characters are part of the URL. The only character within a URL that
+     * that malicious/invalid characters are part of the URL. The only character within an URL that
      * must be escaped in html is the ampersand ("&") which separates query params. So we cannot mark
      * the URL generation as always safe, but only when we are sure there won't be multiple query
      * params. This is the case when there are none or only one constant parameter given.

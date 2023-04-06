@@ -27,22 +27,22 @@ abstract class TransportTestCase extends TestCase
     protected const CUSTOM_HOST = 'host.test';
     protected const CUSTOM_PORT = 42;
 
-    abstract public static function createTransport(HttpClientInterface $client = null): TransportInterface;
+    abstract public function createTransport(HttpClientInterface $client = null): TransportInterface;
 
     /**
      * @return iterable<array{0: string, 1: TransportInterface}>
      */
-    abstract public static function toStringProvider(): iterable;
+    abstract public function toStringProvider(): iterable;
 
     /**
      * @return iterable<array{0: MessageInterface, 1: TransportInterface}>
      */
-    abstract public static function supportedMessagesProvider(): iterable;
+    abstract public function supportedMessagesProvider(): iterable;
 
     /**
      * @return iterable<array{0: MessageInterface, 1: TransportInterface}>
      */
-    abstract public static function unsupportedMessagesProvider(): iterable;
+    abstract public function unsupportedMessagesProvider(): iterable;
 
     /**
      * @dataProvider toStringProvider
@@ -57,7 +57,9 @@ abstract class TransportTestCase extends TestCase
      */
     public function testSupportedMessages(MessageInterface $message, TransportInterface $transport = null)
     {
-        $transport ??= $this->createTransport();
+        if (null === $transport) {
+            $transport = $this->createTransport();
+        }
 
         $this->assertTrue($transport->supports($message));
     }
@@ -67,7 +69,9 @@ abstract class TransportTestCase extends TestCase
      */
     public function testUnsupportedMessages(MessageInterface $message, TransportInterface $transport = null)
     {
-        $transport ??= $this->createTransport();
+        if (null === $transport) {
+            $transport = $this->createTransport();
+        }
 
         $this->assertFalse($transport->supports($message));
     }
@@ -77,7 +81,9 @@ abstract class TransportTestCase extends TestCase
      */
     public function testUnsupportedMessagesTrowUnsupportedMessageTypeExceptionWhenSend(MessageInterface $message, TransportInterface $transport = null)
     {
-        $transport ??= $this->createTransport();
+        if (null === $transport) {
+            $transport = $this->createTransport();
+        }
 
         $this->expectException(UnsupportedMessageTypeException::class);
 

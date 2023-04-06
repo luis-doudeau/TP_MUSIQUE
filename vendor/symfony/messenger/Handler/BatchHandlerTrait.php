@@ -18,6 +18,9 @@ trait BatchHandlerTrait
 {
     private array $jobs = [];
 
+    /**
+     * {@inheritdoc}
+     */
     public function flush(bool $force): void
     {
         if ($jobs = $this->jobs) {

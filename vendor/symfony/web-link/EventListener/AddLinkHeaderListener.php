@@ -50,6 +50,9 @@ class AddLinkHeaderListener implements EventSubscriberInterface
         $event->getResponse()->headers->set('Link', $this->serializer->serialize($links), false);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents(): array
     {
         return [KernelEvents::RESPONSE => 'onKernelResponse'];

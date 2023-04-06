@@ -69,6 +69,9 @@ final class SecurityExtension extends AbstractExtension
         return $this->impersonateUrlGenerator->generateExitPath($exitTo);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFunctions(): array
     {
         return [

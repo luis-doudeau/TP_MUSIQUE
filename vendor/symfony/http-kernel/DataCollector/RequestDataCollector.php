@@ -44,6 +44,9 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
         $this->requestStack = $requestStack;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
         // attributes are serialized and as they can be anything, they need to be converted to strings.
@@ -388,6 +391,9 @@ class RequestDataCollector extends DataCollector implements EventSubscriberInter
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return 'request';

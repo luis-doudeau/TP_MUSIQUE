@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Musique index
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-center my-5">Musique</h1>
+		<div class="row justify-content-center">
+			{% for musique in musiques %}
+				<div class="col-md-4 col-lg-3 mb-4">
+					<div class="card">
+						<img src="{{ musique.album.urlImage }}" alt="{{ musique.album.nomAlbum }}" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">{{ musique.nomMusique }}</h5>
+							<p class="card-text">{{ musique.album.nomAlbum }}</p>
+							<a href="{{ path('app_musique_show', {'id': musique.id}) }}" class="btn btn-primary mr-2">Show</a>
+							<a href="{{ path('app_musique_edit', {'id': musique.id}) }}" class="btn btn-outline-primary">Edit</a>
+						</div>
+					</div>
+				</div>
+			{% else %}
+				<div class="col-12 text-center">
+					<p class="lead">No records found.</p>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-md-4 col-lg-3 mb-4">
+				<a href="{{ path('app_musique_new') }}" class="btn btn-success">Create new</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -34,6 +34,9 @@ class TimeType extends AbstractType
         'choice' => ChoiceType::class,
     ];
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $parts = ['hour'];
@@ -209,6 +212,9 @@ class TimeType extends AbstractType
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars = array_replace($view->vars, [
@@ -233,6 +239,9 @@ class TimeType extends AbstractType
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $compound = function (Options $options) {
@@ -365,6 +374,9 @@ class TimeType extends AbstractType
         $resolver->setAllowedTypes('reference_date', ['null', \DateTimeInterface::class]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix(): string
     {
         return 'time';

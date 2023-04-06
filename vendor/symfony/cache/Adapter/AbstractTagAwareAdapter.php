@@ -44,7 +44,7 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
         if (null !== $this->maxIdLength && \strlen($namespace) > $this->maxIdLength - 24) {
             throw new InvalidArgumentException(sprintf('Namespace must be %d chars max, %d given ("%s").', $this->maxIdLength - 24, \strlen($namespace), $namespace));
         }
-        self::$createCacheItem ??= \Closure::bind(
+        self::$createCacheItem ?? self::$createCacheItem = \Closure::bind(
             static function ($key, $value, $isHit) {
                 $item = new CacheItem();
                 $item->key = $key;
@@ -69,7 +69,7 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
             null,
             CacheItem::class
         );
-        self::$mergeByLifetime ??= \Closure::bind(
+        self::$mergeByLifetime ?? self::$mergeByLifetime = \Closure::bind(
             static function ($deferred, &$expiredIds, $getId, $tagPrefix, $defaultLifetime) {
                 $byLifetime = [];
                 $now = microtime(true);
@@ -165,6 +165,9 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
         $this->doDelete($ids);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function commit(): bool
     {
         $ok = true;
@@ -226,6 +229,9 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
         return $ok;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function deleteItems(array $keys): bool
     {
         if (!$keys) {
@@ -275,9 +281,12 @@ abstract class AbstractTagAwareAdapter implements TagAwareAdapterInterface, TagA
         return $ok;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function invalidateTags(array $tags): bool
     {
-        if (!$tags) {
+        if (empty($tags)) {
             return false;
         }
 

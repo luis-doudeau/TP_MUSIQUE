@@ -23,7 +23,7 @@ final class ObjectParameter
         $this->object = $object;
         $this->error = $error;
         $this->stringable = \is_callable([$object, '__toString']);
-        $this->class = $object::class;
+        $this->class = \get_class($object);
     }
 
     public function getObject(): object

@@ -158,25 +158,4 @@ class AppVariable
 
         return $result;
     }
-
-    public function getCurrent_route(): ?string
-    {
-        if (!isset($this->requestStack)) {
-            throw new \RuntimeException('The "app.current_route" variable is not available.');
-        }
-
-        return $this->getRequest()?->attributes->get('_route');
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    public function getCurrent_route_parameters(): array
-    {
-        if (!isset($this->requestStack)) {
-            throw new \RuntimeException('The "app.current_route_parameters" variable is not available.');
-        }
-
-        return $this->getRequest()?->attributes->get('_route_params') ?? [];
-    }
 }

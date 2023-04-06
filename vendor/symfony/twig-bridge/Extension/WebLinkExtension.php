@@ -31,6 +31,9 @@ final class WebLinkExtension extends AbstractExtension
         $this->requestStack = $requestStack;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getFunctions(): array
     {
         return [

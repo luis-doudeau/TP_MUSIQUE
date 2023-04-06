@@ -40,6 +40,9 @@ class ResourceCheckerConfigCache implements ConfigCacheInterface
         $this->resourceCheckers = $resourceCheckers;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getPath(): string
     {
         return $this->file;
@@ -128,7 +131,7 @@ class ResourceCheckerConfigCache implements ConfigCacheInterface
             }
         }
 
-        if (\function_exists('opcache_invalidate') && filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOL)) {
+        if (\function_exists('opcache_invalidate') && filter_var(\ini_get('opcache.enable'), \FILTER_VALIDATE_BOOLEAN)) {
             @opcache_invalidate($this->file, true);
         }
     }

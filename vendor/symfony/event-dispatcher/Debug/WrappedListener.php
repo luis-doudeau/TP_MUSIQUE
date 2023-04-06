@@ -61,7 +61,7 @@ final class WrappedListener
         } else {
             $this->name = get_debug_type($listener);
             $this->pretty = $this->name.'::__invoke';
-            $this->callableRef = $listener::class.'::__invoke';
+            $this->callableRef = \get_class($listener).'::__invoke';
         }
 
         if (null !== $name) {
@@ -112,12 +112,10 @@ final class WrappedListener
 
         $e = $this->stopwatch->start($this->name, 'event_listener');
 
-        try {
-            ($this->optimizedListener ?? $this->listener)($event, $eventName, $dispatcher);
-        } finally {
-            if ($e->isStarted()) {
-                $e->stop();
-            }
+        ($this->optimizedListener ?? $this->listener)($event, $eventName, $dispatcher);
+
+        if ($e->isStarted()) {
+            $e->stop();
         }
 
         if ($event instanceof StoppableEventInterface && $event->isPropagationStopped()) {

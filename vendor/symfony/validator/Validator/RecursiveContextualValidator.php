@@ -66,6 +66,9 @@ class RecursiveContextualValidator implements ContextualValidatorInterface
         $this->objectInitializers = $objectInitializers;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function atPath(string $path): static
     {
         $this->defaultPropertyPath = $this->context->getPropertyPath($path);
@@ -73,6 +76,9 @@ class RecursiveContextualValidator implements ContextualValidatorInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validate(mixed $value, Constraint|array $constraints = null, string|GroupSequence|array $groups = null): static
     {
         $groups = $groups ? $this->normalizeGroups($groups) : $this->defaultGroups;
@@ -158,6 +164,9 @@ class RecursiveContextualValidator implements ContextualValidatorInterface
         throw new RuntimeException(sprintf('Cannot validate values of type "%s" automatically. Please provide a constraint.', get_debug_type($value)));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validateProperty(object $object, string $propertyName, string|GroupSequence|array $groups = null): static
     {
         $classMetadata = $this->metadataFactory->getMetadataFor($object);
@@ -183,7 +192,7 @@ class RecursiveContextualValidator implements ContextualValidatorInterface
             $this->validateGenericNode(
                 $propertyValue,
                 $object,
-                $cacheKey.':'.$object::class.':'.$propertyName,
+                $cacheKey.':'.\get_class($object).':'.$propertyName,
                 $propertyMetadata,
                 $propertyPath,
                 $groups,
@@ -199,6 +208,9 @@ class RecursiveContextualValidator implements ContextualValidatorInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validatePropertyValue(object|string $objectOrClass, string $propertyName, mixed $value, string|GroupSequence|array $groups = null): static
     {
         $classMetadata = $this->metadataFactory->getMetadataFor($objectOrClass);
@@ -212,7 +224,7 @@ class RecursiveContextualValidator implements ContextualValidatorInterface
 
         if (\is_object($objectOrClass)) {
             $object = $objectOrClass;
-            $class = $object::class;
+            $class = \get_class($object);
             $cacheKey = $this->generateCacheKey($objectOrClass);
             $propertyPath = PropertyPath::append($this->defaultPropertyPath, $propertyName);
         } else {
@@ -249,6 +261,9 @@ class RecursiveContextualValidator implements ContextualValidatorInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getViolations(): ConstraintViolationListInterface
     {
         return $this->context->getViolations();
@@ -501,7 +516,7 @@ class RecursiveContextualValidator implements ContextualValidatorInterface
                 $this->validateGenericNode(
                     $propertyValue,
                     $object,
-                    $cacheKey.':'.$object::class.':'.$propertyName,
+                    $cacheKey.':'.\get_class($object).':'.$propertyName,
                     $propertyMetadata,
                     PropertyPath::append($propertyPath, $propertyName),
                     $groups,

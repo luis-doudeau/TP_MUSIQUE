@@ -30,6 +30,9 @@ class ChainAccessor implements DataAccessorInterface
         $this->accessors = $accessors;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getValue(object|array $data, FormInterface $form): mixed
     {
         foreach ($this->accessors as $accessor) {
@@ -41,6 +44,9 @@ class ChainAccessor implements DataAccessorInterface
         throw new AccessException('Unable to read from the given form data as no accessor in the chain is able to read the data.');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setValue(object|array &$data, mixed $value, FormInterface $form): void
     {
         foreach ($this->accessors as $accessor) {
@@ -54,6 +60,9 @@ class ChainAccessor implements DataAccessorInterface
         throw new AccessException('Unable to write the given value as no accessor in the chain is able to set the data.');
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isReadable(object|array $data, FormInterface $form): bool
     {
         foreach ($this->accessors as $accessor) {
@@ -65,6 +74,9 @@ class ChainAccessor implements DataAccessorInterface
         return false;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isWritable(object|array $data, FormInterface $form): bool
     {
         foreach ($this->accessors as $accessor) {

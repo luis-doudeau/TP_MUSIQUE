@@ -98,7 +98,7 @@ class TextDescriptor extends Descriptor
             ['Scheme', $route->getSchemes() ? implode('|', $route->getSchemes()) : 'ANY'],
             ['Method', $route->getMethods() ? implode('|', $route->getMethods()) : 'ANY'],
             ['Requirements', $route->getRequirements() ? $this->formatRouterConfig($route->getRequirements()) : 'NO CUSTOM'],
-            ['Class', $route::class],
+            ['Class', \get_class($route)],
             ['Defaults', $this->formatRouterConfig($defaults)],
             ['Options', $this->formatRouterConfig($route->getOptions())],
         ];
@@ -150,13 +150,13 @@ class TextDescriptor extends Descriptor
         if ($service instanceof Alias) {
             $this->describeContainerAlias($service, $options, $builder);
         } elseif ($service instanceof Definition) {
-            $this->describeContainerDefinition($service, $options, $builder);
+            $this->describeContainerDefinition($service, $options);
         } else {
             $options['output']->title(sprintf('Information for Service "<info>%s</info>"', $options['id']));
             $options['output']->table(
                 ['Service ID', 'Class'],
                 [
-                    [$options['id'] ?? '-', $service::class],
+                    [$options['id'] ?? '-', \get_class($service)],
                 ]
             );
         }
@@ -244,14 +244,14 @@ class TextDescriptor extends Descriptor
                 $alias = $definition;
                 $tableRows[] = array_merge([$styledServiceId, sprintf('alias for "%s"', $alias)], $tagsCount ? array_fill(0, $tagsCount, '') : []);
             } else {
-                $tableRows[] = array_merge([$styledServiceId, $definition::class], $tagsCount ? array_fill(0, $tagsCount, '') : []);
+                $tableRows[] = array_merge([$styledServiceId, \get_class($definition)], $tagsCount ? array_fill(0, $tagsCount, '') : []);
             }
         }
 
         $options['output']->table($tableHeaders, $tableRows);
     }
 
-    protected function describeContainerDefinition(Definition $definition, array $options = [], ContainerBuilder $builder = null)
+    protected function describeContainerDefinition(Definition $definition, array $options = [])
     {
         if (isset($options['id'])) {
             $options['output']->title(sprintf('Information for Service "<info>%s</info>"', $options['id']));
@@ -360,9 +360,6 @@ class TextDescriptor extends Descriptor
             $tableRows[] = ['Arguments', implode("\n", $argumentsInformation)];
         }
 
-        $inEdges = null !== $builder && isset($options['id']) ? $this->getServiceEdges($builder, $options['id']) : [];
-        $tableRows[] = ['Usages', $inEdges ? implode(\PHP_EOL, $inEdges) : 'none'];
-
         $options['output']->table($tableHeaders, $tableRows);
     }
 
@@ -404,7 +401,7 @@ class TextDescriptor extends Descriptor
             return;
         }
 
-        $this->describeContainerDefinition($builder->getDefinition((string) $alias), array_merge($options, ['id' => (string) $alias]), $builder);
+        $this->describeContainerDefinition($builder->getDefinition((string) $alias), array_merge($options, ['id' => (string) $alias]));
     }
 
     protected function describeContainerParameter(mixed $parameter, array $options = [])
@@ -530,7 +527,7 @@ class TextDescriptor extends Descriptor
 
     private function formatRouterConfig(array $config): string
     {
-        if (!$config) {
+        if (empty($config)) {
             return 'NONE';
         }
 
@@ -625,7 +622,7 @@ class TextDescriptor extends Descriptor
         }
 
         if (method_exists($callable, '__invoke')) {
-            return sprintf('%s::__invoke()', $callable::class);
+            return sprintf('%s::__invoke()', \get_class($callable));
         }
 
         throw new \InvalidArgumentException('Callable is not describable.');

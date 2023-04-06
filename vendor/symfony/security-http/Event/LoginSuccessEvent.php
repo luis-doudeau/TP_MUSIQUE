@@ -34,17 +34,15 @@ class LoginSuccessEvent extends Event
     private AuthenticatorInterface $authenticator;
     private Passport $passport;
     private TokenInterface $authenticatedToken;
-    private ?TokenInterface $previousToken;
     private Request $request;
     private ?Response $response;
     private string $firewallName;
 
-    public function __construct(AuthenticatorInterface $authenticator, Passport $passport, TokenInterface $authenticatedToken, Request $request, ?Response $response, string $firewallName, TokenInterface $previousToken = null)
+    public function __construct(AuthenticatorInterface $authenticator, Passport $passport, TokenInterface $authenticatedToken, Request $request, ?Response $response, string $firewallName)
     {
         $this->authenticator = $authenticator;
         $this->passport = $passport;
         $this->authenticatedToken = $authenticatedToken;
-        $this->previousToken = $previousToken;
         $this->request = $request;
         $this->response = $response;
         $this->firewallName = $firewallName;
@@ -68,11 +66,6 @@ class LoginSuccessEvent extends Event
     public function getAuthenticatedToken(): TokenInterface
     {
         return $this->authenticatedToken;
-    }
-
-    public function getPreviousToken(): ?TokenInterface
-    {
-        return $this->previousToken;
     }
 
     public function getRequest(): Request

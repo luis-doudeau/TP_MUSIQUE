@@ -12,8 +12,6 @@
 namespace Symfony\Bridge\Twig\Mime;
 
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Mime\Part\DataPart;
-use Symfony\Component\Mime\Part\File;
 use Twig\Environment;
 
 /**
@@ -38,7 +36,7 @@ final class WrappedTemplatedEmail
     }
 
     /**
-     * @param string      $image       A Twig path to the image file. It's recommended to define
+     * @param string $image            A Twig path to the image file. It's recommended to define
      *                                 some Twig namespace for email images (e.g. '@email/images/logo.png').
      * @param string|null $contentType The media type (i.e. MIME type) of the image file (e.g. 'image/png').
      *                                 Some email clients require this to display embedded images.
@@ -46,24 +44,30 @@ final class WrappedTemplatedEmail
     public function image(string $image, string $contentType = null): string
     {
         $file = $this->twig->getLoader()->getSourceContext($image);
-        $body = $file->getPath() ? new File($file->getPath()) : $file->getCode();
-        $this->message->addPart((new DataPart($body, $image, $contentType))->asInline());
+        if ($path = $file->getPath()) {
+            $this->message->embedFromPath($path, $image, $contentType);
+        } else {
+            $this->message->embed($file->getCode(), $image, $contentType);
+        }
 
         return 'cid:'.$image;
     }
 
     /**
-     * @param string      $file        A Twig path to the file. It's recommended to define
+     * @param string $file             A Twig path to the file. It's recommended to define
      *                                 some Twig namespace for email files (e.g. '@email/files/contract.pdf').
-     * @param string|null $name        A custom file name that overrides the original name of the attached file
+     * @param string|null $name        A custom file name that overrides the original name of the attached file.
      * @param string|null $contentType The media type (i.e. MIME type) of the file (e.g. 'application/pdf').
      *                                 Some email clients require this to display attached files.
      */
     public function attach(string $file, string $name = null, string $contentType = null): void
     {
         $file = $this->twig->getLoader()->getSourceContext($file);
-        $body = $file->getPath() ? new File($file->getPath()) : $file->getCode();
-        $this->message->addPart(new DataPart($body, $name, $contentType));
+        if ($path = $file->getPath()) {
+            $this->message->attachFromPath($path, $name, $contentType);
+        } else {
+            $this->message->attach($file->getCode(), $name, $contentType);
+        }
     }
 
     /**

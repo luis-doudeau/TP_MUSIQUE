@@ -58,26 +58,41 @@ class Link implements EvolvableLinkInterface
         $this->href = $href;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getHref(): string
     {
         return $this->href;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isTemplated(): bool
     {
         return $this->hrefIsTemplated($this->href);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getRels(): array
     {
         return array_values($this->rel);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getAttributes(): array
     {
         return $this->attributes;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function withHref(string|\Stringable $href): static
     {
         $that = clone $this;
@@ -86,6 +101,9 @@ class Link implements EvolvableLinkInterface
         return $that;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function withRel(string $rel): static
     {
         $that = clone $this;
@@ -94,6 +112,9 @@ class Link implements EvolvableLinkInterface
         return $that;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function withoutRel(string $rel): static
     {
         $that = clone $this;
@@ -102,6 +123,9 @@ class Link implements EvolvableLinkInterface
         return $that;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function withAttribute(string $attribute, string|\Stringable|int|float|bool|array $value): static
     {
         $that = clone $this;
@@ -110,6 +134,9 @@ class Link implements EvolvableLinkInterface
         return $that;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function withoutAttribute(string $attribute): static
     {
         $that = clone $this;

@@ -37,6 +37,9 @@ if (Logger::API >= 3) {
     {
         abstract private function doIsHandling(array|LogRecord $record): bool;
 
+        /**
+         * {@inheritdoc}
+         */
         public function isHandling(LogRecord $record): bool
         {
             return $this->doIsHandling($record);
@@ -54,6 +57,9 @@ if (Logger::API >= 3) {
     {
         abstract private function doIsHandling(array|LogRecord $record): bool;
 
+        /**
+         * {@inheritdoc}
+         */
         public function isHandling(array $record): bool
         {
             return $this->doIsHandling($record);
@@ -115,11 +121,17 @@ class ConsoleHandler extends AbstractProcessingHandler implements EventSubscribe
         $this->consoleFormatterOptions = $consoleFormatterOptions;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     private function doIsHandling(array|LogRecord $record): bool
     {
         return $this->updateLevel() && parent::isHandling($record);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     private function doHandle(array|LogRecord $record): bool
     {
         // we have to update the logging level each time because the verbosity of the
@@ -167,6 +179,9 @@ class ConsoleHandler extends AbstractProcessingHandler implements EventSubscribe
         $this->close();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -181,6 +196,9 @@ class ConsoleHandler extends AbstractProcessingHandler implements EventSubscribe
         $this->output->write((string) $record['formatted'], false, $this->output->getVerbosity());
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefaultFormatter(): FormatterInterface
     {
         if (!class_exists(CliDumper::class)) {

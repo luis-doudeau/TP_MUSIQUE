@@ -305,7 +305,7 @@ class __TwigTemplate_d88353e74a565b55c78a3a00265d3437 extends Template
         }
         if (!$context['_iterated']) {
             // line 71
-            echo "        <div class=\"empty empty-panel\">
+            echo "        <div class=\"empty\">
             <p>No content was dumped.</p>
         </div>
     ";
@@ -408,11 +408,11 @@ class __TwigTemplate_d88353e74a565b55c78a3a00265d3437 extends Template
             {{ dump.data|raw }}
         </div>
     {% else %}
-        <div class=\"empty empty-panel\">
+        <div class=\"empty\">
             <p>No content was dumped.</p>
         </div>
     {% endfor %}
 {% endblock %}
-", "@Debug/Profiler/dump.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/TP_MUSIQUE/Music_library/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
+", "@Debug/Profiler/dump.html.twig", "/media/luigi/FA442DC3442D840B/Users/luisd/Documents/Cours_IUT/PHP/Music_Library/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
     }
 }

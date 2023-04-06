@@ -32,7 +32,7 @@ class ClassExistenceResource implements SelfCheckingResourceInterface
 
     /**
      * @param string    $resource The fully-qualified class name
-     * @param bool|null $exists   Boolean when the existence check has already been done
+     * @param bool|null $exists   Boolean when the existency check has already been done
      */
     public function __construct(string $resource, bool $exists = null)
     {
@@ -53,6 +53,8 @@ class ClassExistenceResource implements SelfCheckingResourceInterface
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws \ReflectionException when a parent class/interface/trait is not found
      */
     public function isFresh(int $timestamp): bool
@@ -96,7 +98,9 @@ class ClassExistenceResource implements SelfCheckingResourceInterface
             }
         }
 
-        $this->exists ??= $exists;
+        if (null === $this->exists) {
+            $this->exists = $exists;
+        }
 
         return $this->exists[0] xor !$exists[0];
     }

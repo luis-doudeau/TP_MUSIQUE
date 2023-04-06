@@ -23,6 +23,9 @@ use Symfony\Component\Intl\Exception\ResourceBundleNotFoundException;
  */
 class IntlBundleReader implements BundleReaderInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function read(string $path, string $locale): mixed
     {
         // Point for future extension: Modify this class so that it works also

@@ -26,6 +26,9 @@ final class FlattenExceptionNormalizer implements DenormalizerInterface, Context
 {
     use NormalizerAwareTrait;
 
+    /**
+     * {@inheritdoc}
+     */
     public function normalize(mixed $object, string $format = null, array $context = []): array
     {
         $normalized = [
@@ -45,11 +48,17 @@ final class FlattenExceptionNormalizer implements DenormalizerInterface, Context
         return $normalized;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
         return $data instanceof FlattenException && ($context[Serializer::MESSENGER_SERIALIZATION_CONTEXT] ?? false);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): FlattenException
     {
         $object = new FlattenException();
@@ -76,6 +85,9 @@ final class FlattenExceptionNormalizer implements DenormalizerInterface, Context
         return $object;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return FlattenException::class === $type && ($context[Serializer::MESSENGER_SERIALIZATION_CONTEXT] ?? false);

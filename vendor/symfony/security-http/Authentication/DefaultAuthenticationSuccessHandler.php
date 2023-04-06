@@ -52,6 +52,9 @@ class DefaultAuthenticationSuccessHandler implements AuthenticationSuccessHandle
         $this->setOptions($options);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): Response
     {
         return $this->httpUtils->createRedirectResponse($request, $this->determineTargetUrl($request));
