@@ -1,1 +1,20 @@
-.env
+# Ignorer les fichiers et répertoires générés par Symfony
+/vendor/
+/bin/
+/var/
+!var/cache/
+!var/log/
+!var/sessions/
+
+# Ignorer les fichiers de configuration locaux
+/.env
+/.env.local
+/.env.*.local
+
+# Ignorer les fichiers de sauvegarde de l'éditeur de texte
+*~
+*.swp
+*.swo
+
+# Ignorer les fichiers de dépendances PHP
+/composer.lock
